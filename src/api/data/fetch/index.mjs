@@ -19,20 +19,23 @@ export async function FetchData(url, ...params) {
 }
 
 /**
- * Description: Fetches data by its id
- * @param {*} id - the data id
- * @param {*} url - the url to fetch data from
+ * Description: Fetches data by its path(name, id, etc) and additional parameters
+ * @param {*} pathSegments - the path segments to include in the url
+ * @param {*} baseURL - the url to fetch data from
  * @param {*} params - additional parameters to include in the fetch
  * @returns the data with the specified id parameter
  */
 
-export async function FetchDataById(url, id, ...params) {
+export async function FetchDataByPath(baseURL, pathSegments = [], ...params) {
+  const path = pathSegments.join("/");
+  const query = params.join("&");
+  const url = `${baseURL}/${path}?${query}`;
   try {
-    const response = await authFetch(`${url}/${id}?${params.join("&")}`);
+    const response = await authFetch(url);
     const data = await response.json();
     console.log(data);
     return data;
   } catch (error) {
-    console.error("Ran into a problem fetching data by id:", error);
+    console.error("Ran into a problem fetching data:", error);
   }
 }
