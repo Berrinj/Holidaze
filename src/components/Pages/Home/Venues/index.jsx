@@ -1,5 +1,5 @@
 import { VENUES_URL } from "../../../../api/constants";
-import { FetchData } from "../../../../api/venues/fetch";
+import { FetchData } from "../../../../api/data/fetch/index.mjs";
 import { useEffect, useState } from "react";
 
 function Venues() {

@@ -3,7 +3,7 @@ import "./App.css";
 // import { FetchVenues, FetchVenueById, FetchData } from "./api/venues/fetch.jsx";
 // import { PROFILES_URL } from "./api/constants.mjs";
 // import { handleSignup } from "./api/handlers/handleSignup.mjs";
-// import Home from "./components/Pages/Home/index.jsx";
+import Home from "./components/Pages/Home/index.jsx";
 // import LoginModal from "./components/Modals/Login/index.jsx";
 // import SignupModal from "./components/Modals/Signup/index.jsx";
 
@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <h1>Holidaze</h1>
-      {/* <Home /> */}
+      <Home />
     </>
   );
 }
