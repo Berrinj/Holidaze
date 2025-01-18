@@ -2,9 +2,9 @@ import Venues from "./Venues";
 
 function Home() {
   return (
-    <div>
+    <main>
       <Venues />
-    </div>
+    </main>
   );
 }
 
