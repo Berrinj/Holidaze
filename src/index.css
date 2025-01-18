@@ -19,22 +19,21 @@
 
 a {
   font-weight: 500;
-  /* color: #646cff; */
   color: inherit;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: #e3d6b4;
 }
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
-  background-color: #bdbbbb;
+  background-color: #000;
 }
 
 h1 {
@@ -55,7 +54,8 @@ button {
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: #e3d6b4;
+  scale: 1.02;
 }
 
 button:focus,
@@ -70,11 +70,12 @@ button:focus-visible {
   }
 
   a:hover {
-    color: #747bff;
+    color: #e3d6b4;
   }
 
   button {
     background-color: #f9f9f9;
+    color: #e3d6b4;
   }
 }
 
