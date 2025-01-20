@@ -6,7 +6,9 @@ function Layout() {
   return (
     <>
       <Header />
-      <Outlet />
+      <main className="bg-main-img bg-cover bg-no-repeat border-x border-mineshaft">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );
