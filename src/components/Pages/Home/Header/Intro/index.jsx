@@ -8,7 +8,7 @@ function Intro() {
           Your number 1 place to book your next home away from home! Browse over
           300 holiday homes or list your own in a few simple steps
         </p>
-        <p className="italic">-The Holidaze Team</p>
+        <p className="italic mt-3">-The Holidaze Team</p>
       </div>
     </div>
   );
