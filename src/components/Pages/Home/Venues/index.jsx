@@ -1,6 +1,7 @@
 import { VENUES_URL } from "../../../../api/constants";
 import { FetchData } from "../../../../api/data/fetch/index.mjs";
 import { useEffect, useState } from "react";
+import VenueCard from "./VenueCard";
 
 function Venues() {
   const [venues, setVenues] = useState([]);
@@ -8,7 +9,14 @@ function Venues() {
 
   useEffect(() => {
     setLoading(true);
-    FetchData(VENUES_URL, "_owner=true", "_bookings=true", "limit=10", `page=1`)
+    FetchData(
+      VENUES_URL,
+      "_owner=true",
+      "_bookings=true",
+      "sort=created",
+      "limit=12",
+      "page=1",
+    )
       .then((response) => {
         if (response && Array.isArray(response.data)) {
           setVenues(response.data);
@@ -27,15 +35,11 @@ function Venues() {
   }
 
   return (
-    <div>
-      <h1>Venues</h1>
-      <ul>
+    <div className="mt-8">
+      <ul className="flex flex-wrap gap-4 justify-center">
         {venues.map((venue) => (
           <li key={venue.id}>
-            <h2>{venue.name}</h2>
-            <p>{venue.description}</p>
-            <p>{venue.maxCapacity}</p>
-            <p>{venue.price}</p>
+            <VenueCard venue={venue} />
           </li>
         ))}
       </ul>
