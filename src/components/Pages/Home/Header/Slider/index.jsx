@@ -51,12 +51,22 @@ function Slider() {
         <p className="bg-mineshaft bg-opacity-70 rounded-b-xl border-b border-solid border-brass text-xs font-light w-1/2 text-white text-center absolute top-0 min-h-5">
           Check out our newest venues
         </p>
-        <span className="slider__arrow slider__arrow--left absolute left-0 top-1/2 transform -translate-y-1/2 bg-cookiesandcream bg-opacity-70 rounded-xl border border-black ms-2 p-1">
-          <GoArrowLeft className="text-black text-2xl" onClick={prevCard} />
-        </span>
-        <span className="slider__arrow slider__arrow--right absolute right-0 top-1/2 transform -translate-y-1/2 bg-cookiesandcream bg-opacity-70 rounded-xl border border-black mr-2 p-1">
-          <GoArrowRight className="text-black text-2xl" onClick={nextCard} />
-        </span>
+        <div
+          className="h-full w-10 absolute left-0 cursor-pointer hover:scale-90"
+          onClick={prevCard}
+        >
+          <span className="slider__arrow slider__arrow--left absolute left-0 top-1/2 transform -translate-y-1/2 bg-cookiesandcream bg-opacity-70 rounded-xl border border-black ms-2 p-1">
+            <GoArrowLeft className="text-black text-2xl" onClick={prevCard} />
+          </span>
+        </div>
+        <div
+          className="h-full w-10 absolute right-0 cursor-pointer hover:scale-90"
+          onClick={nextCard}
+        >
+          <span className="slider__arrow slider__arrow--right absolute right-0 top-1/2 transform -translate-y-1/2 bg-cookiesandcream bg-opacity-70 rounded-xl border border-black mr-2 p-1">
+            <GoArrowRight className="text-black text-2xl" onClick={nextCard} />
+          </span>
+        </div>
         {currentVenue && (
           <SliderCard
             title={currentVenue.name}
