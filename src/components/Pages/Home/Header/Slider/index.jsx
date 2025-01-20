@@ -48,7 +48,7 @@ function Slider() {
   return (
     <div className="slider flex-1 rounded-2xl relative h-80 w-full">
       <div className="slider__content flex justify-center h-full w-full">
-        <p className="bg-mineshaft bg-opacity-70 rounded-b-xl border-b border-solid border-brass text-xs font-light w-1/2 text-white text-center absolute top-0 h-5">
+        <p className="bg-mineshaft bg-opacity-70 rounded-b-xl border-b border-solid border-brass text-xs font-light w-1/2 text-white text-center absolute top-0 min-h-5">
           Check out our newest venues
         </p>
         <span className="slider__arrow slider__arrow--left absolute left-0 top-1/2 transform -translate-y-1/2 bg-cookiesandcream bg-opacity-70 rounded-xl border border-black ms-2 p-1">
