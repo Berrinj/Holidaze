@@ -19,7 +19,7 @@ function Venues() {
     );
 
   return (
-    <div className="venues mt-8">
+    <div className="venues mt-6">
       <ul className="flex flex-wrap gap-4 justify-center">
         {venues.map((venue) => (
           <li key={venue.id}>
