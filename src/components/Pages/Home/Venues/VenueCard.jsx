@@ -22,13 +22,13 @@ function VenueCard({ venue }) {
 
   return (
     <Link to={`/venues/${venue.id}`}>
-      <div className="venue-card w-72 bg-white rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 hover:text-black">
+      <div className="venue-card w-72 bg-white rounded-xl hover:scale-105 transition-transform duration-300 hover:text-black">
         <img
           src={mediaUrl}
           alt={mediaAlt}
-          className="w-full h-72 object-cover rounded-t-xl"
+          className="w-full h-72 object-cover rounded-t-xl drop-shadow-md"
         />
-        <div className="venue-card__content px-3 relative">
+        <div className="venue-card__content h-32 px-3 relative">
           {/* <p className="absolute top-0 right-1 flex items-center text-xs text-white bg-brass rounded-full p-1 gap-1">
           <FaStar />
           {venue.rating}
@@ -43,12 +43,12 @@ function VenueCard({ venue }) {
             {venue.location.city || "City"},{" "}
             {venue.location.country || "Country"}
           </p>
-          <h3 className="font-semibold mb-1">{venue.name}</h3>
+          <h3 className="font-semibold min-h-10 mb-1">{venue.name}</h3>
           <p className="text-sm">Guests: {venue.maxGuests}</p>
           <p className="italic text-sm">
             {trueMetaKeys || "No additional features"}{" "}
           </p>
-          <div className="flex justify-end pb-1 text-sm items-baseline">
+          <div className="flex justify-end pb-1 text-sm items-baseline absolute bottom-0 right-2">
             <p className="font-semibold">Price: {venue.price} </p>
             <p className="text-xs">/night</p>
           </div>

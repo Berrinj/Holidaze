@@ -1,50 +1,39 @@
-import { VENUES_URL } from "../../../../api/constants";
-import { FetchData } from "../../../../api/data/fetch/index.mjs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import VenueCard from "./VenueCard";
+import useFetchVenues from "hooks/useFetchVenues";
+import Pagination from "components/Pages/Pagination";
 
 function Venues() {
-  const [venues, setVenues] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const { venues, loading, error, lastPage } = useFetchVenues(page);
 
-  useEffect(() => {
-    setLoading(true);
-    FetchData(
-      VENUES_URL,
-      "_owner=true",
-      "_bookings=true",
-      "sort=created",
-      "limit=12",
-      "page=1",
-    )
-      .then((response) => {
-        if (response && Array.isArray(response.data)) {
-          setVenues(response.data);
-        } else {
-          console.error("No venues found");
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Ran into a problem fetching venues:", error);
-      });
-  }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  if (loading)
+    return (
+      <p className="text-brass bg-mineshaft p-10 text-center">Loading...</p>
+    );
+  if (error)
+    return (
+      <p className="text-black bg-red-900 p-10 text-center">
+        Error loading venues
+      </p>
+    );
 
   return (
-    <div className="mt-8">
+    <div className="venues mt-8">
       <ul className="flex flex-wrap gap-4 justify-center">
         {venues.map((venue) => (
           <li key={venue.id}>
-            <VenueCard venue={venue} />
+            <VenueCard key={venue.id} venue={venue} />
           </li>
         ))}
       </ul>
-      <p>Page: </p>
+      <Pagination
+        currentPage={page}
+        lastPage={lastPage}
+        onPageChange={setPage}
+      />
     </div>
   );
 }
+
 export default Venues;
