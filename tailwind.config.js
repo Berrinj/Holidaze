@@ -11,6 +11,12 @@ export default {
         eerieblack: "#1a1a1a",
         mineshaft: "#3d3d3d",
       },
+      backgroundImage: {
+        "main-img":
+          "url('/src/assets/andrew-kliatskyi-Wd92ZV15x-E-unsplash.jpg')",
+        "module-img":
+          "url('src/assets/pawel-czerwinski-E68t7s48QA4-unsplash.jpg')",
+      },
     },
   },
   plugins: [],

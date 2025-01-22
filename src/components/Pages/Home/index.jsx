@@ -3,10 +3,10 @@ import HomeHeader from "./Header";
 
 function Home() {
   return (
-    <main>
+    <>
       <HomeHeader />
       <Venues />
-    </main>
+    </>
   );
 }
 
