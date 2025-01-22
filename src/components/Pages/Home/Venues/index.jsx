@@ -8,16 +8,18 @@ import { VENUES_URL } from "api/constants";
 
 function Venues() {
   const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(null);
   const {
     venues,
     loading,
     error,
-    lastPage,
     setLastPage,
     searchResults,
     setSearchResults,
     totalCount,
-  } = useFetchVenues(page, 12);
+    pagination,
+    setPagination,
+  } = useFetchVenues(page, 48, searchQuery);
 
   if (loading)
     return (
@@ -30,17 +32,16 @@ function Venues() {
       </p>
     );
 
-  // const handleSearch = (searchInput) => {
-  //   const filterResults = venues.filter(
-  //     (venue) =>
-  //       (venue.name &&
-  //         venue.name.toLowerCase().includes(searchInput.toLowerCase())) ||
-  //       (venue.description &&
-  //         venue.description.toLowerCase().includes(searchInput.toLowerCase())),
-  //   );
-  //   setSearchResults(filterResults);
-  // };
   const handleSearch = (searchInput) => {
+    // setPage(1);
+    setSearchQuery(searchInput);
+    //refresh
+    console.log("searchInput:", searchInput);
+    if (!searchInput || searchInput.length < 3) {
+      setSearchResults(venues);
+      return;
+    }
+
     FetchDataByPath(
       VENUES_URL,
       ["search"],
@@ -53,8 +54,9 @@ function Venues() {
       .then((response) => {
         if (response && Array.isArray(response.data)) {
           setSearchResults(response.data);
+          setPagination(response.meta);
           const totalResults = response.meta.totalCount;
-          const itemsPerPage = 12;
+          const itemsPerPage = 48;
           setLastPage(Math.ceil(totalResults / itemsPerPage));
         } else {
           console.error("No search results found");
@@ -77,8 +79,10 @@ function Venues() {
           ))}
         </ul>
         <Pagination
-          currentPage={page}
-          lastPage={lastPage}
+          currentPage={pagination.currentPage}
+          lastPage={pagination.pageCount}
+          isFirstPage={pagination.isFirstPage}
+          isLastPage={pagination.isLastPage}
           onPageChange={setPage}
         />
       </div>

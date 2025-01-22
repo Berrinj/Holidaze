@@ -1,10 +1,19 @@
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
 
-function Pagination({ currentPage, lastPage, onPageChange }) {
+function Pagination({
+  currentPage,
+  lastPage,
+  onPageChange,
+  isFirstPage,
+  isLastPage,
+}) {
   const pages = [];
 
   if (lastPage <= 1) {
+    return null;
+  }
+  if (isFirstPage && isLastPage) {
     return null;
   }
 

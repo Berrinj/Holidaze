@@ -9,9 +9,23 @@ function useFetchVenues(page, limit) {
   const [lastPage, setLastPage] = useState(1);
   const [searchResults, setSearchResults] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    isFirstPage: true,
+    isLastPage: true,
+    nextPage: null,
+    previousPage: null,
+    pageCount: 1,
+  });
 
   useEffect(() => {
     setLoading(true);
+
+    // const fetchUrl = searchQuery
+    //   ? `${VENUES_URL}/search?q=${searchQuery}&_sort=created&_page=${page}&_limit=${limit}`
+    //   : `${VENUES_URL}?_sort=created&_page=${page}&_limit=${limit}`;
+
+    // FetchData(fetchUrl)
     FetchData(
       VENUES_URL,
       "_owner=true",
@@ -26,6 +40,14 @@ function useFetchVenues(page, limit) {
           setLastPage(response.meta.pageCount);
           setSearchResults(response.data);
           setTotalCount(response.meta.totalCount);
+          setPagination({
+            currentPage: response.meta.currentPage,
+            isFirstPage: response.meta.isFirstPage,
+            isLastPage: response.meta.isLastPage,
+            nextPage: response.meta.nextPage,
+            previousPage: response.meta.previousPage,
+            pageCount: response.meta.pageCount,
+          });
         } else {
           console.error("No venues found");
         }
@@ -47,6 +69,8 @@ function useFetchVenues(page, limit) {
     searchResults,
     setSearchResults,
     totalCount,
+    pagination,
+    setPagination,
   };
 }
 
