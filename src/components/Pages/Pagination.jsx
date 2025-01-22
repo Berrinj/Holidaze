@@ -4,6 +4,10 @@ import { GoArrowLeft } from "react-icons/go";
 function Pagination({ currentPage, lastPage, onPageChange }) {
   const pages = [];
 
+  if (lastPage <= 1) {
+    return null;
+  }
+
   if (currentPage > 1) {
     pages.push(
       <button

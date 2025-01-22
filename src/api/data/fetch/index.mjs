@@ -10,6 +10,7 @@ import { authFetch } from "../../auth/authFetch.mjs";
 export async function FetchData(url, ...params) {
   try {
     const response = await authFetch(`${url}?${params.join("&")}`);
+    console.log(response);
     const data = await response.json();
     console.log(data);
     return data;
