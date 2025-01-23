@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import "./App.css";
 import Home from "components/Pages/Home";
+import SingleVenue from "components/Pages/Venue";
 import Layout from "components/Layout";
 import { Routes, Route } from "react-router-dom";
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="venues/:id" element={<SingleVenue />} />
           <Route path="*" element={<RouteNotFound />} />
         </Route>
       </Routes>
