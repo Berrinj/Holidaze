@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import useFetchVenue from "hooks/useFetchVenue";
 import Calendar from "components/Pages/Calendar";
 import BookBtn from "./BookBtn";
+import { VenueImageGallery } from "./ImageGallery";
 
 function SingleVenue() {
   const { venue, loading, error } = useFetchVenue();
@@ -30,14 +31,10 @@ function SingleVenue() {
       {venue && (
         <div className="single-venue--container bg-white rounded-2xl flex flex-col min-h-full">
           <div className="single-venue--media w-full ">
-            <img
-              src={venue.media[0].url}
-              alt={venue.name}
-              className="object-cover w-full h-96 rounded-t-2xl"
-            />
+            <VenueImageGallery media={venue.media} />
           </div>
           <div className="single-venue--content px-5 py-2 flex flex-col">
-            <div className="single-venue--header mx-auto flex justify-center items-baseline flex-wrap">
+            <div className="single-venue--header mx-auto flex justify-center items-baseline gap-1 flex-wrap">
               <h1 className="text-3xl font-semibold">{venue.name},</h1>
               <h2 className="text-3xl">
                 {venue.location.city}, {venue.location.country}
@@ -46,7 +43,7 @@ function SingleVenue() {
             <p className="text-center font-semibold">
               Price: {venue.price}/night
             </p>
-            <div className="single-venue--details flex gap-10">
+            <div className="single-venue--details flex gap-10 flex-wrap">
               <div className="single-venue--info flex flex-col flex-1 divide-y-2 divide-mineshaft divide-opacity-30">
                 <div className="hosted-by flex items-center gap-1 pb-4">
                   <img
@@ -82,7 +79,7 @@ function SingleVenue() {
                 </div>
               </div>
               <div className="single-venue--calendar-booking flex flex-1 flex-col">
-                <h2 className="my-2 font-semibold">
+                <h2 className="my-3 font-bold text-center">
                   Choose dates for the visit:
                 </h2>
                 <Calendar
@@ -101,7 +98,7 @@ function SingleVenue() {
                   </div>
                 )}
                 <span className="my-5 flex items-center gap-2">
-                  <label htmlFor="guests" className="font-semibold">
+                  <label htmlFor="guests" className="font-bold">
                     Guests:
                   </label>
                   <input
