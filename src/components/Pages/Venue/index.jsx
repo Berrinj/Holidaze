@@ -1,15 +1,26 @@
 // const { FetchDataByPath } = require("api/data/fetch/index.mjs");
-import { useState } from "react";
+import { useState, useRef } from "react";
 import useFetchVenue from "hooks/useFetchVenue";
 import Calendar from "components/Pages/Calendar";
+import BookBtn from "./BookBtn";
 
 function SingleVenue() {
   const { venue, loading, error } = useFetchVenue();
   const [selectedDates, setSelectedDates] = useState(null);
 
+  const guestsRef = useRef(null);
+
   const handleDateChange = (dates) => {
-    setSelectedDates(dates); // Update local state
-    console.log("Selected dates:", dates); // Log selected dates
+    setSelectedDates(dates);
+  };
+
+  const handleBtnClick = () => {
+    console.log(
+      "Guests:",
+      guestsRef.current.value,
+      "Selected dates:",
+      selectedDates,
+    );
   };
 
   return (
@@ -70,9 +81,14 @@ function SingleVenue() {
                   <p>Max guests: {venue.maxGuests}</p>
                 </div>
               </div>
-              <div className="single-venue--calendar-booking flex flex-1">
-                <p>I am the right side of the page</p>
-                <Calendar onDateChange={handleDateChange} />
+              <div className="single-venue--calendar-booking flex flex-1 flex-col">
+                <h2 className="my-2 font-semibold">
+                  Choose dates for the visit:
+                </h2>
+                <Calendar
+                  onDateChange={handleDateChange}
+                  bookedDates={venue.bookings}
+                />
                 {selectedDates && (
                   <div>
                     <p>Selected dates:</p>
@@ -84,6 +100,25 @@ function SingleVenue() {
                     </p>
                   </div>
                 )}
+                <span className="my-5 flex items-center gap-2">
+                  <label htmlFor="guests" className="font-semibold">
+                    Guests:
+                  </label>
+                  <input
+                    name="guests"
+                    id="guests"
+                    type="number"
+                    min="1"
+                    max={venue.maxGuests}
+                    placeholder="-"
+                    className="focus:outline-none p-1 text-center w-16"
+                    ref={guestsRef}
+                  />
+                  <p className="italic text-sm">(Max: {venue.maxGuests})</p>
+                </span>
+                <div className="booking-btn mx-auto mt-5">
+                  <BookBtn onClick={handleBtnClick} />
+                </div>
               </div>
             </div>
           </div>

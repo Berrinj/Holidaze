@@ -1,18 +1,31 @@
 import { useState } from "react";
-import Calendar from "react-calendar";
-// import 'react-calendar/dist/Calendar.css';
+import { StyledCalendar } from "./Calender.styles";
 
-function CalendarComponent({ onDateChange }) {
-  const [date, setDate] = useState(new Date());
+function CalendarComponent({ onDateChange, bookedDates }) {
+  const [date, setDate] = useState(null);
 
   const handleDateChange = (selectedDate) => {
     setDate(selectedDate);
     onDateChange(selectedDate);
   };
 
+  const isDateBooked = (date) => {
+    return bookedDates.some((booking) => {
+      const fromDate = new Date(booking.dateFrom);
+      const toDate = new Date(booking.dateTo);
+      return date >= fromDate && date <= toDate;
+    });
+  };
+
   return (
     <div className="calendar-container">
-      <Calendar onChange={handleDateChange} value={date} selectRange={true} />
+      <StyledCalendar
+        onChange={handleDateChange}
+        value={date}
+        selectRange={true}
+        minDate={new Date()}
+        tileDisabled={({ date }) => isDateBooked(date)}
+      />
     </div>
   );
 }
