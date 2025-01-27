@@ -1,8 +1,16 @@
 // const { FetchDataByPath } = require("api/data/fetch/index.mjs");
+import { useState } from "react";
 import useFetchVenue from "hooks/useFetchVenue";
+import Calendar from "components/Pages/Calendar";
 
 function SingleVenue() {
   const { venue, loading, error } = useFetchVenue();
+  const [selectedDates, setSelectedDates] = useState(null);
+
+  const handleDateChange = (dates) => {
+    setSelectedDates(dates); // Update local state
+    console.log("Selected dates:", dates); // Log selected dates
+  };
 
   return (
     <div className="single-venue">
@@ -10,15 +18,15 @@ function SingleVenue() {
       {error && <p>Error: {error}</p>}
       {venue && (
         <div className="single-venue--container bg-white rounded-2xl flex flex-col min-h-full">
-          <div className="single-venue--container__media w-full ">
+          <div className="single-venue--media w-full ">
             <img
               src={venue.media[0].url}
               alt={venue.name}
               className="object-cover w-full h-96 rounded-t-2xl"
             />
           </div>
-          <div className="single-venue--container__content px-5 py-2 flex flex-col">
-            <div className="single-venue--container__content__header mx-auto flex justify-center items-baseline flex-wrap">
+          <div className="single-venue--content px-5 py-2 flex flex-col">
+            <div className="single-venue--header mx-auto flex justify-center items-baseline flex-wrap">
               <h1 className="text-3xl font-semibold">{venue.name},</h1>
               <h2 className="text-3xl">
                 {venue.location.city}, {venue.location.country}
@@ -27,8 +35,8 @@ function SingleVenue() {
             <p className="text-center font-semibold">
               Price: {venue.price}/night
             </p>
-            <div className="single-venue--container__content__details flex">
-              <div className="single-venue--container__content__details__left flex flex-col flex-1 divide-y-2 divide-mineshaft divide-opacity-30">
+            <div className="single-venue--details flex gap-10">
+              <div className="single-venue--info flex flex-col flex-1 divide-y-2 divide-mineshaft divide-opacity-30">
                 <div className="hosted-by flex items-center gap-1 pb-4">
                   <img
                     src={venue.owner.avatar.url}
@@ -62,8 +70,20 @@ function SingleVenue() {
                   <p>Max guests: {venue.maxGuests}</p>
                 </div>
               </div>
-              <div className="single-venue--container__content__details__right flex flex-1">
+              <div className="single-venue--calendar-booking flex flex-1">
                 <p>I am the right side of the page</p>
+                <Calendar onDateChange={handleDateChange} />
+                {selectedDates && (
+                  <div>
+                    <p>Selected dates:</p>
+                    <p>
+                      Check-in date: {selectedDates[0].toLocaleDateString()}
+                    </p>
+                    <p>
+                      Check-out date: {selectedDates[1].toLocaleDateString()}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
