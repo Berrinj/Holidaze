@@ -7,7 +7,7 @@ function BookBtn({ onClick }) {
     return (
       <div>
         <button
-          className="bg-brass text-white p-2 rounded-xl mt-2 uppercase"
+          className="bg-brass text-white p-2 rounded-xl my-3 uppercase min-w-52"
           onClick={onClick}
         >
           Book Now!
@@ -18,7 +18,7 @@ function BookBtn({ onClick }) {
     return (
       <div>
         <button
-          className="bg-cookiesandcream text-black p-2 rounded-xl mt-2"
+          className="bg-cookiesandcream text-black p-2 rounded-xl my-3"
           onClick={onClick}
         >
           You need to be logged in to book this venue
