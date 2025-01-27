@@ -7,10 +7,10 @@ function BookBtn({ onClick }) {
     return (
       <div>
         <button
-          className="bg-brass text-white p-2 rounded-xl mt-2"
+          className="bg-brass text-white p-2 rounded-xl mt-2 uppercase"
           onClick={onClick}
         >
-          Book Now
+          Book Now!
         </button>
       </div>
     );
