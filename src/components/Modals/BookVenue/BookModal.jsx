@@ -1,7 +1,12 @@
 // import { useState } from "react";
 import { Modal } from "components/Modals/Modal";
 
-export const ConfirmationModal = ({ isOpen, onClose, onConfirm, info }) => {
+export const ConfirmationModal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  bookingData,
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <h2 className="text-lg font-bold text-white text-center">
@@ -12,12 +17,12 @@ export const ConfirmationModal = ({ isOpen, onClose, onConfirm, info }) => {
       </p>
       <div className="booking-details bg-cookiesandcream text-black p-4 rounded-lg mt-4">
         <h3 className="text-lg font-bold">Booking Details</h3>
-        <p>Booking by: Name {info}</p>
-        <p>Check-in Date: 21/09/2021 {info}</p>
-        <p>Check-out Date: {info}</p>
-        <p>Venue: The Grand Hall {info}</p>
-        <p>Guests: {info} </p>
-        <p>Price: $2000 {info}</p>
+        <p>Booking by: {} </p>
+        <p>Check-in Date: {bookingData.dateFrom} </p>
+        <p>Check-out Date: {bookingData.dateTo}</p>
+        <p>Venue: {bookingData.venueName}</p>
+        <p>Guests: {bookingData.guests}</p>
+        <p>Price: Price </p>
       </div>
       <div className="flex justify-end space-x-4 mt-4">
         <button
