@@ -116,6 +116,7 @@ function SingleVenue() {
                     guests={guests}
                     venueId={venue.id}
                     venueName={venue.name}
+                    venuePrice={venue.price}
                   />
                 </div>
               </div>

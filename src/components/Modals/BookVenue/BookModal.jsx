@@ -7,6 +7,10 @@ export const ConfirmationModal = ({
   onConfirm,
   bookingData,
 }) => {
+  if (!bookingData) return null;
+
+  const totalPrice = bookingData.nights * bookingData.venuePrice;
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <h2 className="text-lg font-bold text-white text-center">
@@ -17,12 +21,15 @@ export const ConfirmationModal = ({
       </p>
       <div className="booking-details bg-cookiesandcream text-black p-4 rounded-lg mt-4">
         <h3 className="text-lg font-bold">Booking Details</h3>
-        <p>Booking by: {} </p>
+        <p>Booking by: {bookingData.booker} </p>
         <p>Check-in Date: {bookingData.dateFrom} </p>
         <p>Check-out Date: {bookingData.dateTo}</p>
         <p>Venue: {bookingData.venueName}</p>
         <p>Guests: {bookingData.guests}</p>
-        <p>Price: Price </p>
+        <p>Nights: {bookingData.nights}</p>
+        <p>
+          Price: {bookingData.venuePrice} x {bookingData.nights} = {totalPrice}{" "}
+        </p>
       </div>
       <div className="flex justify-end space-x-4 mt-4">
         <button
