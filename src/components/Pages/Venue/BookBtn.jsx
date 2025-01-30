@@ -4,6 +4,7 @@ import { ConfirmationModal } from "components/Modals/BookVenue/BookModal";
 import { useState } from "react";
 import { CreatePOST } from "api/data/create";
 import { BOOKINGS_URL } from "api/constants.mjs";
+import LoginModal from "components/Modals/Login";
 
 function BookBtn({
   onClick,
@@ -66,14 +67,23 @@ function BookBtn({
     }
   };
 
+  const isButtonDisabled =
+    !selectedDates ||
+    selectedDates.length !== 2 ||
+    !guests ||
+    selectedDates[0].getTime() === selectedDates[1].getTime();
+
   if (userStatus) {
     return (
       <div>
         <button
-          className="bg-brass text-white p-2 rounded-xl my-3 uppercase min-w-52"
-          onClick={() => handleClick()}
+          className={`p-2 rounded-xl my-3  min-w-52 ${isButtonDisabled ? "bg-cookiesandcream text-black" : "bg-brass text-white cursor-pointer uppercase"}`}
+          onClick={handleClick}
+          disabled={isButtonDisabled}
         >
-          Book Now!
+          {isButtonDisabled
+            ? "Please select dates and guests to book venue"
+            : "Book Now!"}
         </button>
         <ConfirmationModal
           isOpen={isModalOpen}
@@ -88,10 +98,11 @@ function BookBtn({
       <div>
         <button
           className="bg-cookiesandcream text-black p-2 rounded-xl my-3"
-          onClick={onClick}
+          onClick={() => setModalOpen(true)}
         >
           You need to be logged in to book this venue
         </button>
+        <LoginModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
       </div>
     );
   }

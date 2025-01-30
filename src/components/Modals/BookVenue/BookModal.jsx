@@ -10,6 +10,7 @@ export const ConfirmationModal = ({
   if (!bookingData) return null;
 
   const totalPrice = bookingData.nights * bookingData.venuePrice;
+  const btnDisabled = totalPrice === 0;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -39,10 +40,13 @@ export const ConfirmationModal = ({
           Cancel
         </button>
         <button
-          className="px-4 py-2 bg-brass text-white rounded-lg"
+          className={`px-4 py-2 rounded-lg ${btnDisabled ? "bg-cookiesandcream bg-opacity-30 text-white italic font-light" : "bg-brass text-white"} `}
           onClick={onConfirm}
+          disabled={btnDisabled}
         >
-          Confirm Booking
+          {btnDisabled
+            ? "Please select min two nights to place booking"
+            : "Confirm Booking!"}{" "}
         </button>
       </div>
     </Modal>

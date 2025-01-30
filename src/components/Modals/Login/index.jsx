@@ -14,13 +14,13 @@ function LoginModal({ isOpen, onClose }) {
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="login-content flex justify-around">
         <div className="left">
-          <h2 className="text-lg font-bold my-4 text-center">
+          <h2 className="text-lg font-bold my-4 text-center text-white">
             Login to your HOLIDAZE account
           </h2>
           <form id="login-form" onSubmit={handleLogin}>
             <div className="login-form-details flex gap-2 flex-wrap">
               <div className="login-form-details-email">
-                <label htmlFor="email" className="block text-sm">
+                <label htmlFor="email" className="block text-sm text-white">
                   Email
                 </label>
                 <input
@@ -33,7 +33,7 @@ function LoginModal({ isOpen, onClose }) {
                 />
               </div>
               <div className="login-form-details-password">
-                <label htmlFor="password" className="block text-sm">
+                <label htmlFor="password" className="block text-sm text-white">
                   Password
                 </label>
                 <input
