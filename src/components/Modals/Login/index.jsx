@@ -3,7 +3,7 @@ import { Modal } from "../Modal";
 import { useState } from "react";
 import Hlogo from "assets/Hlogo.png";
 
-function LoginModal({ isOpen, onClose }) {
+function LoginModal({ isOpen, onClose, onToggleSignUp }) {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
@@ -55,7 +55,10 @@ function LoginModal({ isOpen, onClose }) {
           </form>
         </div>
         <div className="right flex flex-col justify-center items-center">
-          <button className="bg-cookiesandcream bg-opacity-75 w-32 rounded-2xl">
+          <button
+            onClick={onToggleSignUp}
+            className="bg-cookiesandcream bg-opacity-75 w-32 rounded-2xl"
+          >
             <img src={Hlogo} className="h-20 w-20 m-auto" />
             Are you new here? Click here to sign up
           </button>

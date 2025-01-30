@@ -4,7 +4,8 @@ import { ConfirmationModal } from "components/Modals/BookVenue/BookModal";
 import { useState } from "react";
 import { CreatePOST } from "api/data/create";
 import { BOOKINGS_URL } from "api/constants.mjs";
-import LoginModal from "components/Modals/Login";
+// import LoginModal from "components/Modals/Login";
+import AuthModals from "components/Modals/authModals";
 
 function BookBtn({
   onClick,
@@ -18,6 +19,8 @@ function BookBtn({
   const [isModalOpen, setModalOpen] = useState(false);
   const [bookingInfo, setBookingInfo] = useState({});
   const [sendBooking, setSendBooking] = useState({});
+  const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isSignUpOpen, setSignUpOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -98,11 +101,16 @@ function BookBtn({
       <div>
         <button
           className="bg-cookiesandcream text-black p-2 rounded-xl my-3"
-          onClick={() => setModalOpen(true)}
+          onClick={() => setLoginOpen(true)}
         >
           You need to be logged in to book this venue
         </button>
-        <LoginModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+        <AuthModals
+          isLoginOpen={isLoginOpen}
+          setLoginOpen={setLoginOpen}
+          isSignUpOpen={isSignUpOpen}
+          setSignUpOpen={setSignUpOpen}
+        />
       </div>
     );
   }

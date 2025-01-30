@@ -14,6 +14,7 @@ export async function handleLogin(event) {
     const profile = await login(credentials);
     if (profile) {
       console.log("Login successful:", profile);
+      window.location.reload();
     }
     // Redirect or update UI after successful login
   } catch (error) {
