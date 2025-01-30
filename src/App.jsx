@@ -1,7 +1,9 @@
 // import { useState } from "react";
 import "./App.css";
 import Home from "components/Pages/Home";
+import SingleVenue from "components/Pages/Venue";
 import Layout from "components/Layout";
+import BookingConfirmation from "components/Pages/BookingConfirmation";
 import { Routes, Route } from "react-router-dom";
 
 function RouteNotFound() {
@@ -14,6 +16,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="venues/:id" element={<SingleVenue />} />
+          <Route
+            path="booking-confirmation/:id"
+            element={<BookingConfirmation />}
+          />
           <Route path="*" element={<RouteNotFound />} />
         </Route>
       </Routes>

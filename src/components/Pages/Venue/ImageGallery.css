@@ -1,0 +1,8 @@
+.image-gallery-image {
+  border-radius: 1rem 1rem 0 0;
+}
+
+.image-gallery-thumbnail-image {
+  height: 50px;
+  object-fit: cover;
+}

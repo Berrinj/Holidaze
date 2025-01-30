@@ -14,8 +14,7 @@ export default {
       backgroundImage: {
         "main-img":
           "url('/src/assets/andrew-kliatskyi-Wd92ZV15x-E-unsplash.jpg')",
-        "module-img":
-          "url('src/assets/pawel-czerwinski-E68t7s48QA4-unsplash.jpg')",
+        "modal-img": "url('/src/assets/modal-bg.jpg')",
       },
     },
   },
