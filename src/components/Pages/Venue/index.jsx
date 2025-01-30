@@ -1,5 +1,5 @@
 // const { FetchDataByPath } = require("api/data/fetch/index.mjs");
-import { useState, useRef } from "react";
+import { useState } from "react";
 import useFetchVenue from "hooks/useFetchVenue";
 import Calendar from "components/Pages/Calendar";
 import BookBtn from "./BookBtn";
@@ -8,20 +8,16 @@ import { VenueImageGallery } from "./ImageGallery";
 function SingleVenue() {
   const { venue, loading, error } = useFetchVenue();
   const [selectedDates, setSelectedDates] = useState(null);
+  const [guests, setGuests] = useState(1);
 
-  const guestsRef = useRef(null);
+  // const guestsRef = useRef(null);
 
   const handleDateChange = (dates) => {
     setSelectedDates(dates);
   };
 
-  const handleBtnClick = () => {
-    console.log(
-      "Guests:",
-      guestsRef.current.value,
-      "Selected dates:",
-      selectedDates,
-    );
+  const handleGuestsChange = (e) => {
+    setGuests(e.target.value);
   };
 
   return (
@@ -105,16 +101,23 @@ function SingleVenue() {
                     name="guests"
                     id="guests"
                     type="number"
+                    value={guests}
                     min="1"
                     max={venue.maxGuests}
                     placeholder="-"
                     className="focus:outline-none p-1 text-center w-16"
-                    ref={guestsRef}
+                    onChange={handleGuestsChange}
                   />
                   <p className="italic text-sm">(Max: {venue.maxGuests})</p>
                 </span>
                 <div className="booking-btn mx-auto mt-5">
-                  <BookBtn onClick={handleBtnClick} />
+                  <BookBtn
+                    selectedDates={selectedDates}
+                    guests={guests}
+                    venueId={venue.id}
+                    venueName={venue.name}
+                    venuePrice={venue.price}
+                  />
                 </div>
               </div>
             </div>

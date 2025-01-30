@@ -1,17 +1,86 @@
 import { load } from "utils/localStorage.mjs";
+import { useNavigate } from "react-router-dom";
+import { ConfirmationModal } from "components/Modals/BookVenue/BookModal";
+import { useState } from "react";
+import { CreatePOST } from "api/data/create";
+import { BOOKINGS_URL } from "api/constants.mjs";
 
-function BookBtn({ onClick }) {
+function BookBtn({
+  onClick,
+  selectedDates,
+  guests,
+  venueId,
+  venueName,
+  venuePrice,
+}) {
   const userStatus = load("profile");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [bookingInfo, setBookingInfo] = useState({});
+  const [sendBooking, setSendBooking] = useState({});
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (userStatus) {
+      setModalOpen(true);
+      const nights = Math.ceil(
+        (selectedDates[1] - selectedDates[0]) / (1000 * 60 * 60 * 24),
+      );
+      const bookingData = {
+        venueId,
+        venueName,
+        guests,
+        dateFrom: selectedDates[0].toLocaleDateString(),
+        dateTo: selectedDates[1].toLocaleDateString(),
+        booker: userStatus.name,
+        venuePrice,
+        dateFromISO: selectedDates[0].toISOString(),
+        dateToISO: selectedDates[1].toISOString(),
+        nights: nights - 1,
+      };
+      setBookingInfo(bookingData);
+      const sendToAPI = {
+        venueId,
+        guests: parseInt(guests, 10),
+        dateFrom: selectedDates[0].toISOString(),
+        dateTo: selectedDates[1].toISOString(),
+      };
+      setSendBooking(sendToAPI);
+      console.log("Booking data:", bookingData);
+    } else {
+      onClick();
+    }
+  };
+  const handleConfirmBooking = async () => {
+    try {
+      console.log("Confirm Booking data:", sendBooking);
+      const response = await CreatePOST(BOOKINGS_URL, sendBooking);
+      console.log("Booking response:", response);
+      console.log("booking ID:", response.data.id);
+      // CreatePOST(BOOKINGS_URL, sendBooking);
+      setModalOpen(false);
+      navigate(`/booking-confirmation/${response.data.id}`, {
+        state: { bookingData: response },
+      });
+    } catch (error) {
+      console.error("Ran into a problem creating booking:", error);
+    }
+  };
 
   if (userStatus) {
     return (
       <div>
         <button
           className="bg-brass text-white p-2 rounded-xl my-3 uppercase min-w-52"
-          onClick={onClick}
+          onClick={() => handleClick()}
         >
           Book Now!
         </button>
+        <ConfirmationModal
+          isOpen={isModalOpen}
+          onClose={() => setModalOpen(false)}
+          onConfirm={handleConfirmBooking}
+          bookingData={bookingInfo}
+        />
       </div>
     );
   } else {

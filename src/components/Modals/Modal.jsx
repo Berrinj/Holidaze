@@ -1,0 +1,23 @@
+import Hlogo from "../../assets/Hlogo.png";
+
+export const Modal = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="bg-modal-img bg-cover rounded-lg shadow-lg p-6 max-w-3xl w-full relative">
+        <img
+          src={Hlogo}
+          className="absolute top-2 left-2 h-8 w-8 opacity-50"
+        ></img>
+        <button
+          className="absolute top-2 right-2 text-white bg-black w-8 h-8 p-0 rounded-full flex items-center justify-center"
+          onClick={onClose}
+        >
+          &#x2715; {/* Close button */}
+        </button>
+        {children}
+      </div>
+    </div>
+  );
+};

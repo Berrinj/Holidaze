@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
+import LoginModal from "components/Modals/Login";
+import { useState } from "react";
 
 function Nav() {
+  const [isModalOpen, setModalOpen] = useState(false);
   return (
     <nav className="flex h-full items-center" role="navigation">
       <ul className="flex gap-3 items-center text-white">
@@ -20,9 +23,16 @@ function Nav() {
           </NavLink>
         </li>
         <li>
-          <button className="text-black bg-brass h-6 font-light align-middle flex items-center">
+          <button
+            className="text-black bg-brass h-6 font-light align-middle flex items-center"
+            onClick={() => setModalOpen(true)}
+          >
             Login
           </button>
+          <LoginModal
+            isOpen={isModalOpen}
+            onClose={() => setModalOpen(false)}
+          />
         </li>
       </ul>
     </nav>
