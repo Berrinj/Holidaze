@@ -16,7 +16,7 @@ export async function register(profile) {
     if (!response.ok) {
       throw new Error("Register failed: " + result.errors[0].message);
     } else {
-      console.log("Register successful");
+      console.log("Register successful:", result);
     }
     return result;
   } catch (error) {

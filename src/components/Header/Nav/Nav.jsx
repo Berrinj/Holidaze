@@ -1,11 +1,23 @@
 import { NavLink } from "react-router-dom";
 import AuthModals from "components/Modals/authModals";
-import { load } from "utils/localStorage.mjs";
+import { load, remove } from "utils/localStorage.mjs";
 import { useState } from "react";
+
+/**
+ * Checks if a user is logged in or not and returns the appropriate UI
+ * @returns JSX.Element
+ */
 
 function UserStatus() {
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isSignUpOpen, setSignUpOpen] = useState(false);
+
+  const handleLogout = () => {
+    remove("profile");
+    remove("token");
+    window.location.href = "/";
+  };
+
   if (!load("profile")) {
     return (
       <>
@@ -32,7 +44,7 @@ function UserStatus() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/logout" className="font-light">
+          <NavLink onClick={handleLogout} className="font-light">
             Logout
           </NavLink>
         </li>
@@ -40,6 +52,11 @@ function UserStatus() {
     );
   }
 }
+
+/**
+ * returns the navigation links
+ * @returns JSX.Element
+ */
 
 function Nav() {
   return (

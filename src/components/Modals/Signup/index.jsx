@@ -17,10 +17,10 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     });
   };
 
@@ -79,22 +79,6 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                   onChange={handleChange}
                 />
               </div>
-              {/* <div className="login-form-details-venueManager">
-               <label
-                  htmlFor="venueManager"
-                  className="block text-sm text-white"
-                >
-                  Venue Manager
-                </label>
-                <input
-                  type="checkbox"
-                  id="venueManager"
-                  name="venueManager"
-                  className="text-black rounded-2xl"
-                  checked={formData.venueManager}
-                  onChange={handleChange}
-                />
-              </div>  */}
               <div className="login-form-details-venueManager w-4/5 md:w-2/5">
                 <label
                   htmlFor="venueManager"

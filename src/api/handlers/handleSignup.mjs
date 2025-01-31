@@ -7,17 +7,27 @@ export async function handleSignup(event) {
     email: formData.get("email"),
     password: formData.get("password"),
     name: formData.get("name"),
-    bio: formData.get("bio") || "",
-    avatar: {
-      url: formData.get("avatar") || "",
-      alt: formData.get("avatarAlt"),
-    },
-    banner: {
-      url: formData.get("banner") || "",
-      alt: formData.get("bannerAlt"),
-    },
-    venueManager: formData.get("role") === "venue-manager",
+    bio: formData.get("bio"),
+    venueManager: formData.get("venueManager") === "venue-manager",
   };
+
+  const avatarUrl = formData.get("avatar");
+  const avatarAlt = formData.get("avatarAlt");
+  if (avatarUrl) {
+    profile.avatar = {
+      url: avatarUrl,
+      alt: avatarAlt || "",
+    };
+  }
+
+  const bannerUrl = formData.get("banner");
+  const bannerAlt = formData.get("bannerAlt");
+  if (bannerUrl) {
+    profile.banner = {
+      url: bannerUrl,
+      alt: bannerAlt || "",
+    };
+  }
 
   try {
     await register(profile);
