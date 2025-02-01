@@ -1,6 +1,15 @@
 // import { useState } from "react";
 import { Modal } from "components/Modals/Modal";
 
+/**
+ * A modal that displays the booking details and asks for confirmation
+ * @param {boolean} isOpen - A boolean that determines if the modal is open or not.
+ * @param {function} onClose - A function that closes the modal.
+ * @param {function} onConfirm - A function that confirms the booking.
+ * @param {object} bookingData - The data of the booking to be confirmed.
+ * @returns {JSX.Element} - A modal that displays the booking details and asks for confirmation.
+ */
+
 export const ConfirmationModal = ({
   isOpen,
   onClose,

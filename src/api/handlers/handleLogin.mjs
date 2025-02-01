@@ -2,22 +2,18 @@ import { login } from "../auth/login.mjs";
 
 /**
  * Handle form submission and call the login function with the form data
- * @param {*} event
+ * @param {FormData} formData - the form data to submit
  * @returns the profile data
  */
 
-export async function handleLogin(event) {
-  event.preventDefault();
-  const formData = new FormData(event.target);
+export async function handleLogin(formData) {
   const credentials = Object.fromEntries(formData.entries());
   try {
     const profile = await login(credentials);
-    if (profile) {
-      console.log("Login successful:", profile);
-      window.location.reload();
-    }
-    // Redirect or update UI after successful login
+    console.log(profile);
+    return profile;
   } catch (error) {
     console.error("Login failed:", error);
+    return { errors: [{ message: error.message }] };
   }
 }

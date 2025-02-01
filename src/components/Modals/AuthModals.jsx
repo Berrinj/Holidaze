@@ -1,6 +1,15 @@
 import LoginModal from "./Login";
 import SignUpModal from "./SignUp";
 
+/**
+ * Display login and sign up modals based on user interaction
+ * @param {boolean} isLoginOpen - the state of the login modal
+ * @param {function} setLoginOpen - a function to toggle the login modal
+ * @param {boolean} isSignUpOpen - the state of the sign up modal
+ * @param {function} setSignUpOpen - a function to toggle the sign up modal
+ * @returns {JSX.Element} - a JSX Element that displays login and sign up modals
+ */
+
 function AuthModals({
   isLoginOpen,
   setLoginOpen,

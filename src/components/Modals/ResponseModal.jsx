@@ -1,5 +1,4 @@
 import { Modal } from "./Modal";
-import { useNavigate } from "react-router-dom";
 
 /**
  * A modal component that displays a message based on the status of the response.
@@ -33,25 +32,15 @@ const ResponseModal = ({
       {errors || <p>{errorMessage}</p>}
     </>
   );
-  const navigate = useNavigate();
-
-  const handleHomeClick = () => {
-    navigate("/");
-    onClose();
-  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <h2 className="text-lg font-bold text-white text-center">
-        {response?.status === 201 ? successMsg : errorMsg}
+        {response?.status === 200 || response?.status === 201
+          ? successMsg
+          : errorMsg}
       </h2>
       <div className="flex justify-end space-x-4 mt-4">
-        <button
-          className="px-4 py-2 bg-gray-500 text-white rounded-lg"
-          onClick={handleHomeClick}
-        >
-          Home
-        </button>
         <button
           className="px-4 py-2 bg-gray-500 text-white rounded-lg"
           onClick={onActionClick}

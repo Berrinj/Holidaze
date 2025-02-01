@@ -1,5 +1,13 @@
 import Hlogo from "../../assets/Hlogo.png";
 
+/**
+ * The base modal with a close button and a background image used for all modals.
+ * @param {boolean} isOpen - A boolean that determines if the modal is open or not.
+ * @param {function} onClose - A function that closes the modal.
+ * @param {JSX.Element} children - The content to be displayed in the modal.
+ * @returns {JSX.Element} A modal with a close button and a background image.
+ */
+
 export const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 

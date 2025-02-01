@@ -27,11 +27,12 @@ export async function login(credentials) {
       //reload the current page
       // window.location.reload();
 
-      return profile;
+      return { status: response.status, profile };
     }
     const error = await response.json();
     throw new Error("Login failed", error.errors[0].message);
   } catch (error) {
     console.error(error);
+    return { status: 500, errors: [{ message: error.message }] };
   }
 }

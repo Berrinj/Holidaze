@@ -4,6 +4,14 @@ import { useState } from "react";
 import Hlogo from "assets/Hlogo.png";
 import ResponseModal from "../ResponseModal";
 
+/**
+ * Displays a modal for user registration. It handles the form submission and displays a response modal with the result of the registration.
+ * @param {boolean} isOpen - A boolean that determines if the modal is open or not.
+ * @param {function} onClose - A function that closes the modal.
+ * @param {function} onToggleLogin - A function that toggles the login modal.
+ * @returns {JSX.Element} a JSX element that displays a modal for user registration.
+ */
+
 function SignUpModal({ isOpen, onClose, onToggleLogin }) {
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);
   const [response, setResponse] = useState(null);
@@ -222,7 +230,6 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
         isOpen={isResponseModalOpen}
         onClose={closeResponseModal}
         response={response}
-        target={closeResponseModal}
         onActionClick={handleActionClick}
         action="Register"
         successMessage="You have successfully registered."
