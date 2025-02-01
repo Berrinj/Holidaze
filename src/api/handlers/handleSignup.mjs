@@ -30,8 +30,11 @@ export async function handleSignup(event) {
   }
 
   try {
-    await register(profile);
+    const result = await register(profile);
+    console.log(result);
+    return result;
   } catch (error) {
-    console.error("Signup failed:", error);
+    console.error("Register failed:", error);
+    return { errors: [{ message: error.message }] };
   }
 }

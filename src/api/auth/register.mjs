@@ -14,12 +14,13 @@ export async function register(profile) {
     const result = await response.json();
     console.log(result);
     if (!response.ok) {
-      throw new Error("Register failed: " + result.errors[0].message);
+      return { status: response.status, errors: result.errors };
     } else {
       console.log("Register successful:", result);
+      return { status: response.status, result };
     }
-    return result;
   } catch (error) {
-    console.log(error);
+    console.log("Register failed:", error);
+    return { status: 500, errors: [{ message: error.message }] };
   }
 }
