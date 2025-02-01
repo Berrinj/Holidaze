@@ -2,6 +2,7 @@
 import "./App.css";
 import Home from "components/Pages/Home";
 import SingleVenue from "components/Pages/Venue";
+import Profile from "components/Pages/Profile";
 import Layout from "components/Layout";
 import BookingConfirmation from "components/Pages/BookingConfirmation";
 import { Routes, Route } from "react-router-dom";
@@ -21,6 +22,7 @@ function App() {
             path="booking-confirmation/:id"
             element={<BookingConfirmation />}
           />
+          <Route path="profiles/:id" element={<Profile />} />
           <Route path="*" element={<RouteNotFound />} />
         </Route>
       </Routes>
