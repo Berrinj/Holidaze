@@ -1,9 +1,64 @@
 import { NavLink } from "react-router-dom";
-import LoginModal from "components/Modals/Login";
+import AuthModals from "components/Modals/authModals";
+import { load, remove } from "utils/localStorage.mjs";
 import { useState } from "react";
 
+/**
+ * Checks if a user is logged in or not and returns the appropriate UI
+ * @returns JSX.Element
+ */
+
+function UserStatus() {
+  const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isSignUpOpen, setSignUpOpen] = useState(false);
+
+  const handleLogout = () => {
+    remove("profile");
+    remove("token");
+    window.location.href = "/";
+  };
+
+  if (!load("profile")) {
+    return (
+      <>
+        <button
+          onClick={() => setLoginOpen(true)}
+          className="text-black bg-brass h-6 font-light align-middle flex items-center"
+        >
+          login
+        </button>
+        <AuthModals
+          isLoginOpen={isLoginOpen}
+          setLoginOpen={setLoginOpen}
+          isSignUpOpen={isSignUpOpen}
+          setSignUpOpen={setSignUpOpen}
+        />
+      </>
+    );
+  } else {
+    return (
+      <div className="flex gap-3 items-center">
+        <li>
+          <NavLink to="/profile" className="font-light">
+            Profile
+          </NavLink>
+        </li>
+        <li>
+          <NavLink onClick={handleLogout} className="font-light">
+            Logout
+          </NavLink>
+        </li>
+      </div>
+    );
+  }
+}
+
+/**
+ * returns the navigation links
+ * @returns JSX.Element
+ */
+
 function Nav() {
-  const [isModalOpen, setModalOpen] = useState(false);
   return (
     <nav className="flex h-full items-center" role="navigation">
       <ul className="flex gap-3 items-center text-white">
@@ -22,18 +77,7 @@ function Nav() {
             About
           </NavLink>
         </li>
-        <li>
-          <button
-            className="text-black bg-brass h-6 font-light align-middle flex items-center"
-            onClick={() => setModalOpen(true)}
-          >
-            Login
-          </button>
-          <LoginModal
-            isOpen={isModalOpen}
-            onClose={() => setModalOpen(false)}
-          />
-        </li>
+        <UserStatus />
       </ul>
     </nav>
   );
