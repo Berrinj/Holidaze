@@ -1,18 +1,33 @@
 import useFetchSingle from "hooks/useFetchSingle";
 import { PROFILES_URL } from "api/constants";
 import { load } from "utils/localStorage.mjs";
+import { IoMdSettings } from "react-icons/io";
+import styled from "styled-components";
+import EditProfileModal from "components/Modals/EditProfile";
+import { useState } from "react";
+
+const SyledSettingsIcon = styled(IoMdSettings)`
+  color: #b99a45;
+`;
 
 function Profile() {
   const params = "_bookings=true&_venues=true";
+  const [profileData, setProfileData] = useState(null);
   const {
     data: profile,
     loading,
     error,
   } = useFetchSingle(PROFILES_URL, params);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   // if (loading) return <div>Loading...</div>;
   // if (error) return <div>Error: {error.message}</div>;
   // if (!profile) return <div>No data found</div>;
+  const handleClick = () => {
+    setProfileData(profile);
+    setModalOpen(true);
+    console.log(profile);
+  };
 
   return (
     <div className="profile bg-white rounded-2xl flex flex-col min-h-full">
@@ -20,7 +35,7 @@ function Profile() {
       {error && <p>Error: {error}</p>}
       {!profile && <p className="text-center p-10 italic">User not found</p>}
       {profile && (
-        <div className="profile--container bg-white rounded-2xl flex flex-col min-h-full pb-16">
+        <div className="profile--container bg-white rounded-2xl flex flex-col min-h-full pb-10">
           <img
             src={profile.banner.url}
             alt={profile.banner.alt}
@@ -35,11 +50,16 @@ function Profile() {
                   className="h-52 w-52 md:h-72 md:w-72 rounded-2xl border-4 border-brass object-cover"
                 />
                 {profile.name === load("profile").name && (
-                  <p className="text-center">Edit Profile</p>
+                  <p
+                    className="text-center flex justify-center items-center gap-1 cursor-pointer hover:font-semibold"
+                    onClick={handleClick}
+                  >
+                    <SyledSettingsIcon /> Edit Profile
+                  </p>
                 )}
               </div>
             </div>
-            <div className="grow flex flex-col md:flex-row flex-wrap content-center md:content-normal justify-around lg:justify-between border border-brass md:border-none divide-y-2 md:divide-y-0 md:divide-x-2 divide-brass divide-opacity-30 pt-2 text-center mt-10 md:mt-0">
+            <div className="grow flex flex-col md:flex-row flex-wrap content-center md:content-normal justify-around lg:justify-between border border-brass rounded-xl md:border-none divide-y-2 md:divide-y-0 md:divide-x-2 divide-brass divide-opacity-30 pt-2 text-center md:text-start mt-10 md:mt-0">
               <div className="profile-name-bio flex-col py-4 md:py-2 max-w-80">
                 <p className="italic">
                   {profile.name === load("profile").name
@@ -85,8 +105,8 @@ function Profile() {
                     </div>
                   </div>
                 ) : (
-                  <div className="visitProfile h-full flex flex-col justify-center pe-5 ps-5 lg:ps-10 text-center py-5">
-                    <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                  <div className="visitProfile h-full flex flex-col justify-center pe-5 ps-5 lg:ps-10 text-center py-5 items-center">
+                    <button className="bg-brass text-white rounded-2xl width-content min-w-44">
                       Contact
                     </button>
                     <p className="italic text-sm">Email</p>
@@ -95,6 +115,13 @@ function Profile() {
               </div>
             </div>
           </div>
+          {isModalOpen && (
+            <EditProfileModal
+              isOpen={isModalOpen}
+              onClose={() => setModalOpen(false)}
+              data={profileData}
+            />
+          )}
         </div>
       )}
     </div>
