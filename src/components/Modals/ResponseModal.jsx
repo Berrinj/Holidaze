@@ -26,16 +26,23 @@ const ResponseModal = ({
       {error.message}
     </p>
   ));
+  console.log(errors);
+  // const errorMsg = (
+  //   <>
+  //     <p>{`${action} failed:`}</p>
+  //     {errors || <p>{errorMessage}</p>}
+  //   </>
+  // );
   const errorMsg = (
     <>
       <p>{`${action} failed:`}</p>
-      {errors || <p>{errorMessage}</p>}
+      {errors && errors.length > 0 ? errors : <p>{errorMessage}</p>}
     </>
   );
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <h2 className="text-lg font-bold text-white text-center">
+      <h2 className="text-lg font-bold text-white text-center p-5">
         {response?.status === 200 || response?.status === 201
           ? successMsg
           : errorMsg}

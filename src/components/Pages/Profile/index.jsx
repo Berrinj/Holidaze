@@ -67,7 +67,9 @@ function Profile() {
                     : "The Holidaze team introduces:"}
                 </p>
                 <div className="profile-name-role flex items-baseline flex-wrap gap-1">
-                  <h1 className="font-bold uppercase">{profile.name}</h1>
+                  <h1 className="font-bold uppercase text-3xl md:text-4xl lg:text-5xl">
+                    {profile.name}
+                  </h1>
                   <p className="text-sm">
                     {profile.venueManager === true
                       ? "(Venue Manager)"

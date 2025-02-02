@@ -1,8 +1,9 @@
 import { Modal } from "components/Modals/Modal";
 import { useState } from "react";
 import ResponseModal from "../ResponseModal";
-import UpdateData from "api/data/put";
+import UpdateData from "api/data/update";
 import { PROFILES_URL } from "api/constants.mjs";
+// import handleUpdateProfile from "api/handlers/handleUpdateProfile.mjs";
 
 function EditProfileModal({ isOpen, onClose, data }) {
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);
@@ -16,6 +17,14 @@ function EditProfileModal({ isOpen, onClose, data }) {
     banner: data.banner.url,
     bannerAlt: data.banner.alt,
   });
+
+  // const handleUpdate = async (event) => {
+  //   event.preventDefault();
+  //   const response = await handleUpdateProfile(formData, data);
+  //   setResponse(response);
+  //   setResponseModalOpen(true);
+  //   console.log(response);
+  // };
 
   const handleUpdateProfile = async (event) => {
     event.preventDefault();
@@ -35,10 +44,16 @@ function EditProfileModal({ isOpen, onClose, data }) {
       const result = await UpdateData(PROFILES_URL, data.name, payload);
       setResponse(result);
       setResponseModalOpen(true);
+      if (result.status === 200) {
+        console.log("Update successful");
+      } else {
+        console.error("Update failed");
+      }
     } catch (error) {
       console.error("Update failed:", error);
-      setResponse({ errors: [{ message: error.message }] });
+      setResponse({ status: 500, errors: [{ message: error.message }] });
       setResponseModalOpen(true);
+      return { errors: [{ message: error.message }] };
     }
   };
 
@@ -82,12 +97,12 @@ function EditProfileModal({ isOpen, onClose, data }) {
         <div className="flex flex-col space-x-4 mt-4">
           <form id="edit-profile-form" onSubmit={handleUpdateProfile}>
             <div className="flex flex-col gap-2">
-              <div className="login-form-details-venueManager w-4/5 md:w-2/5">
+              <div className="edit-form-venueManager w-4/5 md:w-2/5">
                 <label
                   htmlFor="venueManager"
                   className="block text-sm text-white"
                 >
-                  Register Type
+                  User Role
                 </label>
                 <select
                   id="venueManager"
@@ -100,7 +115,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   <option value="venue-manager">Venue Manager</option>
                 </select>
               </div>
-              <div className="login-form-details-bio w-4/5">
+              <div className="edit-form-bio w-4/5">
                 <label
                   htmlFor="bio"
                   className="block text-sm text-white w-full"
@@ -115,7 +130,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   onChange={handleChange}
                 />
               </div>
-              <div className="login-form-details-avatar w-4/5 md:w-2/5">
+              <div className="edit-form-avatar">
                 <label htmlFor="avatar" className="block text-sm text-white">
                   Avatar URL
                 </label>
@@ -128,7 +143,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   onChange={handleChange}
                 />
               </div>
-              <div className="login-form-details-avatarAlt w-4/5 md:w-2/5">
+              <div className="edit-form-avatarAlt">
                 <label htmlFor="avatarAlt" className="block text-sm text-white">
                   Avatar Alt Text
                 </label>
@@ -141,7 +156,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   onChange={handleChange}
                 />
               </div>
-              <div className="login-form-details-banner w-4/5 md:w-2/5">
+              <div className="edit-form-banner">
                 <label htmlFor="banner" className="block text-sm text-white">
                   Banner URL
                 </label>
@@ -154,7 +169,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   onChange={handleChange}
                 />
               </div>
-              <div className="login-form-details-bannerAlt w-4/5 md:w-2/5">
+              <div className="login-form-bannerAlt">
                 <label htmlFor="bannerAlt" className="block text-sm text-white">
                   Banner Alt Text
                 </label>
