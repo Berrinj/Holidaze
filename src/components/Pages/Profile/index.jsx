@@ -20,27 +20,27 @@ function Profile() {
       {error && <p>Error: {error}</p>}
       {!profile && <p className="text-center p-10 italic">User not found</p>}
       {profile && (
-        <div className="profile--container bg-white rounded-2xl flex flex-col min-h-full relative">
+        <div className="profile--container bg-white rounded-2xl flex flex-col min-h-full pb-16">
           <img
             src={profile.banner.url}
             alt={profile.banner.alt}
             className="rounded-t-2xl h-48 w-full object-cover"
           />
-          <div className="intro flex flex-wrap px-5">
-            <div className="intro--absolute h-80 md:h-72 w-72 ms-5">
-              <div className="avtar absolute top-1/4 left-5">
+          <div className="intro flex flex-wrap px-5 gap-3">
+            <div className="intro--absolute relative h-36 md:h-56 w-full lg:w-80 ">
+              <div className="avtar absolute -top-16 left-1/2 transform -translate-x-1/2 lg:left-5 lg:transform-none h-52 w-52 md:h-72 md:w-72">
                 <img
                   src={profile.avatar.url}
                   alt={profile.avatar.alt}
-                  className="h-72 w-72 rounded-2xl border-4 border-white object-cover"
+                  className="h-52 w-52 md:h-72 md:w-72 rounded-2xl border-4 border-brass object-cover"
                 />
                 {profile.name === load("profile").name && (
                   <p className="text-center">Edit Profile</p>
                 )}
               </div>
             </div>
-            <div className="grow flex flex-wrap justify-between divide-x-2 divide-brass divide-opacity-30 pt-2">
-              <div className="profile-name-bio flex-col  py-4 md:py-2">
+            <div className="grow flex flex-col md:flex-row flex-wrap content-center md:content-normal justify-around lg:justify-between border border-brass md:border-none divide-y-2 md:divide-y-0 md:divide-x-2 divide-brass divide-opacity-30 pt-2 text-center mt-10 md:mt-0">
+              <div className="profile-name-bio flex-col py-4 md:py-2 max-w-80">
                 <p className="italic">
                   {profile.name === load("profile").name
                     ? "Welcome,"
@@ -54,31 +54,47 @@ function Profile() {
                       : "(Customer)"}
                   </p>
                 </div>
-                <div className="profile-count flex gap-2 font-semibold">
+                <div className="profile-count flex gap-2 font-semibold text-sm">
                   <p>Bookings: {profile._count.bookings}</p>
                   <p>Venues: {profile._count.venues}</p>
                 </div>
-                <p className="bio">
+                <p className="bio mt-2">
                   {profile.bio === null ? "No bio provided" : `${profile.bio}`}
                 </p>
               </div>
-              {profile.name === load("profile").name && (
-                <div className="profile-actions flex flex-col flex-wrap gap-2 justify-around pe-5 ps-10">
-                  <button className="bg-brass text-white rounded-2xl">
-                    Add Venue
-                  </button>
-                  <button className="bg-brass text-white rounded-2xl">
-                    View Bookings
-                  </button>
-                  <button className="bg-brass text-white rounded-2xl">
-                    View venues
-                  </button>
-                </div>
-              )}
+              <div className="profile-actions text-center">
+                {profile.name === load("profile").name ? (
+                  <div className="ownProfile flex flex-col flex-wrap gap-4 justify-around pe-5 ps-5 lg:ps-10 py-5">
+                    <div className="view-bookings-btn">
+                      <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                        View Bookings
+                      </button>
+                      <p>Next trip is X days away</p>
+                    </div>
+                    <div className="view-venues-btn">
+                      <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                        View venues
+                      </button>
+                      <p>Next visit is in X days </p>
+                    </div>
+                    <div className="add-venue-btn">
+                      <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                        Add Venue
+                      </button>
+                      <p>Create a new dream...</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="visitProfile h-full flex flex-col justify-center pe-5 ps-5 lg:ps-10 text-center py-5">
+                    <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                      Contact
+                    </button>
+                    <p className="italic text-sm">Email</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-
-          <p>{profile.email}</p>
         </div>
       )}
     </div>
