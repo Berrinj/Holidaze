@@ -13,14 +13,22 @@ const SyledSettingsIcon = styled(IoMdSettings)`
 
 function Profile() {
   const params = "_bookings=true&_venues=true";
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isImageModalOpen, setImageModalOpen] = useState(false);
   const [profileData, setProfileData] = useState(null);
   const {
     data: profile,
     loading,
     error,
   } = useFetchSingle(PROFILES_URL, params);
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [isImageModalOpen, setImageModalOpen] = useState(false);
+
+  if (loading)
+    return (
+      <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Loading...
+      </div>
+    );
+  if (error) return <div>Error: {error.message}, User Not found</div>;
 
   // if (loading) return <div>Loading...</div>;
   // if (error) return <div>Error: {error.message}</div>;
@@ -49,7 +57,7 @@ function Profile() {
                 <img
                   src={profile.avatar.url}
                   alt={profile.avatar.alt}
-                  className="h-52 w-52 md:h-72 md:w-72 rounded-2xl border-4 border-brass border-opacity-30 object-cover shadow-2xl"
+                  className="h-52 w-52 md:h-72 md:w-72 rounded-2xl border-4 border-brass border-opacity-30 object-cover shadow-2xl cursor-pointer"
                   onClick={() => setImageModalOpen(true)}
                 />
                 {profile.name === load("profile").name && (

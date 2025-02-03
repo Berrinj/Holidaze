@@ -30,14 +30,6 @@ const ResponseModal = ({
     console.log(errors);
   }
 
-  console.log("Errors:", errors);
-  console.log("Response:", response);
-  // const errorMsg = (
-  //   <>
-  //     <p>{`${action} failed:`}</p>
-  //     {errors || <p>{errorMessage}</p>}
-  //   </>
-  // );
   const errorMsg = (
     <>
       <p>{`${action} failed:`}</p>
