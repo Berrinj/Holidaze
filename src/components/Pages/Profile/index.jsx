@@ -7,10 +7,16 @@ import EditProfileModal from "components/Modals/EditProfile";
 import { useState } from "react";
 import ImageModal from "components/Modals/ImageModal";
 import VenueCard from "../Home/Venues/VenueCard";
+import { differenceInDays, parseISO } from "date-fns";
 
 const SyledSettingsIcon = styled(IoMdSettings)`
   color: #b99a45;
 `;
+
+/**
+ * Profile component that displays the user's profile and content based on if it's the user's own profile or not, and if the user is a venue manager, has bookings or venues etc.
+ * @returns JSX.Element Profile
+ */
 
 function Profile() {
   const params = "_bookings=true&_venues=true";
@@ -31,14 +37,38 @@ function Profile() {
     );
   if (error) return <div>Error: {error.message}, User Not found</div>;
 
-  // if (loading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error.message}</div>;
-  // if (!profile) return <div>No data found</div>;
   const handleClick = () => {
     setProfileData(profile);
     setModalOpen(true);
     console.log(profile);
   };
+
+  let nextBooking = null;
+  let daysLeft = null;
+  let nextVisit = null;
+  let daysLeftVisit = null;
+
+  if (profile.name === load("profile").name) {
+    const today = new Date();
+
+    const futureBookings = profile.bookings
+      .filter((booking) => parseISO(booking.dateFrom) > today)
+      .sort((a, b) => parseISO(a.dateFrom) - parseISO(b.dateFrom));
+
+    nextBooking = futureBookings.length > 0 ? futureBookings[0] : null;
+    daysLeft = nextBooking
+      ? differenceInDays(parseISO(nextBooking.dateFrom), today)
+      : null;
+
+    const futureVisits = profile.venues
+      .filter((venues) => parseISO(venues.dateFrom) > today)
+      .sort((a, b) => parseISO(a.dateFrom) - parseISO(b.dateFrom));
+
+    nextVisit = futureVisits.length > 0 ? futureVisits[0] : null;
+    daysLeftVisit = nextVisit
+      ? differenceInDays(parseISO(nextVisit.dateFrom), today)
+      : null;
+  }
 
   return (
     <div className="profile bg-white rounded-2xl flex flex-col min-h-full">
@@ -58,12 +88,12 @@ function Profile() {
                 <img
                   src={profile.avatar.url}
                   alt={profile.avatar.alt}
-                  className="h-52 w-52 md:h-72 md:w-72 rounded-2xl border-4 border-brass border-opacity-30 object-cover shadow-2xl cursor-pointer"
+                  className="h-52 w-52 md:h-72 md:w-72 rounded-2xl border-4 border-brass border-opacity-30 object-cover shadow-xl cursor-pointer"
                   onClick={() => setImageModalOpen(true)}
                 />
                 {profile.name === load("profile").name && (
                   <p
-                    className="text-center flex justify-center items-center gap-1 cursor-pointer hover:font-semibold"
+                    className="text-center flex justify-center items-center gap-1 cursor-pointer hover:font-semibold mt-1"
                     onClick={handleClick}
                   >
                     <SyledSettingsIcon /> Edit Profile
@@ -96,27 +126,41 @@ function Profile() {
                   {profile.bio === null ? "No bio provided" : `${profile.bio}`}
                 </p>
               </div>
-              <div className="profile-actions text-center">
+              <div className="profile-actions text-center flex">
                 {profile.name === load("profile").name ? (
                   <div className="ownProfile flex flex-col flex-wrap gap-4 justify-around pe-5 ps-5 lg:ps-10 py-5">
-                    <div className="view-bookings-btn">
-                      <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
-                        View Bookings
-                      </button>
-                      <p>Next trip is X days away</p>
-                    </div>
-                    <div className="view-venues-btn">
-                      <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
-                        View venues
-                      </button>
-                      <p>Next visit is in X days </p>
-                    </div>
-                    <div className="add-venue-btn">
-                      <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
-                        Add Venue
-                      </button>
-                      <p>Create a new dream...</p>
-                    </div>
+                    {profile._count.bookings > 0 && (
+                      <div className="view-bookings-btn">
+                        <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                          View Bookings
+                        </button>
+                        {nextBooking ? (
+                          <p>Next trip is {daysLeft} days away</p>
+                        ) : (
+                          <p>No bookings ahead</p>
+                        )}
+                      </div>
+                    )}
+                    {profile._count.venues > 0 && (
+                      <div className="view-venues-btn">
+                        <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                          View venues
+                        </button>
+                        {nextVisit ? (
+                          <p>Next visit is in {daysLeftVisit} days </p>
+                        ) : (
+                          <p>No booked visits</p>
+                        )}
+                      </div>
+                    )}
+                    {profile.venueManager === true && (
+                      <div className="add-venue-btn">
+                        <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                          Add Venue
+                        </button>
+                        <p>Create a new dream...</p>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="visitProfile h-full flex flex-col justify-center pe-5 ps-5 lg:ps-10 text-center py-5 items-center">
@@ -130,13 +174,12 @@ function Profile() {
             </div>
           </div>
           {profile.name !== load("profile").name && (
-            <div className="profile-venues p-5">
-              <div className="venues-title flex items-baseline gap-1 font-bold">
+            <div className="profile-venues py-5">
+              <div className="venues-title flex items-baseline gap-1 font-bold ps-5">
                 <h2 className="text-3xl">Venues</h2>
                 <p className="">({profile._count.venues})</p>
               </div>
-              <div className="venues-list">
-                here comes the list of venues
+              <div className="venues-list flex flex-wrap justify-center gap-3 mt-3">
                 {profile.venues.map((venue) => (
                   <VenueCard key={venue.id} venue={venue} />
                 ))}
