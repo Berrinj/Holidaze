@@ -8,6 +8,7 @@ import { useState } from "react";
 import ImageModal from "components/Modals/ImageModal";
 import VenueCard from "../Home/Venues/VenueCard";
 import { differenceInDays, parseISO } from "date-fns";
+import { Link } from "react-router-dom";
 
 const SyledSettingsIcon = styled(IoMdSettings)`
   color: #b99a45;
@@ -131,9 +132,11 @@ function Profile() {
                   <div className="ownProfile flex flex-col flex-wrap gap-4 justify-around pe-5 ps-5 lg:ps-10 py-5">
                     {profile._count.bookings > 0 && (
                       <div className="view-bookings-btn">
-                        <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
-                          View Bookings
-                        </button>
+                        <Link to={`/profiles/${profile.name}/bookings`}>
+                          <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                            View Bookings
+                          </button>
+                        </Link>
                         {nextBooking ? (
                           <p>Next trip is {daysLeft} days away</p>
                         ) : (
