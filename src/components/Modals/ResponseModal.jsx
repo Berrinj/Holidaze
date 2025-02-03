@@ -26,7 +26,12 @@ const ResponseModal = ({
       {error.message}
     </p>
   ));
-  console.log(errors);
+  if (errors) {
+    console.log(errors);
+  }
+
+  console.log("Errors:", errors);
+  console.log("Response:", response);
   // const errorMsg = (
   //   <>
   //     <p>{`${action} failed:`}</p>

@@ -5,6 +5,7 @@ import { IoMdSettings } from "react-icons/io";
 import styled from "styled-components";
 import EditProfileModal from "components/Modals/EditProfile";
 import { useState } from "react";
+import ImageModal from "components/Modals/ImageModal";
 
 const SyledSettingsIcon = styled(IoMdSettings)`
   color: #b99a45;
@@ -19,6 +20,7 @@ function Profile() {
     error,
   } = useFetchSingle(PROFILES_URL, params);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isImageModalOpen, setImageModalOpen] = useState(false);
 
   // if (loading) return <div>Loading...</div>;
   // if (error) return <div>Error: {error.message}</div>;
@@ -47,7 +49,8 @@ function Profile() {
                 <img
                   src={profile.avatar.url}
                   alt={profile.avatar.alt}
-                  className="h-52 w-52 md:h-72 md:w-72 rounded-2xl border-4 border-brass object-cover"
+                  className="h-52 w-52 md:h-72 md:w-72 rounded-2xl border-4 border-brass border-opacity-30 object-cover shadow-2xl"
+                  onClick={() => setImageModalOpen(true)}
                 />
                 {profile.name === load("profile").name && (
                   <p
@@ -60,7 +63,7 @@ function Profile() {
               </div>
             </div>
             <div className="grow flex flex-col md:flex-row flex-wrap content-center md:content-normal justify-around lg:justify-between border border-brass rounded-xl md:border-none divide-y-2 md:divide-y-0 md:divide-x-2 divide-brass divide-opacity-30 pt-2 text-center md:text-start mt-10 md:mt-0">
-              <div className="profile-name-bio flex-col py-4 md:py-2 max-w-80">
+              <div className="profile-name-bio flex-col px-4 sm:px-0 py-2 max-w-80">
                 <p className="italic">
                   {profile.name === load("profile").name
                     ? "Welcome,"
@@ -122,6 +125,13 @@ function Profile() {
               isOpen={isModalOpen}
               onClose={() => setModalOpen(false)}
               data={profileData}
+            />
+          )}
+          {isImageModalOpen && (
+            <ImageModal
+              isOpen={isImageModalOpen}
+              onClose={() => setImageModalOpen(false)}
+              data={profile}
             />
           )}
         </div>

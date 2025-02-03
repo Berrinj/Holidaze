@@ -1,9 +1,9 @@
 import { Modal } from "components/Modals/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ResponseModal from "../ResponseModal";
-import UpdateData from "api/data/update";
-import { PROFILES_URL } from "api/constants.mjs";
-// import handleUpdateProfile from "api/handlers/handleUpdateProfile.mjs";
+// import UpdateData from "api/data/update";
+// import { PROFILES_URL } from "api/constants.mjs";
+import handleUpdateProfile from "api/handlers/handleUpdateProfile.mjs";
 
 function EditProfileModal({ isOpen, onClose, data }) {
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);
@@ -18,44 +18,52 @@ function EditProfileModal({ isOpen, onClose, data }) {
     bannerAlt: data.banner.alt,
   });
 
-  // const handleUpdate = async (event) => {
-  //   event.preventDefault();
-  //   const response = await handleUpdateProfile(formData, data);
-  //   setResponse(response);
-  //   setResponseModalOpen(true);
-  //   console.log(response);
-  // };
-
-  const handleUpdateProfile = async (event) => {
+  const handleUpdate = async (event) => {
     event.preventDefault();
-    const payload = {
-      bio: formData.bio,
-      avatar: {
-        url: formData.avatar,
-        alt: formData.avatarAlt,
-      },
-      banner: {
-        url: formData.banner,
-        alt: formData.bannerAlt,
-      },
-      venueManager: formData.venueManager,
-    };
-    try {
-      const result = await UpdateData(PROFILES_URL, data.name, payload);
-      setResponse(result);
-      setResponseModalOpen(true);
-      if (result.status === 200) {
-        console.log("Update successful");
-      } else {
-        console.error("Update failed");
-      }
-    } catch (error) {
-      console.error("Update failed:", error);
-      setResponse({ status: 500, errors: [{ message: error.message }] });
-      setResponseModalOpen(true);
-      return { errors: [{ message: error.message }] };
-    }
+    console.log("clicked", data.name);
+    const result = await handleUpdateProfile(event, data.name);
+    console.log("Result from handleUpdateProfile:", result);
+    setResponse(result);
+    setResponseModalOpen(true);
+    console.log(response);
   };
+
+  useEffect(() => {
+    if (response) {
+      console.log("Updated response state:", response);
+    }
+  }, [response]);
+
+  // const handleUpdateProfile = async (event) => {
+  //   event.preventDefault();
+  //   const payload = {
+  //     bio: formData.bio,
+  //     avatar: {
+  //       url: formData.avatar,
+  //       alt: formData.avatarAlt,
+  //     },
+  //     banner: {
+  //       url: formData.banner,
+  //       alt: formData.bannerAlt,
+  //     },
+  //     venueManager: formData.venueManager,
+  //   };
+  //   try {
+  //     const result = await UpdateData(PROFILES_URL, data.name, payload);
+  //     setResponse(result);
+  //     setResponseModalOpen(true);
+  //     if (result.status === 200) {
+  //       console.log("Update successful");
+  //     } else {
+  //       console.error("Update failed");
+  //     }
+  //   } catch (error) {
+  //     console.error("Update failed:", error);
+  //     setResponse({ status: 500, errors: [{ message: error.message }] });
+  //     setResponseModalOpen(true);
+  //     return { errors: [{ message: error.message }] };
+  //   }
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -95,7 +103,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
           Update your profile information
         </p>
         <div className="flex flex-col space-x-4 mt-4">
-          <form id="edit-profile-form" onSubmit={handleUpdateProfile}>
+          <form id="edit-profile-form" onSubmit={handleUpdate}>
             <div className="flex flex-col gap-2">
               <div className="edit-form-venueManager w-4/5 md:w-2/5">
                 <label
@@ -183,21 +191,21 @@ function EditProfileModal({ isOpen, onClose, data }) {
                 />
               </div>
             </div>
+            <div className="btns flex gap-10 p-5">
+              <button
+                className="px-4 py-2 bg-gray-500 text-white rounded-lg w-1/3"
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-brass text-white rounded-lg w-1/2"
+              >
+                Save Changes
+              </button>
+            </div>
           </form>
-          <div className="btns flex gap-10 p-5">
-            <button
-              className="px-4 py-2 bg-gray-500 text-white rounded-lg w-1/3"
-              onClick={onClose}
-            >
-              Cancel
-            </button>
-            <button
-              className="px-4 py-2 bg-brass text-white rounded-lg w-1/2"
-              onClick={handleUpdateProfile}
-            >
-              Save Changes
-            </button>
-          </div>
         </div>
       </Modal>
       <ResponseModal
