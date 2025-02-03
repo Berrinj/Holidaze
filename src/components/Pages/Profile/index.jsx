@@ -6,6 +6,7 @@ import styled from "styled-components";
 import EditProfileModal from "components/Modals/EditProfile";
 import { useState } from "react";
 import ImageModal from "components/Modals/ImageModal";
+import VenueCard from "../Home/Venues/VenueCard";
 
 const SyledSettingsIcon = styled(IoMdSettings)`
   color: #b99a45;
@@ -78,7 +79,7 @@ function Profile() {
                     : "The Holidaze team introduces:"}
                 </p>
                 <div className="profile-name-role flex items-baseline flex-wrap gap-1">
-                  <h1 className="font-bold uppercase text-3xl md:text-4xl lg:text-5xl">
+                  <h1 className="font-bold uppercase text-xl sm:text-3xl md:text-4xl lg:text-5xl">
                     {profile.name}
                   </h1>
                   <p className="text-sm">
@@ -128,6 +129,20 @@ function Profile() {
               </div>
             </div>
           </div>
+          {profile.name !== load("profile").name && (
+            <div className="profile-venues p-5">
+              <div className="venues-title flex items-baseline gap-1 font-bold">
+                <h2 className="text-3xl">Venues</h2>
+                <p className="">({profile._count.venues})</p>
+              </div>
+              <div className="venues-list">
+                here comes the list of venues
+                {profile.venues.map((venue) => (
+                  <VenueCard key={venue.id} venue={venue} />
+                ))}
+              </div>
+            </div>
+          )}
           {isModalOpen && (
             <EditProfileModal
               isOpen={isModalOpen}
