@@ -10,8 +10,7 @@ function useFetchSingle(url, params) {
 
   useEffect(() => {
     setLoading(true);
-    const fullUrl = `${url}/${id}?${params}`;
-    FetchDataByPath(fullUrl)
+    FetchDataByPath(url, [id], params)
       .then((response) => {
         setData(response.data);
         console.log(response.data);
