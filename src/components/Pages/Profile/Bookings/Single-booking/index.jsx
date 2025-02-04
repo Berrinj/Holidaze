@@ -24,10 +24,14 @@ function SingleBooking() {
       : "no alt text added";
 
   return (
-    <div className="SingleBooking bg-white rounded-2xl h-full min-h-96">
+    <div className="SingleBooking bg-white rounded-2xl h-96">
       <div className="single-booking-content h-full flex">
         <div className="content-media w-1/2 ">
-          <img src={mediaUrl} alt={mediaAlt} className="h-full object-cover" />
+          <img
+            src={mediaUrl}
+            alt={mediaAlt}
+            className="h-full object-cover rounded-s-2xl"
+          />
         </div>
         <div className="content-info p-5 w-1/2">
           <h1>Your Booking at:</h1>
