@@ -5,6 +5,7 @@ import {
   isBefore,
   isAfter,
 } from "date-fns";
+import { Link } from "react-router-dom";
 
 /**
  * displays the booking card for the profile bookings page, showing the venue name, city, country, date and media. Links to the profile single booking page for more details.
@@ -54,9 +55,11 @@ function BookingsCard({ booking }) {
           {format(parseISO(booking.dateTo), "dd/MM/yyyy")}
         </p>
       </div>
-      <button className="w-full rounded-t-none rounded-b-2xl bg-tan">
-        View Booking
-      </button>
+      <Link to={`/profiles/${booking.customer.name}/bookings/${booking.id}`}>
+        <button className="w-full rounded-t-none rounded-b-2xl bg-tan">
+          View Booking
+        </button>
+      </Link>
     </div>
   );
 }
