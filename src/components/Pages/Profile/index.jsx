@@ -7,8 +7,8 @@ import EditProfileModal from "components/Modals/EditProfile";
 import { useState } from "react";
 import ImageModal from "components/Modals/ImageModal";
 import VenueCard from "../Home/Venues/VenueCard";
-import { differenceInDays, parseISO } from "date-fns";
 import { Link } from "react-router-dom";
+import { calculateNextBookingAndVisit } from "utils/calculatePastFutureBookingVenueVisit";
 
 const SyledSettingsIcon = styled(IoMdSettings)`
   color: #b99a45;
@@ -44,32 +44,35 @@ function Profile() {
     console.log(profile);
   };
 
-  let nextBooking = null;
-  let daysLeft = null;
-  let nextVisit = null;
-  let daysLeftVisit = null;
+  const { nextBooking, daysLeft, nextVisit, daysLeftVisit } =
+    calculateNextBookingAndVisit(profile);
 
-  if (profile.name === load("profile").name) {
-    const today = new Date();
+  // let nextBooking = null;
+  // let daysLeft = null;
+  // let nextVisit = null;
+  // let daysLeftVisit = null;
 
-    const futureBookings = profile.bookings
-      .filter((booking) => parseISO(booking.dateFrom) > today)
-      .sort((a, b) => parseISO(a.dateFrom) - parseISO(b.dateFrom));
+  // if (profile.name === load("profile").name) {
+  //   const today = new Date();
 
-    nextBooking = futureBookings.length > 0 ? futureBookings[0] : null;
-    daysLeft = nextBooking
-      ? differenceInDays(parseISO(nextBooking.dateFrom), today)
-      : null;
+  //   const futureBookings = profile.bookings
+  //     .filter((booking) => parseISO(booking.dateFrom) > today)
+  //     .sort((a, b) => parseISO(a.dateFrom) - parseISO(b.dateFrom));
 
-    const futureVisits = profile.venues
-      .filter((venues) => parseISO(venues.dateFrom) > today)
-      .sort((a, b) => parseISO(a.dateFrom) - parseISO(b.dateFrom));
+  //   nextBooking = futureBookings.length > 0 ? futureBookings[0] : null;
+  //   daysLeft = nextBooking
+  //     ? differenceInDays(parseISO(nextBooking.dateFrom), today)
+  //     : null;
 
-    nextVisit = futureVisits.length > 0 ? futureVisits[0] : null;
-    daysLeftVisit = nextVisit
-      ? differenceInDays(parseISO(nextVisit.dateFrom), today)
-      : null;
-  }
+  //   const futureVisits = profile.venues
+  //     .filter((venues) => parseISO(venues.dateFrom) > today)
+  //     .sort((a, b) => parseISO(a.dateFrom) - parseISO(b.dateFrom));
+
+  //   nextVisit = futureVisits.length > 0 ? futureVisits[0] : null;
+  //   daysLeftVisit = nextVisit
+  //     ? differenceInDays(parseISO(nextVisit.dateFrom), today)
+  //     : null;
+  // }
 
   return (
     <div className="profile bg-white rounded-2xl flex flex-col min-h-full">
