@@ -1,12 +1,15 @@
 import BookingsCard from "./BookingsCard";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import useFetchSingle from "hooks/useFetchSingle";
 import useFetchArray from "hooks/useFetchArray";
 import { PROFILES_URL } from "api/constants";
 import { calculateNextBooking } from "utils/calculatePastFutureBookingVenueVisit";
+import { IoIosArrowBack } from "react-icons/io";
 
 function ProfileBookings() {
   // const params = "_bookings=true&_venues=true";
+  const navigate = useNavigate();
   const bookings = "bookings";
   // const {
   //   data: profile,
@@ -55,8 +58,11 @@ function ProfileBookings() {
 
   return (
     <div className="profile bg-white rounded-2xl min-h-full">
-      <button className="p-1 mt-2 ms-2 text-sm hidden md:inline">
-        Go back
+      <button
+        onClick={() => navigate(-1)}
+        className="p-1 mt-2 ms-2 text-sm hidden md:inline-flex items-center gap-1"
+      >
+        <IoIosArrowBack /> Go back
       </button>
       <div className="p-5">
         <h1 className="uppercase text-center text-3xl font-bold">
