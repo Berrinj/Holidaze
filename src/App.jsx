@@ -26,10 +26,7 @@ function App() {
           />
           <Route path="profiles/:id" element={<Profile />} />
           <Route path="profiles/:id/bookings" element={<ProfileBookings />} />
-          <Route
-            path="profiles/:id/bookings/:id"
-            element={<ProfileBooking />}
-          />
+          <Route path="/bookings/:id" element={<ProfileBooking />} />
           <Route path="*" element={<RouteNotFound />} />
         </Route>
       </Routes>
