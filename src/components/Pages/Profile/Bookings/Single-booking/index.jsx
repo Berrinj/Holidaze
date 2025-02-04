@@ -4,6 +4,8 @@ import { format, parseISO } from "date-fns";
 import { Link, useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
+import { deleteData } from "api/data/delete";
+// import { Modal } from "components/Modals/Modal";
 
 function SingleBooking() {
   const params = "_customer=true&_venue=true";
@@ -39,6 +41,12 @@ function SingleBooking() {
         .join(", ")
     : "";
 
+  //remember confirmation modal here Marte
+  const handleDelete = () => {
+    deleteData(`${BOOKINGS_URL}/${booking.id}`);
+    navigate(-1);
+  };
+
   return (
     <div className="SingleBooking bg-white rounded-2xl min-h-96 h-full relative">
       <button
@@ -47,7 +55,10 @@ function SingleBooking() {
       >
         <IoIosArrowBack /> Go back
       </button>
-      <p className="absolute top-2 right-2 flex items-center gap-1 cursor-pointer hover:bg-red-500 hover:text-white p-2 rounded-2xl">
+      <p
+        onClick={handleDelete}
+        className="absolute top-2 right-2 flex items-center gap-1 cursor-pointer hover:bg-red-500 hover:text-white p-2 rounded-2xl"
+      >
         <MdDeleteForever /> Cancel booking?
       </p>
       <div className="single-booking-content h-full flex flex-col md:flex-row">
