@@ -55,7 +55,7 @@ function BookingsCard({ booking }) {
           {format(parseISO(booking.dateTo), "dd/MM/yyyy")}
         </p>
       </div>
-      <Link to={`/profiles/${booking.customer.name}/bookings/${booking.id}`}>
+      <Link to={`/bookings/${booking.id}`}>
         <button className="w-full rounded-t-none rounded-b-2xl bg-tan">
           View Booking
         </button>
