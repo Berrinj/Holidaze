@@ -9,9 +9,7 @@ export async function deleteData(url, dataToDelete) {
       },
       body: JSON.stringify(dataToDelete),
     });
-    const data = await response.json();
-    console.log(data);
-    return data;
+    return response;
   } catch (error) {
     console.error("Ran into a problem deleting data:", error);
   }
