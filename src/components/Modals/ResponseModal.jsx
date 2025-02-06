@@ -40,7 +40,9 @@ const ResponseModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <h2 className="text-lg font-bold text-white text-center p-5">
-        {response?.status === 200 || response?.status === 201
+        {response?.status === 200 ||
+        response?.status === 201 ||
+        response?.status === 204
           ? successMsg
           : errorMsg}
       </h2>
