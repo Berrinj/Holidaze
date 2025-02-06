@@ -2,14 +2,15 @@ import useFetchSingle from "hooks/useFetchSingle";
 import { BOOKINGS_URL } from "api/constants";
 import { format, parseISO } from "date-fns";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
-import { deleteData } from "api/data/delete";
-// import { Modal } from "components/Modals/Modal";
+import DeleteBooking from "components/Modals/DeleteBooking";
 
 function SingleBooking() {
   const params = "_customer=true&_venue=true";
   const navigate = useNavigate();
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const {
     data: booking,
@@ -43,10 +44,8 @@ function SingleBooking() {
         .join(", ")
     : "";
 
-  //remember confirmation modal here Marte
-  const handleDelete = () => {
-    deleteData(`${BOOKINGS_URL}/${booking.id}`);
-    navigate(-1);
+  const handleDeleteClick = () => {
+    setModalOpen(true);
   };
 
   return (
@@ -68,7 +67,7 @@ function SingleBooking() {
         <div className="content-info relative p-5 w-full md:w-1/2 flex flex-col">
           {dateFrom > today && (
             <p
-              onClick={handleDelete}
+              onClick={handleDeleteClick}
               className="absolute bottom-2 right-2 md:top-2 md:bottom-auto flex items-center gap-1 cursor-pointer bg-white md:bg-transparent hover:bg-red-500 hover:text-white p-2 rounded-2xl"
             >
               <MdDeleteForever /> Cancel booking?
@@ -124,6 +123,11 @@ function SingleBooking() {
           </Link>
         </div>
       </div>
+      <DeleteBooking
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        booking={booking}
+      />
     </div>
   );
 }
