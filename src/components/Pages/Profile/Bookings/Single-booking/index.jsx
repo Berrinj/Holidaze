@@ -30,6 +30,8 @@ function SingleBooking() {
       ? booking.venue.media[0].alt
       : "no alt text added";
 
+  const today = new Date();
+  const dateFrom = new Date(booking.dateFrom);
   const city = booking.venue.city || "City";
   const country = booking.venue.country || "Country";
 
@@ -55,12 +57,6 @@ function SingleBooking() {
       >
         <IoIosArrowBack /> Go back
       </button>
-      <p
-        onClick={handleDelete}
-        className="absolute top-2 right-2 flex items-center gap-1 cursor-pointer hover:bg-red-500 hover:text-white p-2 rounded-2xl"
-      >
-        <MdDeleteForever /> Cancel booking?
-      </p>
       <div className="single-booking-content h-full flex flex-col md:flex-row">
         <div className="content-media md:w-1/2 ">
           <img
@@ -69,26 +65,22 @@ function SingleBooking() {
             className="h-full w-full object-cover rounded-t-2xl md:rounded-s-2xl md:rounded-se-none flex-grow"
           />
         </div>
-        <div className="content-info p-5 w-full md:w-1/2 flex flex-col">
-          <h1 className="font-bold text-3xl uppercase">Your Booking at:</h1>
+        <div className="content-info relative p-5 w-full md:w-1/2 flex flex-col">
+          {dateFrom > today && (
+            <p
+              onClick={handleDelete}
+              className="absolute bottom-2 right-2 md:top-2 md:bottom-auto flex items-center gap-1 cursor-pointer bg-white md:bg-transparent hover:bg-red-500 hover:text-white p-2 rounded-2xl"
+            >
+              <MdDeleteForever /> Cancel booking?
+            </p>
+          )}
+          <h1 className="font-bold text-3xl uppercase mt-4">
+            Your Booking at:
+          </h1>
           <h2 className="font-semibold text-3xl mt-4">{booking.venue.name}</h2>
           <p className="text-2xl">
             {city}, {country}
           </p>
-          {/* <div className="content-details font-semibold mt-3 divide-y-2 divide-mineshaft divide-opacity-30 text-base/8 w-fit">
-            <p>
-              Your check-in date:{" "}
-              {format(parseISO(booking.dateFrom), "dd/MM/yyyy")}
-            </p>
-            <p>
-              Your check-out date:{" "}
-              {format(parseISO(booking.dateTo), "dd/MM/yyyy")}
-            </p>
-            <p>Number of guests: {booking.guests}</p>
-            <p>Ameneties: {trueMetaKeys} </p>
-            <p>Booking Ref: {booking.id}</p>
-          </div> */}
-
           <table className="content-details font-semibold mt-3 text-base/8 w-fit">
             <tbody className="divide-y-2 divide-mineshaft divide-opacity-30">
               <tr>
@@ -126,7 +118,7 @@ function SingleBooking() {
 
           <Link
             to={`/venues/${booking.venue.id}`}
-            className="rounded-2xl bg-brass text-white m-5 self-center px-5 py-2"
+            className="rounded-2xl bg-brass text-white m-7 md:m-5 self-center px-5 py-2"
           >
             View Venue
           </Link>
