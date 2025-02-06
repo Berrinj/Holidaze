@@ -3,6 +3,8 @@ import "./App.css";
 import Home from "components/Pages/Home";
 import SingleVenue from "components/Pages/Venue";
 import Profile from "components/Pages/Profile";
+import ProfileBookings from "components/Pages/Profile/Bookings";
+import ProfileBooking from "components/Pages/Profile/Bookings/Single-booking";
 import Layout from "components/Layout";
 import BookingConfirmation from "components/Pages/BookingConfirmation";
 import { Routes, Route } from "react-router-dom";
@@ -23,6 +25,8 @@ function App() {
             element={<BookingConfirmation />}
           />
           <Route path="profiles/:id" element={<Profile />} />
+          <Route path="profiles/:id/bookings" element={<ProfileBookings />} />
+          <Route path="/bookings/:id" element={<ProfileBooking />} />
           <Route path="*" element={<RouteNotFound />} />
         </Route>
       </Routes>
