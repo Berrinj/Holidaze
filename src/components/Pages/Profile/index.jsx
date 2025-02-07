@@ -4,6 +4,7 @@ import { load } from "utils/localStorage.mjs";
 import { IoMdSettings } from "react-icons/io";
 import styled from "styled-components";
 import EditProfileModal from "components/Modals/EditProfile";
+import CreateVenueModal from "components/Modals/CreateVenue";
 import { useState } from "react";
 import ImageModal from "components/Modals/ImageModal";
 import VenueCard from "../Home/Venues/VenueCard";
@@ -23,6 +24,7 @@ function Profile() {
   const params = "_bookings=true&_venues=true";
   const [isModalOpen, setModalOpen] = useState(false);
   const [isImageModalOpen, setImageModalOpen] = useState(false);
+  const [isVenueModalOpen, setVenueModalOpen] = useState(false);
   const [profileData, setProfileData] = useState(null);
   const {
     data: profile,
@@ -43,36 +45,12 @@ function Profile() {
     setModalOpen(true);
     console.log(profile);
   };
+  const handleCreateVenueClick = () => {
+    setVenueModalOpen(true);
+  };
 
   const { nextBooking, daysLeft, nextVisit, daysLeftVisit } =
     calculateNextBookingAndVisit(profile);
-
-  // let nextBooking = null;
-  // let daysLeft = null;
-  // let nextVisit = null;
-  // let daysLeftVisit = null;
-
-  // if (profile.name === load("profile").name) {
-  //   const today = new Date();
-
-  //   const futureBookings = profile.bookings
-  //     .filter((booking) => parseISO(booking.dateFrom) > today)
-  //     .sort((a, b) => parseISO(a.dateFrom) - parseISO(b.dateFrom));
-
-  //   nextBooking = futureBookings.length > 0 ? futureBookings[0] : null;
-  //   daysLeft = nextBooking
-  //     ? differenceInDays(parseISO(nextBooking.dateFrom), today)
-  //     : null;
-
-  //   const futureVisits = profile.venues
-  //     .filter((venues) => parseISO(venues.dateFrom) > today)
-  //     .sort((a, b) => parseISO(a.dateFrom) - parseISO(b.dateFrom));
-
-  //   nextVisit = futureVisits.length > 0 ? futureVisits[0] : null;
-  //   daysLeftVisit = nextVisit
-  //     ? differenceInDays(parseISO(nextVisit.dateFrom), today)
-  //     : null;
-  // }
 
   return (
     <div className="profile bg-white rounded-2xl flex flex-col min-h-full">
@@ -161,7 +139,10 @@ function Profile() {
                     )}
                     {profile.venueManager === true && (
                       <div className="add-venue-btn">
-                        <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                        <button
+                          onClick={handleCreateVenueClick}
+                          className="bg-brass text-white rounded-2xl m-auto width-content min-w-44"
+                        >
                           Add Venue
                         </button>
                         <p>Create a new dream...</p>
@@ -204,6 +185,12 @@ function Profile() {
               isOpen={isImageModalOpen}
               onClose={() => setImageModalOpen(false)}
               data={profile}
+            />
+          )}
+          {isVenueModalOpen && (
+            <CreateVenueModal
+              isOpen={isVenueModalOpen}
+              onClose={() => setVenueModalOpen(false)}
             />
           )}
         </div>
