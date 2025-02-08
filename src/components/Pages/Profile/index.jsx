@@ -49,8 +49,9 @@ function Profile() {
     setVenueModalOpen(true);
   };
 
-  const { nextBooking, daysLeft, nextVisit, daysLeftVisit } =
-    calculateNextBookingAndVisit(profile);
+  // const { nextBooking, daysLeft, nextVisit, daysLeftVisit } =
+  //   calculateNextBookingAndVisit(profile);
+  const { nextBooking, daysLeft } = calculateNextBookingAndVisit(profile);
 
   return (
     <div className="profile bg-white rounded-2xl flex flex-col min-h-full">
@@ -130,11 +131,11 @@ function Profile() {
                         <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
                           View venues
                         </button>
-                        {nextVisit ? (
+                        {/* {nextVisit ? (
                           <p>Next visit is in {daysLeftVisit} days </p>
                         ) : (
                           <p>No booked visits</p>
-                        )}
+                        )} */}
                       </div>
                     )}
                     {profile.venueManager === true && (
