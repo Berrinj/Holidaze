@@ -2,11 +2,16 @@ import { Modal } from "components/Modals/Modal";
 import ResponseModal from "components/Modals/ResponseModal";
 import { useState, useEffect } from "react";
 import { handleCreateVenue } from "api/handlers/handleCreateVenue.mjs";
+import { MdDeleteForever } from "react-icons/md";
+import { BiSolidImageAdd } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 function CreateVenueModal({ isOpen, onClose }) {
   // const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);
   const [response, setResponse] = useState(null);
+  const [media, setMedia] = useState([{ url: "", alt: "" }]);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -21,24 +26,26 @@ function CreateVenueModal({ isOpen, onClose }) {
     },
 
     maxGuests: 0,
-    price: 0,
-    rating: 0,
+    price: null,
+    rating: null,
     meta: {
       wifi: false,
       parking: false,
       pets: false,
       breakfast: false,
     },
-    media: {
-      url: "",
-      alt: "",
-    },
+    media: media,
   });
 
   const handleCreateVenueSubmit = async (event) => {
     event.preventDefault();
+    const dataToSend = {
+      ...formData,
+      media: media,
+    };
+    console.log("Form data:", dataToSend);
     const result = await handleCreateVenue(event);
-    console.log(result);
+    console.log("Response from handleCreateVenue:", result);
     setResponse(result);
     setResponseModalOpen(true);
   };
@@ -47,14 +54,6 @@ function CreateVenueModal({ isOpen, onClose }) {
       console.log("Updated response state:", response);
     }
   }, [response]);
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -76,14 +75,41 @@ function CreateVenueModal({ isOpen, onClose }) {
     }
   };
 
+  const handleMediaChange = (index, field, value) => {
+    const updatedMedia = [...media];
+    updatedMedia[index] = {
+      ...updatedMedia[index],
+      [field]: value,
+    };
+    setMedia(updatedMedia);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      media: updatedMedia,
+    }));
+  };
+
+  const addMediaField = () => {
+    setMedia([...media, { url: "", alt: "" }]);
+  };
+
+  const removeMediaField = (index) => {
+    const updatedMedia = media.filter((_, i) => i !== index);
+    setMedia(updatedMedia);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      media: updatedMedia,
+    }));
+  };
+
   const closeResponseModal = () => {
     setResponseModalOpen(false);
     onClose();
   };
 
   const handleActionClick = () => {
-    if (response.status === 200) {
-      setResponseModalOpen(false);
+    if (response.status === 200 || response.status === 201) {
+      navigate(`/venues/${response.result.data.id}`);
+      // setResponseModalOpen(false);
     }
     setResponseModalOpen(false);
   };
@@ -103,6 +129,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   type="text"
                   name="name"
                   id="name"
+                  required={true}
                   className="text-black rounded-2xl w-full"
                   value={formData.name}
                   onChange={handleChange}
@@ -114,6 +141,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   type="number"
                   name="maxGuests"
                   id="guests"
+                  required={true}
                   className="text-black rounded-2xl w-full"
                   value={formData.maxGuests}
                   onChange={handleChange}
@@ -125,6 +153,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   type="number"
                   name="price"
                   id="price"
+                  required={true}
                   className="text-black rounded-2xl w-full"
                   value={formData.price}
                   onChange={handleChange}
@@ -132,13 +161,22 @@ function CreateVenueModal({ isOpen, onClose }) {
               </div>
               <div className="w-full md:w-1/4">
                 <label htmlFor="rating">Rating</label>
-                <input
-                  type="number"
+                <select
                   name="rating"
+                  id="rating"
+                  required={true}
                   className="text-black rounded-2xl w-full"
                   value={formData.rating}
                   onChange={handleChange}
-                />
+                >
+                  <option value="">Select Rating</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
               </div>
               <div className="w-full md:w-4/5">
                 <label htmlFor="description" className="w-full">
@@ -147,6 +185,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                 <textarea
                   name="description"
                   id="description"
+                  required={true}
                   className="text-black rounded-2xl w-full"
                   rows={6}
                   value={formData.description}
@@ -170,7 +209,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   Zip
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="location.zip"
                   id="zip"
                   className="text-black rounded-2xl w-full"
@@ -241,6 +280,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                 <input
                   type="checkbox"
                   name="meta.wifi"
+                  id="meta.wifi"
                   className="text-black rounded-2xl w-full"
                   checked={formData.meta.wifi}
                   onChange={handleChange}
@@ -251,6 +291,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                 <input
                   type="checkbox"
                   name="meta.parking"
+                  id="meta.parking"
                   className="text-black rounded-2xl w-full"
                   checked={formData.meta.parking}
                   onChange={handleChange}
@@ -261,6 +302,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                 <input
                   type="checkbox"
                   name="meta.pets"
+                  id="meta.pets"
                   className="text-black rounded-2xl w-full"
                   checked={formData.meta.pets}
                   onChange={handleChange}
@@ -271,46 +313,70 @@ function CreateVenueModal({ isOpen, onClose }) {
                 <input
                   type="checkbox"
                   name="meta.breakfast"
+                  id="meta.breakfast"
                   className="text-black rounded-2xl w-full"
                   checked={formData.meta.breakfast}
                   onChange={handleChange}
                 />
               </div>
               <h3 className="text-xl font-semibold w-full mt-3">Add Images</h3>
-              <div>
-                <label>Media URL</label>
-                <input
-                  type="text"
-                  name="media.url"
-                  className="text-black rounded-2xl w-full"
-                  value={formData.media.url}
-                  onChange={handleChange}
-                />
-              </div>
-              <div>
-                <label>Media Alt Text</label>
-                <input
-                  type="text"
-                  name="media.alt"
-                  className="text-black rounded-2xl w-full"
-                  value={formData.media.alt}
-                  onChange={handleChange}
-                />
-              </div>
+              {media.map((item, index) => (
+                <div key={index} className="flex flex-wrap gap-2">
+                  <div className="w-full sm:w-4/5">
+                    <label htmlFor={`media-url-${index}`}>Media URL</label>
+                    <input
+                      type="text"
+                      name="media.url"
+                      id={`media-url-${index}`}
+                      className="text-black rounded-2xl w-full"
+                      value={item.url}
+                      onChange={(e) =>
+                        handleMediaChange(index, "url", e.target.value)
+                      }
+                    />
+                    {item.url && (
+                      <img
+                        src={item.url}
+                        alt={item.alt}
+                        className="mt-2 w-20 h-20 object-cover rounded"
+                      />
+                    )}
+                  </div>
+                  <div className="w-full sm:w-4/5">
+                    <label htmlFor={`media-alt-${index}`}>Media Alt Text</label>
+                    <input
+                      type="text"
+                      name="media.alt"
+                      id={`media-alt-${index}`}
+                      className="text-black rounded-2xl w-full"
+                      value={item.alt}
+                      onChange={(e) =>
+                        handleMediaChange(index, "alt", e.target.value)
+                      }
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeMediaField(index)}
+                    className="bg-red-400 p-3 h-12 text-white rounded-lg flex items-center justify-center self-end text-2xl"
+                  >
+                    <MdDeleteForever />
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={addMediaField}
+                className="flex items-center justify-center"
+              >
+                <BiSolidImageAdd /> Add more images
+              </button>
             </div>
             <button type="submit" className="bg-brass text-white rounded-lg ">
               Create Venue
             </button>
           </form>
           <div className="flex gap-4">
-            {/* <button
-              className="bg-brass text-white w-1/3"
-              onClick={() => {
-                handleCreateVenueSubmit();
-              }}
-            >
-              Create Venue
-            </button> */}
             <button
               className="px-4 py-2 bg-gray-500 text-white rounded-lg"
               onClick={onClose}
@@ -324,6 +390,8 @@ function CreateVenueModal({ isOpen, onClose }) {
         isOpen={isResponseModalOpen}
         onClose={closeResponseModal}
         response={response}
+        action="Create Venue"
+        successMessage="Your venue is now live! Go check it out"
         onActionClick={handleActionClick}
       />
     </>
