@@ -26,8 +26,8 @@ function CreateVenueModal({ isOpen, onClose }) {
     },
 
     maxGuests: 0,
-    price: null,
-    rating: null,
+    price: 0,
+    rating: 0,
     meta: {
       wifi: false,
       parking: false,
