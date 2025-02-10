@@ -13,10 +13,11 @@ export const Modal = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-modal-img bg-cover rounded-lg shadow-lg p-6 max-w-3xl w-full relative">
+      <div className="bg-modal-img bg-cover rounded-lg shadow-lg p-6 max-w-3xl w-full h-full md:h-auto relative">
         <img
           src={Hlogo}
           className="absolute top-2 left-2 h-8 w-8 opacity-50"
+          alt="logo"
         ></img>
         <button
           className="absolute top-2 right-2 text-white bg-black w-8 h-8 p-0 rounded-full flex items-center justify-center"
@@ -24,7 +25,9 @@ export const Modal = ({ isOpen, onClose, children }) => {
         >
           &#x2715; {/* Close button */}
         </button>
-        {children}
+        <div className="overflow-y-auto max-h-full md:max-h-[80vh]">
+          {children}
+        </div>
       </div>
     </div>
   );

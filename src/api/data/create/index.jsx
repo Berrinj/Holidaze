@@ -15,9 +15,9 @@ export async function CreatePOST(url, postData) {
       },
       body: JSON.stringify(postData),
     });
-    const data = await response.json();
-    console.log(data);
-    return data;
+    const result = await response.json();
+    console.log(result);
+    return { status: response.status, result };
   } catch (error) {
     console.error("Ran into a problem creating booking:", error);
   }

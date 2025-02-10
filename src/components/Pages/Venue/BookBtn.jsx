@@ -59,10 +59,10 @@ function BookBtn({
       console.log("Confirm Booking data:", sendBooking);
       const response = await CreatePOST(BOOKINGS_URL, sendBooking);
       console.log("Booking response:", response);
-      console.log("booking ID:", response.data.id);
+      console.log("booking ID:", response.result.data.id);
       // CreatePOST(BOOKINGS_URL, sendBooking);
       setModalOpen(false);
-      navigate(`/booking-confirmation/${response.data.id}`, {
+      navigate(`/booking-confirmation/${response.result.data.id}`, {
         state: { bookingData: response },
       });
     } catch (error) {
