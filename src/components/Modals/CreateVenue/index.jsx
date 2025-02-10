@@ -408,6 +408,7 @@ function CreateVenueModal({ isOpen, onClose }) {
         response={response}
         action="Create Venue"
         successMessage="Your venue is now live! Go check it out"
+        errorMessage="Something went wrong. Please try again."
         onActionClick={handleActionClick}
       />
     </>

@@ -21,11 +21,17 @@ const ResponseModal = ({
   onActionClick,
 }) => {
   const successMsg = `${action} successful: ${successMessage}`;
-  const errors = response?.errors?.map((error, index) => (
-    <p key={index} className="text-red-500">
-      {error.message}
-    </p>
-  ));
+  const errors =
+    response?.errors?.map((error, index) => (
+      <p key={index} className="text-red-500">
+        {error.message}
+      </p>
+    )) ||
+    response?.result?.errors?.map((error, index) => (
+      <p key={index} className="text-red-500">
+        {error.message}
+      </p>
+    ));
   if (errors) {
     console.log(errors);
   }
