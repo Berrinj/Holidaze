@@ -319,58 +319,74 @@ function CreateVenueModal({ isOpen, onClose }) {
                   onChange={handleChange}
                 />
               </div>
-              <h3 className="text-xl font-semibold w-full mt-3">Add Images</h3>
-              {media.map((item, index) => (
-                <div key={index} className="flex flex-wrap gap-2">
-                  <div className="w-full sm:w-4/5">
-                    <label htmlFor={`media-url-${index}`}>Media URL</label>
-                    <input
-                      type="text"
-                      name="media.url"
-                      id={`media-url-${index}`}
-                      className="text-black rounded-2xl w-full"
-                      value={item.url}
-                      onChange={(e) =>
-                        handleMediaChange(index, "url", e.target.value)
-                      }
-                    />
-                    {item.url && (
+              <div className="images-container flex flex-col w-full">
+                <h3 className="text-xl font-semibold w-full mt-3">
+                  Add Images
+                </h3>
+                {media.map((item, index) => (
+                  <div key={index} className="flex flex-wrap gap-2">
+                    <div className="w-full sm:w-4/5">
+                      <label htmlFor={`media-url-${index}`}>Media URL</label>
+                      <input
+                        type="text"
+                        name="media.url"
+                        id={`media-url-${index}`}
+                        className="text-black rounded-2xl w-full"
+                        value={item.url}
+                        onChange={(e) =>
+                          handleMediaChange(index, "url", e.target.value)
+                        }
+                      />
+                      {/* {item.url && (
                       <img
                         src={item.url}
                         alt={item.alt}
                         className="mt-2 w-20 h-20 object-cover rounded"
                       />
+                    )} */}
+                    </div>
+                    <div className="w-full sm:w-4/5">
+                      <label htmlFor={`media-alt-${index}`}>
+                        Media Alt Text
+                      </label>
+                      <input
+                        type="text"
+                        name="media.alt"
+                        id={`media-alt-${index}`}
+                        className="text-black rounded-2xl w-full"
+                        value={item.alt}
+                        onChange={(e) =>
+                          handleMediaChange(index, "alt", e.target.value)
+                        }
+                      />
+                    </div>
+                    {item.url && (
+                      <div className="img-preview w-full">
+                        <label className="w-full">Image Preview</label>
+                        <img
+                          src={item.url}
+                          alt={item.alt}
+                          className="mt-2 w-24 h-24 object-cover rounded"
+                        />
+                      </div>
                     )}
+                    <button
+                      type="button"
+                      onClick={() => removeMediaField(index)}
+                      className="bg-transparent p-3 h-12 text-red-600 rounded-lg flex items-center justify-center self-end text-2xl"
+                    >
+                      <MdDeleteForever />
+                    </button>
                   </div>
-                  <div className="w-full sm:w-4/5">
-                    <label htmlFor={`media-alt-${index}`}>Media Alt Text</label>
-                    <input
-                      type="text"
-                      name="media.alt"
-                      id={`media-alt-${index}`}
-                      className="text-black rounded-2xl w-full"
-                      value={item.alt}
-                      onChange={(e) =>
-                        handleMediaChange(index, "alt", e.target.value)
-                      }
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => removeMediaField(index)}
-                    className="bg-red-400 p-3 h-12 text-white rounded-lg flex items-center justify-center self-end text-2xl"
-                  >
-                    <MdDeleteForever />
-                  </button>
-                </div>
-              ))}
-              <button
-                type="button"
-                onClick={addMediaField}
-                className="flex items-center justify-center"
-              >
-                <BiSolidImageAdd /> Add more images
-              </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={addMediaField}
+                  className="flex items-center justify-center w-fit mt-2"
+                >
+                  <BiSolidImageAdd /> Add more images
+                </button>
+              </div>
             </div>
             <button type="submit" className="bg-brass text-white rounded-lg ">
               Create Venue
