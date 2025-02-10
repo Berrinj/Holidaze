@@ -78,11 +78,11 @@ export function calculateNextVisit(data) {
   let nextVisit = null;
   let daysLeft = null;
 
-  if (data.customer.name === load("profile").name) {
+  if (data.bookings) {
     const today = new Date();
 
     const futureVisits = data
-      .filter((venues) => parseISO(venues.dateFrom) > today)
+      .filter((venues) => parseISO(venues.bookings.dateFrom) > today)
       .sort((a, b) => parseISO(a.dateFrom) - parseISO(b.dateFrom));
 
     nextVisit = futureVisits.length > 0 ? futureVisits[0] : null;

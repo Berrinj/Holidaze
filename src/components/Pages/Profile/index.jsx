@@ -128,9 +128,11 @@ function Profile() {
                     )}
                     {profile._count.venues > 0 && (
                       <div className="view-venues-btn">
-                        <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
-                          View venues
-                        </button>
+                        <Link to={`/profiles/${profile.name}/venues`}>
+                          <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                            View venues
+                          </button>
+                        </Link>
                         {/* {nextVisit ? (
                           <p>Next visit is in {daysLeftVisit} days </p>
                         ) : (

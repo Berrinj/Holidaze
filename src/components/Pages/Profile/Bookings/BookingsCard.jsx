@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 function BookingsCard({ booking }) {
   const city = booking.venue.city || "City";
   const country = booking.venue.country || "Country";
+
   const mediaUrl =
     booking.venue.media && booking.venue.media.length > 0
       ? booking.venue.media[0].url
@@ -25,12 +26,14 @@ function BookingsCard({ booking }) {
     booking.venue.media && booking.venue.media.length > 0
       ? booking.venue.media[0].alt
       : "no alt text added";
+
   const today = new Date();
   const dateFrom = parseISO(booking.dateFrom);
   const dateTo = parseISO(booking.dateTo);
   const daysLeft = differenceInDays(parseISO(booking.dateFrom), today);
   const daysSince = differenceInDays(today, parseISO(booking.dateTo));
   const tripInProgress = isBefore(today, dateTo) && isAfter(today, dateFrom);
+
   return (
     <div className="bg-white rounded-2xl w-full min-w-40 sm:w-1/5 shadow-lg flex flex-col">
       <img
