@@ -21,22 +21,34 @@ const ResponseModal = ({
   onActionClick,
 }) => {
   const successMsg = `${action} successful: ${successMessage}`;
-  const errors = response?.errors?.map((error, index) => (
-    <p key={index} className="text-red-500">
-      {error.message}
-    </p>
-  ));
+  const errors =
+    response?.errors?.map((error, index) => (
+      <p key={index} className="text-red-500">
+        {error.message}
+      </p>
+    )) ||
+    response?.result?.errors?.map((error, index) => (
+      <p key={index} className="text-red-500">
+        {error.message}
+      </p>
+    ));
+  if (errors) {
+    console.log(errors);
+  }
+
   const errorMsg = (
     <>
       <p>{`${action} failed:`}</p>
-      {errors || <p>{errorMessage}</p>}
+      {errors && errors.length > 0 ? errors : <p>{errorMessage}</p>}
     </>
   );
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <h2 className="text-lg font-bold text-white text-center">
-        {response?.status === 200 || response?.status === 201
+      <h2 className="text-lg font-bold text-white text-center p-5">
+        {response?.status === 200 ||
+        response?.status === 201 ||
+        response?.status === 204
           ? successMsg
           : errorMsg}
       </h2>

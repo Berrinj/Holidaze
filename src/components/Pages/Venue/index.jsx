@@ -4,6 +4,7 @@ import useFetchVenue from "hooks/useFetchVenue";
 import Calendar from "components/Pages/Calendar";
 import BookBtn from "./BookBtn";
 import { VenueImageGallery } from "./ImageGallery";
+import { Link } from "react-router-dom";
 
 function SingleVenue() {
   const { venue, loading, error } = useFetchVenue();
@@ -47,7 +48,11 @@ function SingleVenue() {
                     className="h-8 w-8 object-cover rounded-full"
                   />
                   <p>Hosted by</p>
-                  <p>{venue.owner.name}</p>
+                  <p>
+                    <Link to={`/profiles/${venue.owner.name}`}>
+                      {venue.owner.name}
+                    </Link>
+                  </p>
                 </div>
                 <div className="description py-3">
                   <p className="font-bold">Description:</p>

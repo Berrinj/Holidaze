@@ -18,6 +18,8 @@ function UserStatus() {
     window.location.href = "/";
   };
 
+  const name = load("profile") ? load("profile").name : null;
+
   if (!load("profile")) {
     return (
       <>
@@ -39,7 +41,7 @@ function UserStatus() {
     return (
       <div className="flex gap-3 items-center">
         <li>
-          <NavLink to="/profile" className="font-light">
+          <NavLink to={`/profiles/${name}`} className="font-light">
             Profile
           </NavLink>
         </li>
