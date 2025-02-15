@@ -1,4 +1,4 @@
-import Hlogo from "assets/Hlogo.png";
+import Hlogo from "assets/hlogo.png";
 
 /**
  * The base modal with a close button and a background image used for all modals.
