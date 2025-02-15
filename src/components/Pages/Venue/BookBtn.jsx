@@ -5,7 +5,7 @@ import { useState } from "react";
 import { CreatePOST } from "api/data/create";
 import { BOOKINGS_URL } from "api/constants.mjs";
 // import LoginModal from "components/Modals/Login";
-import AuthModals from "components/Modals/authModals";
+import AuthModals from "components/Modals/AuthModals";
 
 function BookBtn({
   onClick,
