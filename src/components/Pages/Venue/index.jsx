@@ -5,11 +5,15 @@ import Calendar from "components/Pages/Calendar";
 import BookBtn from "./BookBtn";
 import { VenueImageGallery } from "./ImageGallery";
 import { Link } from "react-router-dom";
+import { load } from "utils/localStorage.mjs";
+import EditVenue from "components/Modals/EditVenue";
 
 function SingleVenue() {
   const { venue, loading, error } = useFetchVenue();
   const [selectedDates, setSelectedDates] = useState(null);
   const [guests, setGuests] = useState(1);
+  const [isOpen, setIsOpen] = useState(false);
+  const userStatus = load("profile");
 
   // const guestsRef = useRef(null);
 
@@ -19,6 +23,11 @@ function SingleVenue() {
 
   const handleGuestsChange = (e) => {
     setGuests(e.target.value);
+  };
+
+  const handleClick = () => {
+    setIsOpen(true);
+    console.log(venue);
   };
 
   return (
@@ -115,19 +124,34 @@ function SingleVenue() {
                   />
                   <p className="italic text-sm">(Max: {venue.maxGuests})</p>
                 </span>
-                <div className="booking-btn mx-auto mt-5">
-                  <BookBtn
-                    selectedDates={selectedDates}
-                    guests={guests}
-                    venueId={venue.id}
-                    venueName={venue.name}
-                    venuePrice={venue.price}
-                  />
-                </div>
+                {userStatus.name === venue.owner.name ? (
+                  <div className="edit-btn mx-auto mt-5">
+                    <button onClick={handleClick} className="btn btn-primary">
+                      Edit Venue
+                    </button>
+                  </div>
+                ) : (
+                  <div className="booking-btn mx-auto mt-5">
+                    <BookBtn
+                      selectedDates={selectedDates}
+                      guests={guests}
+                      venueId={venue.id}
+                      venueName={venue.name}
+                      venuePrice={venue.price}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
+      )}
+      {isOpen && (
+        <EditVenue
+          data={venue}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+        />
       )}
     </div>
   );
