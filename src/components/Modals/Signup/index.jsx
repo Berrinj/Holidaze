@@ -1,7 +1,7 @@
 import { handleSignup } from "api/handlers/handleSignup.mjs";
 import { Modal } from "../Modal";
 import { useState } from "react";
-import Hlogo from "assets/Hlogo.png";
+import Hlogo from "assets/hlogo.png";
 import ResponseModal from "../ResponseModal";
 
 /**
