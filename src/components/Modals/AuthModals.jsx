@@ -1,5 +1,5 @@
-import LoginModal from "./Login";
-import SignUpModal from "./SignUp";
+import LoginModal from "components/Modals/Login";
+import SignUpModal from "components/Modals/Signup";
 
 /**
  * Display login and sign up modals based on user interaction
