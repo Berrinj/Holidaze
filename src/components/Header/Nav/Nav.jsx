@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import AuthModals from "components/Modals/authModals";
+import AuthModals from "components/Modals/AuthModals";
 import { load, remove } from "utils/localStorage.mjs";
 import { useState } from "react";
 
