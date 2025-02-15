@@ -124,12 +124,24 @@ function SingleVenue() {
                   />
                   <p className="italic text-sm">(Max: {venue.maxGuests})</p>
                 </span>
-                {userStatus.name === venue.owner.name ? (
-                  <div className="edit-btn mx-auto mt-5">
-                    <button onClick={handleClick} className="btn btn-primary">
-                      Edit Venue
-                    </button>
-                  </div>
+                {userStatus ? (
+                  userStatus.name === venue.owner.name ? (
+                    <div className="edit-btn mx-auto mt-5">
+                      <button onClick={handleClick} className="btn btn-primary">
+                        Edit Venue
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="booking-btn mx-auto mt-5">
+                      <BookBtn
+                        selectedDates={selectedDates}
+                        guests={guests}
+                        venueId={venue.id}
+                        venueName={venue.name}
+                        venuePrice={venue.price}
+                      />
+                    </div>
+                  )
                 ) : (
                   <div className="booking-btn mx-auto mt-5">
                     <BookBtn
