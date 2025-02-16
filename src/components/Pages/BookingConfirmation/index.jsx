@@ -16,15 +16,27 @@ function BookingConfirmation() {
   } = useFetchSingle(BOOKINGS_URL, params);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <p className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Loading confirmation...
+      </p>
+    );
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return (
+      <p className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Error: {error.message}
+      </p>
+    );
   }
 
   if (!booking) {
-    return <p>No booking data available.</p>;
+    return (
+      <p className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        No booking data available.
+      </p>
+    );
   }
 
   const mediaUrl =

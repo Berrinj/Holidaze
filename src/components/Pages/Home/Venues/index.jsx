@@ -23,7 +23,9 @@ function Venues() {
 
   if (loading)
     return (
-      <p className="text-brass bg-mineshaft p-10 text-center">Loading...</p>
+      <p className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold my-5">
+        Loading Venues...
+      </p>
     );
   if (error)
     return (
