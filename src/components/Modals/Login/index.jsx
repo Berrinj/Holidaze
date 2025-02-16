@@ -45,14 +45,14 @@ function LoginModal({ isOpen, onClose, onToggleSignUp }) {
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
-        <div className="login-content flex justify-around">
+        <div className="login-content flex justify-around flex-wrap">
           <div className="left">
             <h2 className="text-lg font-bold my-4 text-center text-white">
               Login to your HOLIDAZE account
             </h2>
             <form id="login-form" onSubmit={handleLoginSubmit}>
               <div className="login-form-details flex gap-2 flex-wrap">
-                <div className="login-form-details-email">
+                <div className="login-form-details-email w-full sm:w-1/2">
                   <label htmlFor="email" className="block text-sm text-white">
                     Email
                   </label>
@@ -60,12 +60,12 @@ function LoginModal({ isOpen, onClose, onToggleSignUp }) {
                     type="email"
                     id="email"
                     name="email"
-                    className="text-black rounded-2xl"
+                    className="text-black rounded-2xl w-full"
                     value={formData.email}
                     onChange={handleChange}
                   />
                 </div>
-                <div className="login-form-details-password">
+                <div className="login-form-details-password w-full sm:w-2/5">
                   <label
                     htmlFor="password"
                     className="block text-sm text-white"
@@ -76,7 +76,7 @@ function LoginModal({ isOpen, onClose, onToggleSignUp }) {
                     type="password"
                     id="password"
                     name="password"
-                    className="text-black rounded-2xl"
+                    className="text-black rounded-2xl w-full"
                     value={formData.password}
                     onChange={handleChange}
                   />
