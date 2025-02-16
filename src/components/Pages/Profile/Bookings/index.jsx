@@ -6,6 +6,7 @@ import useFetchArray from "hooks/useFetchArray";
 import { PROFILES_URL } from "api/constants";
 import { calculateNextBooking } from "utils/calculatePastFutureBookingVenueVisit";
 import { IoIosArrowBack } from "react-icons/io";
+import { load } from "utils/localStorage.mjs";
 
 function ProfileBookings() {
   // const params = "_bookings=true&_venues=true";
@@ -25,13 +26,38 @@ function ProfileBookings() {
 
   const [filter, setFilter] = useState("all");
 
+  const loggedInUser = load("profile");
+
   if (loading)
     return (
       <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
         Loading...
       </div>
     );
-  if (error) return <div>Error: {error.message}, Bookings Not found</div>;
+  if (
+    error ||
+    profilebookings.some(
+      (booking) => booking.customer.name !== loggedInUser.name,
+    )
+  ) {
+    if (
+      error?.status === 401 ||
+      profilebookings.some(
+        (booking) => booking.customer.name !== loggedInUser.name,
+      )
+    ) {
+      return (
+        <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+          Error: Unauthorized access.
+        </div>
+      );
+    }
+    return (
+      <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Error: {error.message}, Bookings Not found
+      </div>
+    );
+  }
 
   console.log("Profile bookings data:", profilebookings);
 
