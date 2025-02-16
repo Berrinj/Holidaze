@@ -1,6 +1,8 @@
 // const { FetchDataByPath } = require("api/data/fetch/index.mjs");
 import { useState } from "react";
-import useFetchVenue from "hooks/useFetchVenue";
+// import useFetchVenue from "hooks/useFetchVenue";
+import useFetchSingle from "hooks/useFetchSingle";
+import { VENUES_URL } from "api/constants.mjs";
 import Calendar from "components/Pages/Calendar";
 import BookBtn from "./BookBtn";
 import { VenueImageGallery } from "./ImageGallery";
@@ -9,7 +11,10 @@ import { load } from "utils/localStorage.mjs";
 import EditVenue from "components/Modals/EditVenue";
 
 function SingleVenue() {
-  const { venue, loading, error } = useFetchVenue();
+  // const { venue, loading, error } = useFetchVenue();
+  const params = "_owner=true&_bookings=true";
+  const { data: venue, loading, error } = useFetchSingle(VENUES_URL, params);
+  console.log(venue);
   const [selectedDates, setSelectedDates] = useState(null);
   const [guests, setGuests] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +41,12 @@ function SingleVenue() {
         Loading...
       </div>
     );
-  if (error) return <div>Error: {error.message}, Venue Not found</div>;
+  if (error)
+    return (
+      <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Error: {error.message}, Venue Not found
+      </div>
+    );
 
   return (
     <div className="single-venue">
