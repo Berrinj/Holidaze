@@ -43,7 +43,9 @@ function VenueCard({ venue }) {
             {venue.location.city || "City"},{" "}
             {venue.location.country || "Country"}
           </p>
-          <h3 className="font-semibold min-h-10 mb-1">{venue.name}</h3>
+          <h3 className="font-semibold min-h-10 mb-1 overflow-hidden">
+            {venue.name}
+          </h3>
           <p className="text-sm">Guests: {venue.maxGuests}</p>
           <p className="italic text-sm">
             {trueMetaKeys || "No additional features"}{" "}
