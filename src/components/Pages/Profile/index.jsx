@@ -38,7 +38,21 @@ function Profile() {
         Loading...
       </div>
     );
-  if (error) return <div>Error: {error.message}, User Not found</div>;
+  if (error) {
+    console.log("Error:", error);
+    if (error.status === 401) {
+      return (
+        <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+          Error: Unauthorized access. Please log in.
+        </div>
+      );
+    }
+    return (
+      <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Error: {error.message}, User Not found
+      </div>
+    );
+  }
 
   const handleClick = () => {
     setProfileData(profile);
