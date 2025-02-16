@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProfileVenueCard from "./ProfileVenueCard";
 import { IoIosArrowBack } from "react-icons/io";
 import { PROFILES_URL } from "api/constants";
@@ -13,6 +13,7 @@ function ProfileVenues() {
   const navigate = useNavigate();
   const venues = "venues";
   const params = "_venues=true&_bookings=true";
+  const { id } = useParams();
 
   const {
     data: profilevenues,
@@ -26,12 +27,21 @@ function ProfileVenues() {
         Loading...
       </div>
     );
-  if (error)
+  if (error) {
+    if (error.status === 401) {
+      return (
+        <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+          Error: Unauthorized access. Please log in.
+        </div>
+      );
+    }
     return (
       <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        {" "}
         Error: {error.message}, Venues Not found
       </div>
     );
+  }
 
   console.log("Profile venues data:", profilevenues);
 
@@ -45,9 +55,12 @@ function ProfileVenues() {
       </button>
       <div className="p-5">
         <h1 className="uppercase text-center text-3xl font-bold">
-          Your Venues
+          Venues by: {id}
         </h1>
         <div className="profile-venue-cards flex flex-wrap justify-center gap-5 mt-5">
+          {!profilevenues.length && (
+            <p className="text-center">No venues found.</p>
+          )}
           {profilevenues.map((profilevenues) => (
             <ProfileVenueCard key={profilevenues.id} venue={profilevenues} />
           ))}
