@@ -8,7 +8,7 @@
 }
 main {
   background-color: rgb(17, 17, 17);
-  padding: 2rem;
+  /* padding: 2rem; */
   max-width: 1280px;
   margin: 0 auto;
 }
