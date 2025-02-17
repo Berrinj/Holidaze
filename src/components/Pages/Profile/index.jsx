@@ -177,7 +177,7 @@ function Profile() {
               </div>
             </div>
           </div>
-          {profile.name !== load("profile").name && (
+          {profile.name !== load("profile").name && profile.venueManager && (
             <div className="profile-venues py-5">
               <div className="venues-title flex items-baseline gap-1 font-bold ps-5">
                 <h2 className="text-3xl">Venues</h2>
