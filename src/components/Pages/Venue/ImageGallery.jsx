@@ -32,7 +32,7 @@ export const VenueImageGallery = ({ media }) => {
         alt={media[0].alt}
         className="object-cover w-full rounded-t-2xl"
         onError={(e) => {
-          e.target.onerror = null; // Prevent infinite loop if placeholder image fails
+          e.target.onerror = null;
           e.target.src = defaultImage;
         }}
       />
