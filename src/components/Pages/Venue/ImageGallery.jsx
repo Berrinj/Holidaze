@@ -31,6 +31,10 @@ export const VenueImageGallery = ({ media }) => {
         src={media[0].url}
         alt={media[0].alt}
         className="object-cover w-full rounded-t-2xl"
+        onError={(e) => {
+          e.target.onerror = null; // Prevent infinite loop if placeholder image fails
+          e.target.src = defaultImage;
+        }}
       />
     );
   }
