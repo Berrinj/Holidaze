@@ -17,7 +17,8 @@ export async function authFetch(url, options = {}) {
 
   if (!response.ok) {
     const error = await response.json();
-    const errorMessage = error.message || "Something went wrong";
+    console.log(error);
+    const errorMessage = error.errors[0].message || "Something went wrong";
     const errorStatus = response.status;
     throw { message: errorMessage, status: errorStatus };
   }
