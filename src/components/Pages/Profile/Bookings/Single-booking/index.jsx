@@ -27,7 +27,9 @@ function SingleBooking() {
   if (error)
     return (
       <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
-        Error: {error.message}
+        {error.status === 404
+          ? ". Booking not found"
+          : `Error: ${error.message}`}
       </div>
     );
 
