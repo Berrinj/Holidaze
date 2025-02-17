@@ -164,6 +164,16 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   onChange={handleChange}
                 />
               </div>
+              {formData.avatar && (
+                <div className="img-preview text-white w-full">
+                  <label className="w-full">Avatar Preview</label>
+                  <img
+                    src={formData.avatar}
+                    alt={formData.avatarAlt}
+                    className="mt-2 w-24 h-24 object-cover rounded"
+                  />
+                </div>
+              )}
               <div className="edit-form-banner">
                 <label htmlFor="banner" className="block text-sm text-white">
                   Banner URL
@@ -190,6 +200,16 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   onChange={handleChange}
                 />
               </div>
+              {formData.banner && (
+                <div className="img-preview text-white w-full">
+                  <label className="w-full">Banner Preview</label>
+                  <img
+                    src={formData.banner}
+                    alt={formData.bannerAlt}
+                    className="mt-2 w-48 h-24 object-cover rounded"
+                  />
+                </div>
+              )}
             </div>
             <div className="btns flex gap-10 p-5">
               <button
