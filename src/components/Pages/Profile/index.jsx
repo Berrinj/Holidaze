@@ -169,9 +169,11 @@ function Profile() {
                   </div>
                 ) : (
                   <div className="visitProfile h-full flex flex-col justify-center pe-5 ps-5 lg:ps-10 text-center py-5 items-center">
-                    <button className="bg-brass text-white rounded-2xl width-content min-w-44">
-                      Contact
-                    </button>
+                    <a href={`mailto:${profile.email}`}>
+                      <button className="bg-brass text-white rounded-2xl width-content min-w-44">
+                        Contact
+                      </button>
+                    </a>
                     <p className="italic text-sm">Email</p>
                   </div>
                 )}
