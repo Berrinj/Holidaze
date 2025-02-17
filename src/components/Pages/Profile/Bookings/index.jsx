@@ -1,6 +1,6 @@
 import BookingsCard from "./BookingsCard";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 // import useFetchSingle from "hooks/useFetchSingle";
 import useFetchArray from "hooks/useFetchArray";
 import { PROFILES_URL } from "api/constants";
@@ -115,6 +115,14 @@ function ProfileBookings() {
           </p>
         </div>
         <div className="profile-booking-cards flex flex-wrap justify-center gap-5 mt-5">
+          {filteredBookings.length === 0 && (
+            <div className="no-data text-center">
+              <p className="italic mb-4">No bookings found</p>
+              <Link to={`/profiles/${loggedInUser.name}`}>
+                Click here to go to your profile
+              </Link>
+            </div>
+          )}
           {filteredBookings.map((booking) => {
             return (
               <BookingsCard
