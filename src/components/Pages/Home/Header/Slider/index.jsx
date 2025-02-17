@@ -46,7 +46,7 @@ function Slider() {
   const currentVenue = venues[currentCard];
 
   return (
-    <div className="slider flex-1 rounded-2xl relative h-80 w-full">
+    <div className="slider md:flex-1 rounded-2xl relative h-80 w-full  min-w-64">
       <div className="slider__content flex justify-center h-full w-full">
         <p className="bg-mineshaft bg-opacity-70 rounded-b-xl border-b border-solid border-brass text-xs font-light w-1/2 text-white text-center absolute top-0 min-h-5">
           Check out our newest venues

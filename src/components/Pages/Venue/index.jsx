@@ -1,6 +1,8 @@
 // const { FetchDataByPath } = require("api/data/fetch/index.mjs");
 import { useState } from "react";
-import useFetchVenue from "hooks/useFetchVenue";
+// import useFetchVenue from "hooks/useFetchVenue";
+import useFetchSingle from "hooks/useFetchSingle";
+import { VENUES_URL } from "api/constants.mjs";
 import Calendar from "components/Pages/Calendar";
 import BookBtn from "./BookBtn";
 import { VenueImageGallery } from "./ImageGallery";
@@ -9,7 +11,10 @@ import { load } from "utils/localStorage.mjs";
 import EditVenue from "components/Modals/EditVenue";
 
 function SingleVenue() {
-  const { venue, loading, error } = useFetchVenue();
+  // const { venue, loading, error } = useFetchVenue();
+  const params = "_owner=true&_bookings=true";
+  const { data: venue, loading, error } = useFetchSingle(VENUES_URL, params);
+  console.log(venue);
   const [selectedDates, setSelectedDates] = useState(null);
   const [guests, setGuests] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +35,19 @@ function SingleVenue() {
     console.log(venue);
   };
 
+  if (loading)
+    return (
+      <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Loading...
+      </div>
+    );
+  if (error)
+    return (
+      <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Error: {error.message}, Venue Not found
+      </div>
+    );
+
   return (
     <div className="single-venue">
       {loading && <p>Loading...</p>}
@@ -43,7 +61,8 @@ function SingleVenue() {
             <div className="single-venue--header mx-auto flex justify-center items-baseline gap-1 flex-wrap">
               <h1 className="text-3xl font-semibold">{venue.name},</h1>
               <h2 className="text-3xl">
-                {venue.location.city}, {venue.location.country}
+                {venue.location.city || "City"},{" "}
+                {venue.location.country || "Country"}
               </h2>
             </div>
             <p className="text-center font-semibold">
@@ -51,7 +70,7 @@ function SingleVenue() {
             </p>
             <div className="single-venue--details flex gap-10 flex-wrap">
               <div className="single-venue--info flex flex-col flex-1 divide-y-2 divide-mineshaft divide-opacity-30">
-                <div className="hosted-by flex items-center gap-1 pb-4">
+                <div className="hosted-by flex flex-wrap items-center gap-1 pb-4">
                   <img
                     src={venue.owner.avatar.url}
                     className="h-8 w-8 object-cover rounded-full"

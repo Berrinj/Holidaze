@@ -4,10 +4,16 @@ import ResponseModal from "../ResponseModal";
 import handleUpdateVenue from "api/handlers/handleUpdateVenue.mjs";
 import { MdDeleteForever } from "react-icons/md";
 import { BiSolidImageAdd } from "react-icons/bi";
+import { handleDelete } from "api/handlers/handleDelete.mjs";
+import { VENUES_URL } from "api/constants.mjs";
+import { useNavigate } from "react-router-dom";
 
 function EditVenue({ isOpen, onClose, data }) {
+  const navigate = useNavigate();
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);
   const [response, setResponse] = useState(null);
+  const [action, setAction] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
   const [media, setMedia] = useState(data.media || []);
   const [formData, setFormData] = useState({
     name: data.name,
@@ -41,6 +47,8 @@ function EditVenue({ isOpen, onClose, data }) {
     const result = await handleUpdateVenue(event, data.id);
     console.log("Response from handleCreateVenue:", result);
     setResponse(result);
+    setAction("Update Venue");
+    setSuccessMessage("Your venue is now updated! Go check it out");
     setResponseModalOpen(true);
   };
   useEffect(() => {
@@ -105,7 +113,18 @@ function EditVenue({ isOpen, onClose, data }) {
       setResponseModalOpen(false);
       window.location.reload();
     }
-    setResponseModalOpen(false);
+    if (response.status === 204) {
+      setResponseModalOpen(false);
+      navigate(`/profiles/${data.owner.name}/venues`);
+    }
+  };
+
+  const handleDeleteClick = async () => {
+    const result = await handleDelete(VENUES_URL, data.id);
+    setResponse(result);
+    setAction("Delete Venue");
+    setSuccessMessage("Your venue is now deleted! Go back to your venues");
+    setResponseModalOpen(true);
   };
 
   return (
@@ -353,11 +372,17 @@ function EditVenue({ isOpen, onClose, data }) {
                 </button>
               </div>
             </div>
-            <button type="submit" className="bg-brass text-white rounded-lg ">
+            <button
+              type="submit"
+              className="bg-brass text-white rounded-lg mt-10"
+            >
               Update Venue
             </button>
           </form>
-          <div className="flex gap-4">
+          <div className="flex justify-between gap-4 mt-10">
+            <button className="bg-red-500" onClick={() => handleDeleteClick()}>
+              Delete Venue
+            </button>
             <button
               className="px-4 py-2 bg-gray-500 text-white rounded-lg"
               onClick={onClose}
@@ -371,8 +396,8 @@ function EditVenue({ isOpen, onClose, data }) {
         isOpen={isResponseModalOpen}
         onClose={closeResponseModal}
         response={response}
-        action="Update Venue"
-        successMessage="Your venue is now updated! Go check it out"
+        action={action}
+        successMessage={successMessage}
         errorMessage="Something went wrong. Please try again."
         onActionClick={handleActionClick}
       />

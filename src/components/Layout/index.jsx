@@ -6,7 +6,7 @@ function Layout() {
   return (
     <>
       <Header />
-      <main className="bg-main-img bg-cover bg-no-repeat border-x border-mineshaft min-h-screen">
+      <main className="bg-main-img bg-cover bg-no-repeat border-x border-mineshaft min-h-screen p-0 md:p-8">
         <Outlet />
       </main>
       <Footer />

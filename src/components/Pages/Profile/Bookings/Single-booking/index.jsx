@@ -18,8 +18,20 @@ function SingleBooking() {
     error,
   } = useFetchSingle(BOOKINGS_URL, params);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading)
+    return (
+      <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Loading booking...
+      </div>
+    );
+  if (error)
+    return (
+      <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        {error.status === 404
+          ? ". Booking not found"
+          : `Error: ${error.message}`}
+      </div>
+    );
 
   const mediaUrl =
     booking.venue.media && booking.venue.media.length > 0

@@ -14,6 +14,7 @@ export async function FetchData(url, ...params) {
     return data;
   } catch (error) {
     console.error("Ran into a problem fetching data:", error);
+    throw error;
   }
 }
 
@@ -35,5 +36,6 @@ export async function FetchDataByPath(baseURL, pathSegments = [], ...params) {
     return data;
   } catch (error) {
     console.error("Ran into a problem fetching data:", error);
+    throw error;
   }
 }

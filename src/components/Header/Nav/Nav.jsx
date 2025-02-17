@@ -69,7 +69,7 @@ function Nav() {
             Home
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/contact" className="font-light">
             Contact
           </NavLink>
@@ -78,7 +78,7 @@ function Nav() {
           <NavLink to="/about" className="font-light">
             About
           </NavLink>
-        </li>
+        </li> */}
         <UserStatus />
       </ul>
     </nav>

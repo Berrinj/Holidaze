@@ -107,9 +107,12 @@ function CreateVenueModal({ isOpen, onClose }) {
   };
 
   const handleActionClick = () => {
-    if (response.status === 200 || response.status === 201) {
-      navigate(`/venues/${response.result.data.id}`);
-      // setResponseModalOpen(false);
+    console.log("Response:", response);
+    if (response) {
+      if (response.status === 200 || response.status === 201) {
+        navigate(`/venues/${response.result.data.id}`);
+        // setResponseModalOpen(false);
+      }
     }
     setResponseModalOpen(false);
   };

@@ -2,10 +2,10 @@ import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 function VenueCard({ venue }) {
+  const defaultImage =
+    "https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?q=80&w=1206&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   const mediaUrl =
-    venue.media && venue.media.length > 0
-      ? venue.media[0].url
-      : "https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?q=80&w=1206&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+    venue.media && venue.media.length > 0 ? venue.media[0].url : defaultImage;
 
   const mediaAlt =
     venue.media && venue.media.length > 0
@@ -27,6 +27,10 @@ function VenueCard({ venue }) {
           src={mediaUrl}
           alt={mediaAlt}
           className="w-full h-72 object-cover rounded-t-xl drop-shadow-md"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = defaultImage;
+          }}
         />
         <div className="venue-card__content h-32 px-3 relative">
           {/* <p className="absolute top-0 right-1 flex items-center text-xs text-white bg-brass rounded-full p-1 gap-1">
@@ -43,7 +47,9 @@ function VenueCard({ venue }) {
             {venue.location.city || "City"},{" "}
             {venue.location.country || "Country"}
           </p>
-          <h3 className="font-semibold min-h-10 mb-1">{venue.name}</h3>
+          <h3 className="font-semibold min-h-10 mb-1 overflow-hidden">
+            {venue.name}
+          </h3>
           <p className="text-sm">Guests: {venue.maxGuests}</p>
           <p className="italic text-sm">
             {trueMetaKeys || "No additional features"}{" "}

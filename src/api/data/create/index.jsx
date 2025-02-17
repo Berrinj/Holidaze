@@ -19,6 +19,7 @@ export async function CreatePOST(url, postData) {
     console.log(result);
     return { status: response.status, result };
   } catch (error) {
-    console.error("Ran into a problem creating booking:", error);
+    console.error("Ran into a problem creating data:", error);
+    throw error;
   }
 }

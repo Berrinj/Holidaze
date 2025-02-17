@@ -38,7 +38,21 @@ function Profile() {
         Loading...
       </div>
     );
-  if (error) return <div>Error: {error.message}, User Not found</div>;
+  if (error) {
+    console.log("Error:", error);
+    if (error.status === 401) {
+      return (
+        <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+          Error: Unauthorized access. Please log in.
+        </div>
+      );
+    }
+    return (
+      <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Error: {error.message}, User Not found
+      </div>
+    );
+  }
 
   const handleClick = () => {
     setProfileData(profile);
@@ -63,7 +77,7 @@ function Profile() {
           <img
             src={profile.banner.url}
             alt={profile.banner.alt}
-            className="rounded-t-2xl h-48 w-full object-cover"
+            className="rounded-t-2xl h-48 md:h-64 w-full object-cover"
           />
           <div className="intro flex flex-wrap px-5 gap-3">
             <div className="intro--absolute relative h-36 md:h-56 w-full lg:w-80 ">
@@ -109,14 +123,14 @@ function Profile() {
                   {profile.bio === null ? "No bio provided" : `${profile.bio}`}
                 </p>
               </div>
-              <div className="profile-actions text-center flex">
+              <div className="profile-actions text-center flex justify-center">
                 {profile.name === load("profile").name ? (
                   <div className="ownProfile flex flex-col flex-wrap gap-4 justify-around pe-5 ps-5 lg:ps-10 py-5">
                     {profile._count.bookings > 0 && (
                       <div className="view-bookings-btn">
                         <Link to={`/profiles/${profile.name}/bookings`}>
                           <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
-                            View Bookings
+                            View my Bookings
                           </button>
                         </Link>
                         {nextBooking ? (
@@ -130,9 +144,10 @@ function Profile() {
                       <div className="view-venues-btn">
                         <Link to={`/profiles/${profile.name}/venues`}>
                           <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
-                            View venues
+                            View my venues
                           </button>
                         </Link>
+                        <p>& the bookings</p>
                         {/* {nextVisit ? (
                           <p>Next visit is in {daysLeftVisit} days </p>
                         ) : (
@@ -154,16 +169,18 @@ function Profile() {
                   </div>
                 ) : (
                   <div className="visitProfile h-full flex flex-col justify-center pe-5 ps-5 lg:ps-10 text-center py-5 items-center">
-                    <button className="bg-brass text-white rounded-2xl width-content min-w-44">
-                      Contact
-                    </button>
+                    <a href={`mailto:${profile.email}`}>
+                      <button className="bg-brass text-white rounded-2xl width-content min-w-44">
+                        Contact
+                      </button>
+                    </a>
                     <p className="italic text-sm">Email</p>
                   </div>
                 )}
               </div>
             </div>
           </div>
-          {profile.name !== load("profile").name && (
+          {profile.name !== load("profile").name && profile.venueManager && (
             <div className="profile-venues py-5">
               <div className="venues-title flex items-baseline gap-1 font-bold ps-5">
                 <h2 className="text-3xl">Venues</h2>

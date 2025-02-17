@@ -1,19 +1,42 @@
-import useFetchBooking from "hooks/useFetchBooking";
+import useFetchSingle from "hooks/useFetchSingle";
+import { BOOKINGS_URL } from "api/constants.mjs";
 import { Link } from "react-router-dom";
 
+/**
+ * a function that fetches the booking data from the API and displays the booking confirmation based on the data just sent and received
+ * @returns jsx component
+ */
+
 function BookingConfirmation() {
-  const { booking, loading, error } = useFetchBooking();
+  const params = "_customer=true&_venue=true";
+  const {
+    data: booking,
+    loading,
+    error,
+  } = useFetchSingle(BOOKINGS_URL, params);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <p className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Loading confirmation...
+      </p>
+    );
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return (
+      <p className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        Error: {error.message}
+      </p>
+    );
   }
 
   if (!booking) {
-    return <p>No booking data available.</p>;
+    return (
+      <p className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
+        No booking data available.
+      </p>
+    );
   }
 
   const mediaUrl =
