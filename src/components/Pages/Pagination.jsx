@@ -94,7 +94,7 @@ function Pagination({
   }
 
   return (
-    <div className="pagination flex justify-center mt-4 text-white">
+    <div className="pagination flex flex-wrap justify-center mt-4 text-white">
       {pages}
     </div>
   );
