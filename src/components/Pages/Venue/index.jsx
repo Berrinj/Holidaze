@@ -54,7 +54,7 @@ function SingleVenue() {
       {error && <p>Error: {error}</p>}
       {venue && (
         <div className="single-venue--container bg-white rounded-2xl flex flex-col min-h-full">
-          <div className="single-venue--media w-full ">
+          <div className="single-venue--media w-full">
             <VenueImageGallery media={venue.media} />
           </div>
           <div className="single-venue--content px-5 py-2 flex flex-col">
@@ -146,7 +146,10 @@ function SingleVenue() {
                 {userStatus ? (
                   userStatus.name === venue.owner.name ? (
                     <div className="edit-btn mx-auto mt-5">
-                      <button onClick={handleClick} className="btn btn-primary">
+                      <button
+                        onClick={handleClick}
+                        className="btn btn-primary bg-cookiesandcream text-black hover:border-brass"
+                      >
                         Edit Venue
                       </button>
                     </div>
