@@ -45,8 +45,8 @@ function SingleBooking() {
 
   const today = new Date();
   const dateFrom = new Date(booking.dateFrom);
-  const city = booking.venue.city || "City";
-  const country = booking.venue.country || "Country";
+  const city = booking.venue.location.city || "City";
+  const country = booking.venue.location.country || "Country";
 
   const meta = booking.venue.meta;
 
