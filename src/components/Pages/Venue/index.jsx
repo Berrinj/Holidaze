@@ -53,7 +53,7 @@ function SingleVenue() {
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {venue && (
-        <div className="single-venue--container bg-white rounded-2xl flex flex-col min-h-full">
+        <div className="single-venue--container bg-white rounded-2xl flex flex-col min-h-fit">
           <div className="single-venue--media w-full">
             <VenueImageGallery media={venue.media} />
           </div>

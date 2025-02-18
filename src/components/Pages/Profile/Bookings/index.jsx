@@ -83,7 +83,7 @@ function ProfileBookings() {
   });
 
   return (
-    <div className="profile-bookings bg-white rounded-2xl min-h-full">
+    <div className="profile-bookings bg-white rounded-2xl min-h-fit">
       <button
         onClick={() => navigate(-1)}
         className="p-1 mt-2 ms-2 text-sm hidden md:inline-flex items-center gap-1"

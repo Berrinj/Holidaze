@@ -61,7 +61,7 @@ function SingleBooking() {
   };
 
   return (
-    <div className="SingleBooking bg-white rounded-2xl min-h-96 h-full relative">
+    <div className="SingleBooking bg-white rounded-2xl min-h-fit relative">
       <button
         onClick={() => navigate(-1)}
         className="absolute top-2 left-2 p-1 mt-2 ms-2 text-sm hidden md:inline-flex items-center gap-1"
