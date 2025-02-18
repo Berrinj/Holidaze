@@ -134,8 +134,11 @@ function EditVenue({ isOpen, onClose, data }) {
           <h2 className="text-xl font-bold my-4 text-center">
             Edit your venue
           </h2>
-          <form onSubmit={handleCreateVenueSubmit}>
-            <div className="create-venue-details flex gap-2 flex-wrap bg-black bg-opacity-75 rounded-2xl p-4">
+          <form
+            onSubmit={handleCreateVenueSubmit}
+            className=" bg-black bg-opacity-75 rounded-2xl p-4"
+          >
+            <div className="create-venue-details flex gap-2 flex-wrap">
               <div className="w-full md:w-4/5">
                 <label htmlFor="name">Venue Name</label>
                 <input
@@ -371,13 +374,13 @@ function EditVenue({ isOpen, onClose, data }) {
                   <BiSolidImageAdd /> Add more images
                 </button>
               </div>
-              <button
-                type="submit"
-                className="bg-brass text-white rounded-lg mt-10 mx-auto w-full sm:w-1/2"
-              >
-                Update Venue
-              </button>
             </div>
+            <button
+              type="submit"
+              className="bg-brass text-white rounded-lg mt-10 mx-auto w-full sm:w-1/2"
+            >
+              Update Venue
+            </button>
           </form>
           <div className="flex justify-between gap-4 mt-10">
             <button className="bg-red-500" onClick={() => handleDeleteClick()}>
