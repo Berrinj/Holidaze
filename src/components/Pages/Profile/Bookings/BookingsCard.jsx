@@ -14,8 +14,8 @@ import { Link } from "react-router-dom";
  */
 
 function BookingsCard({ booking }) {
-  const city = booking.venue.city || "City";
-  const country = booking.venue.country || "Country";
+  const city = booking.venue.location.city || "City";
+  const country = booking.venue.location.country || "Country";
 
   const mediaUrl =
     booking.venue.media && booking.venue.media.length > 0
