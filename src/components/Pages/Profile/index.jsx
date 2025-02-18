@@ -68,12 +68,18 @@ function Profile() {
   const { nextBooking, daysLeft } = calculateNextBookingAndVisit(profile);
 
   return (
-    <div className="profile bg-white rounded-2xl flex flex-col min-h-full">
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-      {!profile && <p className="text-center p-10 italic">User not found</p>}
+    <div className="profile rounded-2xl flex flex-col min-h-fit">
+      {loading && (
+        <p className="bg-white text-center p-10 italic">Loading...</p>
+      )}
+      {error && (
+        <p className="bg-white text-center p-10 italic">Error: {error}</p>
+      )}
+      {!profile && (
+        <p className="bg-white text-center p-10 italic">User not found</p>
+      )}
       {profile && (
-        <div className="profile--container bg-white rounded-2xl flex flex-col min-h-full pb-10">
+        <div className="profile--container bg-transparent md:bg-white rounded-2xl flex flex-col min-h-full pb-10">
           <img
             src={profile.banner.url}
             alt={profile.banner.alt}
@@ -90,7 +96,7 @@ function Profile() {
                 />
                 {profile.name === load("profile").name && (
                   <p
-                    className="text-center flex justify-center items-center gap-1 cursor-pointer hover:font-semibold mt-1"
+                    className="text-center flex justify-center items-center gap-1 cursor-pointer hover:font-semibold mt-1 text-white md:text-mineshaft italic"
                     onClick={handleClick}
                   >
                     <SyledSettingsIcon /> Edit Profile
@@ -98,7 +104,7 @@ function Profile() {
                 )}
               </div>
             </div>
-            <div className="grow flex flex-col md:flex-row flex-wrap content-center md:content-normal justify-around lg:justify-between border border-brass rounded-xl md:border-none divide-y-2 md:divide-y-0 md:divide-x-2 divide-brass divide-opacity-30 pt-2 text-center md:text-start mt-10 md:mt-0">
+            <div className="grow flex flex-col md:flex-row flex-wrap content-center md:content-normal justify-around lg:justify-between border border-brass rounded-xl md:border-none divide-y-2 md:divide-y-0 md:divide-x-2 divide-brass divide-opacity-30 pt-2 text-center md:text-start mt-6 md:mt-0 bg-white">
               <div className="profile-name-bio flex-col px-4 sm:px-0 py-2 max-w-80">
                 <p className="italic">
                   {profile.name === load("profile").name
@@ -192,11 +198,11 @@ function Profile() {
           </div>
           {profile.name !== load("profile").name && profile.venueManager && (
             <div className="profile-venues py-5">
-              <div className="venues-title flex items-baseline gap-1 font-bold ps-5">
+              <div className="venues-title flex items-baseline gap-1 font-bold ps-5 text-white md:text-eerieblack">
                 <h2 className="text-3xl">Venues</h2>
                 <p className="">({profile._count.venues})</p>
               </div>
-              <div className="venues-list flex flex-wrap justify-center gap-3 mt-3">
+              <div className="venues-list flex flex-wrap justify-center gap-3 mt-3 px-2">
                 {profile.venues.map((venue) => (
                   <VenueCard key={venue.id} venue={venue} />
                 ))}
