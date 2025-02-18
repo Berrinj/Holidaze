@@ -21,8 +21,6 @@ function CreateVenueModal({ isOpen, onClose }) {
       city: "",
       country: "",
       continent: "",
-      // lat: "",
-      // lng: "",
     },
 
     maxGuests: 0,
@@ -124,8 +122,11 @@ function CreateVenueModal({ isOpen, onClose }) {
           <h2 className="text-xl font-bold my-4 text-center">
             Create new venue
           </h2>
-          <form onSubmit={handleCreateVenueSubmit}>
-            <div className="create-venue-details flex gap-2 flex-wrap bg-black bg-opacity-75 rounded-2xl p-4">
+          <form
+            onSubmit={handleCreateVenueSubmit}
+            className="bg-black bg-opacity-75 rounded-2xl p-4"
+          >
+            <div className="create-venue-details flex gap-2 flex-wrap">
               <div className="w-full md:w-4/5">
                 <label htmlFor="name">Venue Name</label>
                 <input
@@ -147,6 +148,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   required={true}
                   className="text-black rounded-2xl w-full"
                   value={formData.maxGuests}
+                  placeholder="0"
                   onChange={handleChange}
                 />
               </div>
@@ -159,6 +161,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   required={true}
                   className="text-black rounded-2xl w-full"
                   value={formData.price}
+                  placeholder="0"
                   onChange={handleChange}
                 />
               </div>
@@ -252,28 +255,6 @@ function CreateVenueModal({ isOpen, onClose }) {
                   onChange={handleChange}
                 />
               </div>
-              {/* <div>
-              <label htmlFor="lat">Latitude</label>
-              <input
-                type="text"
-                name="location.lat"
-                id="lat"
-                className="text-black rounded-2xl w-full"
-                value={formData.location.lat}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="lng">Longitude</label>
-              <input
-                type="text"
-                name="location.lng"
-                id="lng"
-                className="text-black rounded-2xl w-full"
-                value={formData.location.lng}
-                onChange={handleChange}
-              />
-            </div> */}
               <h3 className="text-xl font-semibold w-full mt-3">
                 Add Ameneties
               </h3>
@@ -340,13 +321,6 @@ function CreateVenueModal({ isOpen, onClose }) {
                           handleMediaChange(index, "url", e.target.value)
                         }
                       />
-                      {/* {item.url && (
-                      <img
-                        src={item.url}
-                        alt={item.alt}
-                        className="mt-2 w-20 h-20 object-cover rounded"
-                      />
-                    )} */}
                     </div>
                     <div className="w-full sm:w-4/5">
                       <label htmlFor={`media-alt-${index}`}>
@@ -391,7 +365,10 @@ function CreateVenueModal({ isOpen, onClose }) {
                 </button>
               </div>
             </div>
-            <button type="submit" className="bg-brass text-white rounded-lg ">
+            <button
+              type="submit"
+              className="bg-brass text-white rounded-lg mt-10 mx-auto w-full sm:w-1/2"
+            >
               Create Venue
             </button>
           </form>
