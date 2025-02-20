@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import ProfileVenueCard from "./ProfileVenueCard";
 import { IoIosArrowBack } from "react-icons/io";
 import { PROFILES_URL } from "api/constants";
@@ -59,7 +59,10 @@ function ProfileVenues() {
         </h1>
         <div className="profile-venue-cards flex flex-wrap justify-center gap-5 mt-5">
           {!profilevenues.length && (
-            <p className="text-center">No venues found.</p>
+            <div className="h-32 flex flex-col justify-around items-center">
+              <p className="italic">No venues found.</p>
+              <Link to={`/profiles/${id}`}>Go to profile</Link>
+            </div>
           )}
           {profilevenues.map((profilevenues) => (
             <ProfileVenueCard key={profilevenues.id} venue={profilevenues} />
