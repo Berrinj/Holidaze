@@ -4,6 +4,7 @@ import { load, remove } from "utils/localStorage.mjs";
 import { useState, useEffect, useCallback } from "react";
 import { FetchDataByPath } from "api/data/fetch/index.mjs";
 import { PROFILES_URL } from "api/constants.mjs";
+
 /**
  * Checks if a user is logged in or not and returns the appropriate UI
  * @returns JSX.Element
