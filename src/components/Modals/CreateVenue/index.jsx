@@ -23,9 +23,9 @@ function CreateVenueModal({ isOpen, onClose }) {
       continent: "",
     },
 
-    maxGuests: 0,
-    price: 0,
-    rating: 0,
+    maxGuests: "",
+    price: "",
+    rating: "",
     meta: {
       wifi: false,
       parking: false,
@@ -136,6 +136,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   required={true}
                   className="text-black rounded-2xl w-full"
                   value={formData.name}
+                  placeholder="The name of your venue"
                   onChange={handleChange}
                 />
               </div>
@@ -148,7 +149,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   required={true}
                   className="text-black rounded-2xl w-full"
                   value={formData.maxGuests}
-                  placeholder="0"
+                  placeholder="Maximal number of guests"
                   onChange={handleChange}
                 />
               </div>
@@ -161,7 +162,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   required={true}
                   className="text-black rounded-2xl w-full"
                   value={formData.price}
-                  placeholder="0"
+                  placeholder="Price per night"
                   onChange={handleChange}
                 />
               </div>
@@ -195,6 +196,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   className="text-black rounded-2xl w-full"
                   rows={6}
                   value={formData.description}
+                  placeholder="Tell us about your venue"
                   onChange={handleChange}
                 />
               </div>
@@ -207,6 +209,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   id="address"
                   className="text-black rounded-2xl w-full"
                   value={formData.location.address}
+                  placeholder="Street address"
                   onChange={handleChange}
                 />
               </div>
@@ -220,6 +223,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   id="zip"
                   className="text-black rounded-2xl w-full"
                   value={formData.location.zip}
+                  placeholder="Zip code"
                   onChange={handleChange}
                 />
               </div>
@@ -231,6 +235,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   id="city"
                   className="text-black rounded-2xl w-full"
                   value={formData.location.city}
+                  placeholder="City"
                   onChange={handleChange}
                 />
               </div>
@@ -242,6 +247,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   id="country"
                   className="text-black rounded-2xl w-full"
                   value={formData.location.country}
+                  placeholder="Country"
                   onChange={handleChange}
                 />
               </div>
@@ -252,6 +258,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                   name="location.continent"
                   className="text-black rounded-2xl w-full"
                   value={formData.location.continent}
+                  placeholder="Continent"
                   onChange={handleChange}
                 />
               </div>
@@ -317,6 +324,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                         id={`media-url-${index}`}
                         className="text-black rounded-2xl w-full"
                         value={item.url}
+                        placeholder="Image URL starting with http://"
                         onChange={(e) =>
                           handleMediaChange(index, "url", e.target.value)
                         }
@@ -332,6 +340,7 @@ function CreateVenueModal({ isOpen, onClose }) {
                         id={`media-alt-${index}`}
                         className="text-black rounded-2xl w-full"
                         value={item.alt}
+                        placeholder="Alt text for image"
                         onChange={(e) =>
                           handleMediaChange(index, "alt", e.target.value)
                         }
