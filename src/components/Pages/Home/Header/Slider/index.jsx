@@ -30,7 +30,7 @@ function Slider() {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className="mx-auto p-4">Loading venue slider...</p>;
   }
 
   if (error) return <p>Error: {error}</p>;
