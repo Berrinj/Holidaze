@@ -74,7 +74,7 @@ function ProfileVenueCard({ venue }) {
           <div className="view-venue-btn bg-tan w-1/2 text-center p-2 rounded-bl-2xl flex justify-center">
             <Link
               to={`/venues/${venue.id}`}
-              className="hover:italic hover:text-eerieblack self-center"
+              className="hover:italic hover:text-eerieblack self-center w-full"
             >
               Venue
             </Link>
@@ -82,7 +82,7 @@ function ProfileVenueCard({ venue }) {
           <div className="view-bookings-btn bg-brass text-white w-1/2 text-center p-2 rounded-br-2xl border-l-2 md:border-l-4 border-white flex justify-center">
             <p
               onClick={handleModal}
-              className="hover:italic cursor-pointer text-center"
+              className="hover:italic cursor-pointer text-center w-full"
             >
               Bookings Info
             </p>
