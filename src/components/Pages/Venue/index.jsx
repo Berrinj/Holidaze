@@ -59,8 +59,10 @@ function SingleVenue() {
           </div>
           <div className="single-venue--content px-5 py-2 flex flex-col">
             <div className="single-venue--header mx-auto flex justify-center items-baseline gap-1 flex-wrap">
-              <h1 className="text-3xl font-semibold">{venue.name},</h1>
-              <h2 className="text-3xl">
+              <h1 className="text-3xl font-semibold text-center">
+                {venue.name},
+              </h1>
+              <h2 className="text-2xl">
                 {venue.location.city || "City"},{" "}
                 {venue.location.country || "Country"}
               </h2>
@@ -69,7 +71,7 @@ function SingleVenue() {
               Price: {venue.price}/night
             </p>
             <div className="single-venue--details flex gap-10 flex-wrap">
-              <div className="single-venue--info flex flex-col flex-1 divide-y-2 divide-mineshaft divide-opacity-30">
+              <div className="single-venue--info flex flex-col divide-y-2 divide-mineshaft divide-opacity-30 w-full md:flex-1">
                 <div className="hosted-by flex flex-wrap items-center gap-1 pb-4">
                   <img
                     src={venue.owner.avatar.url}
@@ -176,6 +178,17 @@ function SingleVenue() {
                   </div>
                 )}
               </div>
+            </div>
+            <div className="venue-t flex flex-wrap justify-center pb-1 text-sm items-baseline">
+              <p className="italic mt-10">
+                Venue created: {new Date(venue.created).toLocaleDateString()}
+              </p>
+              {venue.updated > venue.created && (
+                <p className="italic ps-10">
+                  Venue last updated:{" "}
+                  {new Date(venue.updated).toLocaleDateString()}
+                </p>
+              )}
             </div>
           </div>
         </div>
