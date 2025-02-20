@@ -46,18 +46,27 @@ function UserStatus() {
   if (!load("profile")) {
     return (
       <>
-        <button
-          onClick={() => setSignUpOpen(true)}
-          className="bg-transparent text-white h-6 font-light align-middle hidden sm:flex items-center "
-        >
-          Register
-        </button>
-        <button
-          onClick={() => setLoginOpen(true)}
-          className="text-black bg-brass rounded-2xl h-6 font-light align-middle flex items-center"
-        >
-          Login
-        </button>
+        <li>
+          <NavLink to="/" end className="font-light">
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <button
+            onClick={() => setSignUpOpen(true)}
+            className="bg-transparent text-white h-6 font-light align-middle hidden sm:flex items-center "
+          >
+            Register
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => setLoginOpen(true)}
+            className="text-black bg-brass rounded-2xl h-6 font-light align-middle flex items-center"
+          >
+            Login
+          </button>
+        </li>
         <AuthModals
           isLoginOpen={isLoginOpen}
           setLoginOpen={setLoginOpen}
@@ -89,6 +98,15 @@ function UserStatus() {
               <ul className="py-1 text-white bg-black rounded-b-2xl">
                 <li className="px-4 py-2 font-semibold text-center">MENU</li>
                 <hr className="border-t border-gray-300 mx-4 mb-2" />
+                <li>
+                  <NavLink
+                    to="/"
+                    className="block px-4 py-4 hover:bg-gray-100"
+                    onClick={toggleDropdown}
+                  >
+                    Home
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink
                     to={`/profiles/${name}`}
@@ -147,11 +165,6 @@ function Nav() {
   return (
     <nav className="flex h-full items-center" role="navigation">
       <ul className="flex gap-3 items-center text-white">
-        <li>
-          <NavLink to="/" end className="font-light">
-            Home
-          </NavLink>
-        </li>
         <UserStatus />
       </ul>
     </nav>
