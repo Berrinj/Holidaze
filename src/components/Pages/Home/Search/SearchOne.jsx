@@ -26,8 +26,11 @@ function SearchOne({ onSearch }) {
             onChange={handleSearchInput}
             autoComplete="off"
           />
-          <button className="p-3 rounded-2xl w-16" onClick={handleSearch}>
-            <IoSearchOutline className="text-4xl text-black bg-cookiesandcream" />
+          <button
+            className="p-3 rounded-2xl w-16 bg-cookiesandcream"
+            onClick={handleSearch}
+          >
+            <IoSearchOutline className="text-4xl text-black" />
           </button>
         </div>
       </div>
