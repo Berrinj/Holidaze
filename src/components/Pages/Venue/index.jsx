@@ -1,6 +1,4 @@
-// const { FetchDataByPath } = require("api/data/fetch/index.mjs");
 import { useState } from "react";
-// import useFetchVenue from "hooks/useFetchVenue";
 import useFetchSingle from "hooks/useFetchSingle";
 import { VENUES_URL } from "api/constants.mjs";
 import Calendar from "components/Pages/Calendar";
@@ -11,7 +9,6 @@ import { load } from "utils/localStorage.mjs";
 import EditVenue from "components/Modals/EditVenue";
 
 function SingleVenue() {
-  // const { venue, loading, error } = useFetchVenue();
   const params = "_owner=true&_bookings=true";
   const { data: venue, loading, error } = useFetchSingle(VENUES_URL, params);
   console.log(venue);
@@ -19,8 +16,6 @@ function SingleVenue() {
   const [guests, setGuests] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const userStatus = load("profile");
-
-  // const guestsRef = useRef(null);
 
   const handleDateChange = (dates) => {
     setSelectedDates(dates);
