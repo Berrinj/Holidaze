@@ -33,11 +33,10 @@ function VenueCard({ venue }) {
           }}
         />
         <div className="venue-card__content h-32 px-3 relative">
-          {/* <p className="absolute top-0 right-1 flex items-center text-xs text-white bg-brass rounded-full p-1 gap-1">
-          <FaStar />
-          {venue.rating}
-        </p> */}
-          <div className="rating absolute top-0 right-1 flex items-center text-xs gap-1">
+          <div
+            className="rating absolute top-0 right-1 flex items-center text-xs gap-1"
+            aria-label={`Venue rating: ${venue.rating} out of 5`}
+          >
             <span className="text-brass">
               <FaStar />
             </span>
