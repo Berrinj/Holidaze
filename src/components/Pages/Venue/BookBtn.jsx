@@ -67,6 +67,7 @@ function BookBtn({
       });
     } catch (error) {
       console.error("Ran into a problem creating booking:", error);
+      throw error;
     }
   };
 
