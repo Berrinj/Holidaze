@@ -1,10 +1,6 @@
 import { load } from "utils/localStorage.mjs";
-import { useNavigate } from "react-router-dom";
-import { ConfirmationModal } from "components/Modals/BookVenue/BookModal";
+import ConfirmationModal from "components/Modals/BookVenue/BookModal";
 import { useState } from "react";
-import { CreatePOST } from "api/data/create";
-import { BOOKINGS_URL } from "api/constants.mjs";
-// import LoginModal from "components/Modals/Login";
 import AuthModals from "components/Modals/AuthModals";
 
 function BookBtn({
@@ -14,6 +10,7 @@ function BookBtn({
   venueId,
   venueName,
   venuePrice,
+  onConfirm,
 }) {
   const userStatus = load("profile");
   const [isModalOpen, setModalOpen] = useState(false);
@@ -21,7 +18,6 @@ function BookBtn({
   const [sendBooking, setSendBooking] = useState({});
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isSignUpOpen, setSignUpOpen] = useState(false);
-  const navigate = useNavigate();
 
   const handleClick = () => {
     if (userStatus) {
@@ -54,22 +50,6 @@ function BookBtn({
       onClick();
     }
   };
-  const handleConfirmBooking = async () => {
-    try {
-      console.log("Confirm Booking data:", sendBooking);
-      const response = await CreatePOST(BOOKINGS_URL, sendBooking);
-      console.log("Booking response:", response);
-      console.log("booking ID:", response.result.data.id);
-      // CreatePOST(BOOKINGS_URL, sendBooking);
-      setModalOpen(false);
-      navigate(`/booking-confirmation/${response.result.data.id}`, {
-        state: { bookingData: response },
-      });
-    } catch (error) {
-      console.error("Ran into a problem creating booking:", error);
-      throw error;
-    }
-  };
 
   const isButtonDisabled =
     !selectedDates ||
@@ -92,8 +72,9 @@ function BookBtn({
         <ConfirmationModal
           isOpen={isModalOpen}
           onClose={() => setModalOpen(false)}
-          onConfirm={handleConfirmBooking}
+          onConfirm={onConfirm}
           bookingData={bookingInfo}
+          sendtoAPIdata={sendBooking}
         />
       </div>
     );
