@@ -18,7 +18,6 @@ function ConfirmationModal({ isOpen, onClose, bookingData, sendtoAPIdata }) {
   const [response, setResponse] = useState(null);
   const navigate = useNavigate();
 
-  // if (!bookingData) return null;
   console.log("Booking data:", bookingData);
   console.log("API data:", sendtoAPIdata);
 
@@ -58,7 +57,6 @@ function ConfirmationModal({ isOpen, onClose, bookingData, sendtoAPIdata }) {
 
   const handleActionClick = () => {
     setResponseModalOpen(false);
-    // onClose();
   };
 
   return (
