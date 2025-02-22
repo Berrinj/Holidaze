@@ -134,7 +134,7 @@ function SingleBooking() {
 
           <Link
             to={`/venues/${booking.venue.id}`}
-            className="rounded-2xl bg-brass text-white m-7 md:m-5 self-center px-5 py-2"
+            className="rounded-2xl bg-brass text-black m-7 md:m-5 self-center px-5 py-2"
           >
             View Venue
           </Link>

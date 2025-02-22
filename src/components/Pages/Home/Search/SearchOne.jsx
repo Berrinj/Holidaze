@@ -24,7 +24,7 @@ function SearchOne({ onSearch }) {
     <div className="search mt-6 mx-2 w-full">
       <div className="w-full bg-black flex rounded-2xl border border-cookiesandcream h-16">
         <div className="w-full flex relative">
-          <label htmlFor="search" className="sr-only">
+          <label htmlFor="search" className="sr-only text-white">
             Search venue by name or description
           </label>
           <input

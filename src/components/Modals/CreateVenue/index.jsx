@@ -457,7 +457,7 @@ function CreateVenueModal({ isOpen, onClose }) {
             </div>
             <button
               type="submit"
-              className="bg-brass text-white rounded-lg mt-10 mx-auto w-full sm:w-1/2"
+              className="bg-brass text-grey rounded-lg mt-10 mx-auto w-full sm:w-1/2"
             >
               Create Venue
             </button>
