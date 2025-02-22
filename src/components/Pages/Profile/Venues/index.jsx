@@ -57,6 +57,10 @@ function ProfileVenues() {
         <h1 className="uppercase text-center text-3xl font-bold">
           Venues by: {id}
         </h1>
+        <p className="text-center mt-5 italic">
+          Looking to add a new venue? go to{" "}
+          <Link to={`/profiles/${id}`}>your profile</Link>
+        </p>
         <div className="profile-venue-cards flex flex-wrap justify-center gap-5 mt-5">
           {!profilevenues.length && (
             <div className="h-32 flex flex-col justify-around items-center">
