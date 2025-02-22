@@ -24,8 +24,12 @@ function SearchOne({ onSearch }) {
     <div className="search mt-6 mx-2 w-full">
       <div className="w-full bg-black flex rounded-2xl border border-cookiesandcream h-16">
         <div className="w-full flex relative">
+          <label htmlFor="search" className="sr-only">
+            Search venue by name or description
+          </label>
           <input
             type="search"
+            id="search"
             placeholder="Search venue by name or description..."
             className="w-full bg-black text-white rounded-2xl focus:outline-none placeholder:text-xs sm:placeholder:text-sm pe-0"
             value={searchInput}
@@ -35,6 +39,7 @@ function SearchOne({ onSearch }) {
           <button
             className="p-3 rounded-2xl w-16 bg-cookiesandcream"
             onClick={handleSearch}
+            aria-label="Search"
           >
             <IoSearchOutline className="text-4xl text-black" />
           </button>
