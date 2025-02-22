@@ -43,9 +43,11 @@ function BookingsCard({ booking }) {
       />
       <div className="booking-details p-2 grow">
         {tripInProgress ? (
-          <p className="text-green-500">Trip in progress</p>
+          <p className="text-green-500 bg-mineshaft rounded p-1">
+            Trip in progress
+          </p>
         ) : daysLeft >= 0 ? (
-          <p className="text-red-500">Days left: {daysLeft} days</p>
+          <p className="text-red-700 p-1">Days left: {daysLeft} days</p>
         ) : (
           <p className="italic">Days since: {daysSince} days</p>
         )}

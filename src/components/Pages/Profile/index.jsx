@@ -135,7 +135,7 @@ function Profile() {
                     {profile._count.bookings > 0 ? (
                       <div className="view-bookings-btn">
                         <Link to={`/profiles/${profile.name}/bookings`}>
-                          <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                          <button className="bg-brass text-eerieblack rounded-2xl m-auto width-content min-w-44">
                             View my Bookings
                           </button>
                         </Link>
@@ -153,7 +153,7 @@ function Profile() {
                     {profile._count.venues > 0 ? (
                       <div className="view-venues-btn">
                         <Link to={`/profiles/${profile.name}/venues`}>
-                          <button className="bg-brass text-white rounded-2xl m-auto width-content min-w-44">
+                          <button className="bg-brass text-eerieblack rounded-2xl m-auto width-content min-w-44">
                             View my venues
                           </button>
                         </Link>
@@ -168,7 +168,7 @@ function Profile() {
                       <div className="add-venue-btn">
                         <button
                           onClick={handleCreateVenueClick}
-                          className="bg-brass text-white rounded-2xl m-auto width-content min-w-44"
+                          className="bg-brass text-eerieblack rounded-2xl m-auto width-content min-w-44"
                         >
                           Add Venue
                         </button>

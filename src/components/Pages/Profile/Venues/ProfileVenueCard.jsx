@@ -39,7 +39,7 @@ function ProfileVenueCard({ venue }) {
     if (tripInProgress) {
       return <p className="text-green-500">Visit in progress</p>;
     } else if (daysLeft >= 0) {
-      return <p className="text-red-500">Next Visit in: {daysLeft} days</p>;
+      return <p className="text-red-700">Next Visit in: {daysLeft} days</p>;
     } else {
       return <p className="italic">No upcoming bookings</p>;
     }
@@ -85,7 +85,7 @@ function ProfileVenueCard({ venue }) {
               Venue
             </Link>
           </div>
-          <div className="view-bookings-btn bg-brass text-white w-1/2 text-center p-2 rounded-br-2xl border-l-2 md:border-l-4 border-white flex justify-center">
+          <div className="view-bookings-btn bg-brass text-black w-1/2 text-center p-2 rounded-br-2xl border-l-2 md:border-l-4 border-white flex justify-center">
             <p
               onClick={handleModal}
               className="hover:italic cursor-pointer text-center w-full"

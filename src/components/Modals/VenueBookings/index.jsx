@@ -111,15 +111,12 @@ function VenueBookings({ venue, isOpen, onClose }) {
               </div>
               <div className="btns-container flex flex-col gap-2 justify-around">
                 <Link to={`/profiles/${booking.customer.name}`}>
-                  <button className="bg-brass rounded-2xl text-white min-w-44">
+                  <button className="bg-brass rounded-2xl text-eerieblack min-w-44">
                     See Guests Profile
                   </button>
                 </Link>
-                {/* <button onClick={() => handleDeleteBooking(booking.id)}>
-                  Delete Booking
-                </button> */}
                 <a href={`mailto:${booking.customer.email}`}>
-                  <button className="bg-brass rounded-2xl text-white min-w-44">
+                  <button className="bg-brass rounded-2xl text-eerieblack min-w-44">
                     Contact Guest
                   </button>
                 </a>
