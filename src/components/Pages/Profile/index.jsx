@@ -95,12 +95,12 @@ function Profile() {
                   onClick={() => setImageModalOpen(true)}
                 />
                 {profile.name === load("profile").name && (
-                  <p
-                    className="text-center flex justify-center items-center gap-1 cursor-pointer hover:font-semibold mt-1 text-white md:text-mineshaft italic"
+                  <button
+                    className="text-center flex justify-center items-center gap-1 cursor-pointer font-normal hover:font-semibold mt-1 text-white md:text-mineshaft italic bg-transparent border-none p-0 mx-auto"
                     onClick={handleClick}
                   >
                     <SyledSettingsIcon /> Edit Profile
-                  </p>
+                  </button>
                 )}
               </div>
             </div>
