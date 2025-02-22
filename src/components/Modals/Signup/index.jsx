@@ -1,8 +1,58 @@
 import { handleSignup } from "api/handlers/handleSignup.mjs";
 import { Modal } from "../Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Hlogo from "assets/hlogo.png";
 import ResponseModal from "../ResponseModal";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+// Yup validation schema
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Invalid email format")
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/,
+      "Email must be a @stud.noroff.no email",
+    )
+    .required("Email is required"),
+  password: yup
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .required("Password is required"),
+  name: yup
+    .string()
+    .matches(
+      /^[a-zA-Z0-9_]+$/,
+      "Name must not contain punctuation symbols apart from underscore (_)",
+    )
+    .required("Name is required"),
+  bio: yup.string().max(160, "Bio must be less than 160 characters"),
+  avatar: yup.string().url("Invalid URL"),
+  avatarAlt: yup
+    .string()
+    .max(120, "Avatar Alt must be less than 120 characters")
+    .test(
+      "avatarAlt",
+      "Avatar Alt cannot be set without Avatar URL",
+      function (value) {
+        return !value || (value && this.parent.avatar);
+      },
+    ),
+  banner: yup.string().url("Invalid URL"),
+  bannerAlt: yup
+    .string()
+    .max(120, "Banner Alt must be less than 120 characters")
+    .test(
+      "bannerAlt",
+      "Banner Alt cannot be set without Banner URL",
+      function (value) {
+        return !value || (value && this.parent.banner);
+      },
+    ),
+  venueManager: yup.string().oneOf(["customer", "venue-manager"]),
+});
 
 /**
  * Displays a modal for user registration. It handles the form submission and displays a response modal with the result of the registration.
@@ -15,39 +65,23 @@ import ResponseModal from "../ResponseModal";
 function SignUpModal({ isOpen, onClose, onToggleLogin }) {
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);
   const [response, setResponse] = useState(null);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    name: "",
-    venueManager: false,
-    bio: "",
-    avatar: "",
-    avatarAlt: "",
-    banner: "",
-    bannerAlt: "",
+  const [avatarPreview, setAvatarPreview] = useState("");
+  const [bannerPreview, setBannerPreview] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    resolver: yupResolver(schema),
   });
 
-  const handleRegister = async (event) => {
-    event.preventDefault();
-    const result = await handleSignup(event);
+  const handleRegister = async (data) => {
+    const result = await handleSignup(data);
     setResponse(result);
     setResponseModalOpen(true);
     console.log(result);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSelectChange = (e) => {
-    setFormData({
-      ...formData,
-      venueManager: e.target.value === "venue-manager",
-    });
   };
 
   const closeResponseModal = () => {
@@ -63,6 +97,17 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
       setResponseModalOpen(false);
     }
   };
+
+  //watch the url values to show as preview
+  const avatarUrl = watch("avatar");
+  const bannerUrl = watch("banner");
+
+  // Update the previews when the avatar or banner URLs change
+  useEffect(() => {
+    setAvatarPreview(avatarUrl);
+    setBannerPreview(bannerUrl);
+  }, [avatarUrl, bannerUrl]);
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -71,7 +116,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
             <h2 className="text-lg font-bold my-4 text-center text-white">
               Register a HOLIDAZE account
             </h2>
-            <form id="signup" onSubmit={handleRegister}>
+            <form id="signup" onSubmit={handleSubmit(handleRegister)}>
               <div className="signup-form-details flex gap-2 flex-wrap justify-center">
                 <div className="signup-form-details-name w-4/5 md:w-2/5">
                   <label htmlFor="name" className="block text-sm text-white">
@@ -82,9 +127,13 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     id="name"
                     name="name"
                     className="text-black rounded-2xl w-full"
-                    value={formData.name}
-                    onChange={handleChange}
+                    {...register("name")}
                   />
+                  {errors.name && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.name.message}
+                    </p>
+                  )}
                 </div>
                 <div className="signup-form-details-email w-4/5 md:w-2/5">
                   <label htmlFor="email" className="block text-sm text-white">
@@ -95,9 +144,13 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     id="email"
                     name="email"
                     className="text-black rounded-2xl w-full"
-                    value={formData.email}
-                    onChange={handleChange}
+                    {...register("email")}
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
                 <div className="signup-form-details-password w-4/5 md:w-2/5">
                   <label
@@ -111,9 +164,13 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     id="password"
                     name="password"
                     className="text-black rounded-2xl w-full"
-                    value={formData.password}
-                    onChange={handleChange}
+                    {...register("password")}
                   />
+                  {errors.password && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
                 </div>
                 <div className="signup-form-details-venueManager w-4/5 md:w-2/5">
                   <label
@@ -126,12 +183,16 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     id="venueManager"
                     name="venueManager"
                     className="text-black rounded-2xl w-full"
-                    value={formData.venueManager ? "venue-manager" : "customer"}
-                    onChange={handleSelectChange}
+                    {...register("venueManager")}
                   >
                     <option value="customer">Customer</option>
                     <option value="venue-manager">Venue Manager</option>
                   </select>
+                  {errors.venueManager && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.venueManager.message}
+                    </p>
+                  )}
                 </div>
                 <div className="signup-form-details-bio w-4/5">
                   <label
@@ -144,9 +205,13 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     id="bio"
                     name="bio"
                     className="text-black rounded-2xl w-full"
-                    value={formData.bio}
-                    onChange={handleChange}
+                    {...register("bio")}
                   />
+                  {errors.bio && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.bio.message}
+                    </p>
+                  )}
                 </div>
                 <div className="signup-form-details-avatar w-4/5 md:w-2/5">
                   <label htmlFor="avatar" className="block text-sm text-white">
@@ -157,9 +222,25 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     id="avatar"
                     name="avatar"
                     className="text-black rounded-2xl w-full"
-                    value={formData.avatar}
-                    onChange={handleChange}
+                    {...register("avatar")}
                   />
+                  {errors.avatar && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.avatar.message}
+                    </p>
+                  )}
+                  {avatarPreview && (
+                    <div className="img-preview text-white w-full my-2">
+                      <label className="w-full text-sm italic">
+                        Avatar Preview:
+                      </label>
+                      <img
+                        src={avatarPreview}
+                        alt="Avatar Preview"
+                        className="mt-2 w-24 h-24 object-cover rounded"
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="signup-form-details-avatarAlt w-4/5 md:w-2/5">
                   <label
@@ -173,9 +254,13 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     id="avatarAlt"
                     name="avatarAlt"
                     className="text-black rounded-2xl w-full"
-                    value={formData.avatarAlt}
-                    onChange={handleChange}
+                    {...register("avatarAlt")}
                   />
+                  {errors.avatarAlt && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.avatarAlt.message}
+                    </p>
+                  )}
                 </div>
                 <div className="signup-form-details-banner w-4/5 md:w-2/5">
                   <label htmlFor="banner" className="block text-sm text-white">
@@ -186,9 +271,25 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     id="banner"
                     name="banner"
                     className="text-black rounded-2xl w-full"
-                    value={formData.banner}
-                    onChange={handleChange}
+                    {...register("banner")}
                   />
+                  {errors.banner && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.banner.message}
+                    </p>
+                  )}
+                  {bannerPreview && (
+                    <div className="img-preview text-white w-full my-2">
+                      <label className="w-full text-sm italic">
+                        Banner Preview
+                      </label>
+                      <img
+                        src={bannerPreview}
+                        alt="Banner Preview"
+                        className="mt-2 w-48 h-24 object-cover rounded"
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="signup-form-details-bannerAlt w-4/5 md:w-2/5">
                   <label
@@ -202,9 +303,13 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     id="bannerAlt"
                     name="bannerAlt"
                     className="text-black rounded-2xl w-full"
-                    value={formData.bannerAlt}
-                    onChange={handleChange}
+                    {...register("bannerAlt")}
                   />
+                  {errors.bannerAlt && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.bannerAlt.message}
+                    </p>
+                  )}
                 </div>
               </div>
               <button
