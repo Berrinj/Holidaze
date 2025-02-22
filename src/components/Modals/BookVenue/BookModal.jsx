@@ -18,17 +18,13 @@ function ConfirmationModal({ isOpen, onClose, bookingData, sendtoAPIdata }) {
   const [response, setResponse] = useState(null);
   const navigate = useNavigate();
 
-  console.log("Booking data:", bookingData);
-  console.log("API data:", sendtoAPIdata);
-
   const totalPrice = bookingData.nights * bookingData.venuePrice;
-  const btnDisabled = totalPrice === 0;
+  const btnDisabled = bookingData.nights < 1;
 
   const handleCreateBookingSumbit = async () => {
     try {
       const result = await handleCreateBooking(sendtoAPIdata);
       setResponse(result);
-      console.log("RESULT FROM HANDLECREATEBOOKINGSUBMIT", result);
       if (result.status === 201) {
         navigate(`/booking-confirmation/${result.result.data.id}`, {
           state: { bookingData: result },
@@ -38,14 +34,13 @@ function ConfirmationModal({ isOpen, onClose, bookingData, sendtoAPIdata }) {
         setResponseModalOpen(true);
       }
     } catch (error) {
-      console.log("Error from handleCreateBookingSubmit", error);
+      console.error("Error from handleCreateBookingSubmit", error);
       setResponseModalOpen(true);
     }
   };
 
   useEffect(() => {
     if (response) {
-      console.log("Updated response state:", response);
       setResponse(response);
     }
   }, [response]);
@@ -94,7 +89,7 @@ function ConfirmationModal({ isOpen, onClose, bookingData, sendtoAPIdata }) {
             disabled={btnDisabled}
           >
             {btnDisabled
-              ? "Please select min two nights to place booking"
+              ? "Please select min one(1) night to place booking"
               : "Confirm Booking!"}{" "}
           </button>
         </div>

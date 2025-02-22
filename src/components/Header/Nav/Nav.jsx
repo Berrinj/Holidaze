@@ -90,6 +90,7 @@ function UserStatus() {
           >
             <img
               src={load("profile").avatar.url}
+              alt="profile image"
               className="h-6 w-6 rounded-full border border-tan object-cover"
             />
             <span>{name}</span>
