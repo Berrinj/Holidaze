@@ -137,10 +137,12 @@ export const StyledCalendar = styled(Calendar)`
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus {
     background-color: #d5c28f;
+    color: black;
   }
 
   .react-calendar__tile--now {
     background: #e3d6b4;
+    color: black;
   }
 
   .react-calendar__tile--now:enabled:hover,
