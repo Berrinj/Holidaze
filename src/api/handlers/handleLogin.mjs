@@ -2,12 +2,11 @@ import { login } from "../auth/login.mjs";
 
 /**
  * Handle form submission and call the login function with the form data
- * @param {FormData} formData - the form data to submit
+ * @param {Object} credentials - the form data
  * @returns the profile data
  */
 
-export async function handleLogin(formData) {
-  const credentials = Object.fromEntries(formData.entries());
+export async function handleLogin(credentials) {
   try {
     const profile = await login(credentials);
     console.log(profile);

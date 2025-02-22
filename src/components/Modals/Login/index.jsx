@@ -3,6 +3,24 @@ import { Modal } from "../Modal";
 import { useState } from "react";
 import Hlogo from "assets/hlogo.png";
 import ResponseModal from "../ResponseModal";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Invalid email format")
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/,
+      "Email must be a @stud.noroff.no email",
+    )
+    .required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 8 characters")
+    .required("Password is required"),
+});
 
 /**
  * Displays a login form in a modal. It handles form submission and displays a response modal.
@@ -13,14 +31,19 @@ import ResponseModal from "../ResponseModal";
  */
 
 function LoginModal({ isOpen, onClose, onToggleSignUp }) {
-  const [formData, setFormData] = useState({ email: "", password: "" });
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);
   const [response, setResponse] = useState(null);
 
-  const handleLoginSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const response = await handleLogin(formData);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const handleLoginSubmit = async (data) => {
+    const response = await handleLogin(data);
     console.log(response);
     setResponse(response);
     setResponseModalOpen(true);
@@ -28,10 +51,6 @@ function LoginModal({ isOpen, onClose, onToggleSignUp }) {
 
   const closeResponseModal = () => {
     setResponseModalOpen(false);
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleActionClick = () => {
@@ -50,7 +69,7 @@ function LoginModal({ isOpen, onClose, onToggleSignUp }) {
             <h2 className="text-lg font-bold my-4 text-center text-white">
               Login to your HOLIDAZE account
             </h2>
-            <form id="login-form" onSubmit={handleLoginSubmit}>
+            <form id="login-form" onSubmit={handleSubmit(handleLoginSubmit)}>
               <div className="login-form-details flex gap-2 flex-wrap">
                 <div className="login-form-details-email w-full sm:w-1/2">
                   <label htmlFor="email" className="block text-sm text-white">
@@ -61,9 +80,13 @@ function LoginModal({ isOpen, onClose, onToggleSignUp }) {
                     id="email"
                     name="email"
                     className="text-black rounded-2xl w-full"
-                    value={formData.email}
-                    onChange={handleChange}
+                    {...register("email")}
                   />
+                  {errors.email && (
+                    <p className="bg-black text-red-500 text-xs mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
                 <div className="login-form-details-password w-full sm:w-2/5">
                   <label
@@ -77,9 +100,13 @@ function LoginModal({ isOpen, onClose, onToggleSignUp }) {
                     id="password"
                     name="password"
                     className="text-black rounded-2xl w-full"
-                    value={formData.password}
-                    onChange={handleChange}
+                    {...register("password")}
                   />
+                  {errors.password && (
+                    <p className="bg-black text-red-500 text-xs mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
                 </div>
               </div>
               <button
