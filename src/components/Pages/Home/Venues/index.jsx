@@ -77,10 +77,10 @@ function Venues() {
   return (
     <>
       <Search venues={venues} onSearch={handleSearch} />
-      <div className="venues mt-6">
+      <div className="venues my-6">
         <ul className="flex flex-wrap gap-4 justify-center">
           {searchResults.map((venue) => (
-            <li key={venue.id}>
+            <li key={venue.id} className="w-screen mx-4 sm:mx-0 sm:w-72">
               <VenueCard key={venue.id} venue={venue} />
             </li>
           ))}

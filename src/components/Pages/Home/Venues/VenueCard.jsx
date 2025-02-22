@@ -39,7 +39,7 @@ function VenueCard({ venue }) {
 
   return (
     <Link to={`/venues/${venue.id}`}>
-      <div className="venue-card w-72 bg-white rounded-xl lg:hover:scale-105 lg:transition-transform lg:duration-300 hover:text-black shadow-md">
+      <div className="venue-card w-full sm:w-72 bg-white rounded-xl lg:hover:scale-105 lg:transition-transform lg:duration-300 hover:text-black shadow-md">
         <img
           src={mediaUrl}
           alt={mediaAlt}
