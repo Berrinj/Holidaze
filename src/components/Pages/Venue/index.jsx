@@ -90,13 +90,16 @@ function SingleVenue() {
                 </div>
                 <div className="amenities py-3">
                   <p className="font-bold">Amenities:</p>
-                  <ul>
+                  <ul className="capitalize">
                     {Object.entries(venue.meta).map(([key, value]) => {
                       if (value) {
                         return <li key={key}>{key}</li>;
                       }
                       return (
-                        <li key={key} className="line-through text-gray-500">
+                        <li
+                          key={key}
+                          className="line-through font-light text-gray-500"
+                        >
                           {key}
                         </li>
                       );
