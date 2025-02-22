@@ -153,7 +153,7 @@ function CreateVenueModal({ isOpen, onClose }) {
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
-        <div className="flex flex-col gap-4 text-white p-4">
+        <div className="flex flex-col gap-4 text-white p-0 md:p-4">
           <h2 className="text-xl font-bold my-4 text-center">
             Create new venue
           </h2>
@@ -337,45 +337,47 @@ function CreateVenueModal({ isOpen, onClose }) {
                 Add Amenities
               </h3>
               <p className="w-full italic">What does your venue offer?</p>
-              <div>
-                <label htmlFor="meta.wifi">WiFi</label>
-                <input
-                  type="checkbox"
-                  name="meta.wifi"
-                  id="meta.wifi"
-                  className="text-black rounded-2xl w-full"
-                  {...register("meta.wifi")}
-                />
-              </div>
-              <div>
-                <label htmlFor="meta.parking">Parking</label>
-                <input
-                  type="checkbox"
-                  name="meta.parking"
-                  id="meta.parking"
-                  className="text-black rounded-2xl w-full"
-                  {...register("meta.parking")}
-                />
-              </div>
-              <div>
-                <label htmlFor="meta.pets">Pets</label>
-                <input
-                  type="checkbox"
-                  name="meta.pets"
-                  id="meta.pets"
-                  className="text-black rounded-2xl w-full"
-                  {...register("meta.pets")}
-                />
-              </div>
-              <div>
-                <label htmlFor="meta.breakfast">Breakfast</label>
-                <input
-                  type="checkbox"
-                  name="meta.breakfast"
-                  id="meta.breakfast"
-                  className="text-black rounded-2xl w-full"
-                  {...register("meta.breakfast")}
-                />
+              <div className="amenities-options flex flex-col md:flex-row w-40 gap-4 items-start">
+                <div className="flex flex-row-reverse md:flex-col gap-2">
+                  <label htmlFor="meta.wifi">WiFi</label>
+                  <input
+                    type="checkbox"
+                    name="meta.wifi"
+                    id="meta.wifi"
+                    className="text-black rounded-2xl w-full"
+                    {...register("meta.wifi")}
+                  />
+                </div>
+                <div className="flex flex-row-reverse md:flex-col gap-2">
+                  <label htmlFor="meta.parking">Parking</label>
+                  <input
+                    type="checkbox"
+                    name="meta.parking"
+                    id="meta.parking"
+                    className="text-black rounded-2xl w-full"
+                    {...register("meta.parking")}
+                  />
+                </div>
+                <div className="flex flex-row-reverse md:flex-col gap-2">
+                  <label htmlFor="meta.pets">Pets</label>
+                  <input
+                    type="checkbox"
+                    name="meta.pets"
+                    id="meta.pets"
+                    className="text-black rounded-2xl w-full"
+                    {...register("meta.pets")}
+                  />
+                </div>
+                <div className="flex flex-row-reverse md:flex-col gap-2">
+                  <label htmlFor="meta.breakfast">Breakfast</label>
+                  <input
+                    type="checkbox"
+                    name="meta.breakfast"
+                    id="meta.breakfast"
+                    className="text-black rounded-2xl w-full"
+                    {...register("meta.breakfast")}
+                  />
+                </div>
               </div>
               <div className="images-container flex flex-col w-full">
                 <h3 className="text-xl font-semibold w-full mt-3">
