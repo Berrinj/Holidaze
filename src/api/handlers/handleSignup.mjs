@@ -1,31 +1,31 @@
 import { register } from "../auth/register.mjs";
 
-export async function handleSignup(event) {
-  event.preventDefault();
-  const formData = new FormData(event.target);
+/**
+ * Handle form submission and call the register function with the form data
+ * @param {Object} data - the form data
+ * @returns the profile data
+ */
+
+export async function handleSignup(data) {
   const profile = {
-    email: formData.get("email"),
-    password: formData.get("password"),
-    name: formData.get("name"),
-    bio: formData.get("bio"),
-    venueManager: formData.get("venueManager") === "venue-manager",
+    email: data.email,
+    password: data.password,
+    name: data.name,
+    bio: data.bio,
+    venueManager: data.venueManager === "venue-manager",
   };
 
-  const avatarUrl = formData.get("avatar");
-  const avatarAlt = formData.get("avatarAlt");
-  if (avatarUrl) {
+  if (data.avatar) {
     profile.avatar = {
-      url: avatarUrl,
-      alt: avatarAlt || "",
+      url: data.avatar,
+      alt: data.avatarAlt || "",
     };
   }
 
-  const bannerUrl = formData.get("banner");
-  const bannerAlt = formData.get("bannerAlt");
-  if (bannerUrl) {
+  if (data.banner) {
     profile.banner = {
-      url: bannerUrl,
-      alt: bannerAlt || "",
+      url: data.banner,
+      alt: data.bannerAlt || "",
     };
   }
 

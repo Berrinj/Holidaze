@@ -1,83 +1,65 @@
 import { Modal } from "components/Modals/Modal";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ResponseModal from "../ResponseModal";
-// import UpdateData from "api/data/update";
-// import { PROFILES_URL } from "api/constants.mjs";
 import handleUpdateProfile from "api/handlers/handleUpdateProfile.mjs";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+// Yup validation schema
+const schema = yup.object().shape({
+  bio: yup.string().max(160, "Bio must be less than 160 characters"),
+  avatar: yup.string().url("Invalid URL"),
+  avatarAlt: yup
+    .string()
+    .max(120, "Avatar Alt must be less than 120 characters")
+    .test(
+      "avatarAlt",
+      "Avatar Alt cannot be set without Avatar URL",
+      function (value) {
+        return !value || (value && this.parent.avatar);
+      },
+    ),
+  banner: yup.string().url("Invalid URL"),
+  bannerAlt: yup
+    .string()
+    .max(120, "Banner Alt must be less than 120 characters")
+    .test(
+      "bannerAlt",
+      "Banner Alt cannot be set without Banner URL",
+      function (value) {
+        return !value || (value && this.parent.banner);
+      },
+    ),
+  venueManager: yup.string().oneOf(["customer", "venue-manager"]),
+});
 
 function EditProfileModal({ isOpen, onClose, data }) {
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);
   const [response, setResponse] = useState(null);
-  const [formData, setFormData] = useState({
-    name: data.name,
-    venueManager: data.venueManager,
-    bio: data.bio,
-    avatar: data.avatar.url,
-    avatarAlt: data.avatar.alt,
-    banner: data.banner.url,
-    bannerAlt: data.banner.alt,
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      venueManager: data.venueManager ? "venue-manager" : "customer",
+      bio: data.bio,
+      avatar: data.avatar.url,
+      avatarAlt: data.avatar.alt,
+      banner: data.banner.url,
+      bannerAlt: data.banner.alt,
+    },
   });
 
-  const handleUpdate = async (event) => {
-    event.preventDefault();
-    console.log("clicked", data.name);
-    const result = await handleUpdateProfile(event, data.name);
-    console.log("Result from handleUpdateProfile:", result);
+  const handleUpdate = async (formData) => {
+    const result = await handleUpdateProfile(formData, data.name);
     setResponse(result);
     setResponseModalOpen(true);
-    console.log(response);
-  };
-
-  useEffect(() => {
-    if (response) {
-      console.log("Updated response state:", response);
-    }
-  }, [response]);
-
-  // const handleUpdateProfile = async (event) => {
-  //   event.preventDefault();
-  //   const payload = {
-  //     bio: formData.bio,
-  //     avatar: {
-  //       url: formData.avatar,
-  //       alt: formData.avatarAlt,
-  //     },
-  //     banner: {
-  //       url: formData.banner,
-  //       alt: formData.bannerAlt,
-  //     },
-  //     venueManager: formData.venueManager,
-  //   };
-  //   try {
-  //     const result = await UpdateData(PROFILES_URL, data.name, payload);
-  //     setResponse(result);
-  //     setResponseModalOpen(true);
-  //     if (result.status === 200) {
-  //       console.log("Update successful");
-  //     } else {
-  //       console.error("Update failed");
-  //     }
-  //   } catch (error) {
-  //     console.error("Update failed:", error);
-  //     setResponse({ status: 500, errors: [{ message: error.message }] });
-  //     setResponseModalOpen(true);
-  //     return { errors: [{ message: error.message }] };
-  //   }
-  // };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSelectChange = (e) => {
-    setFormData({
-      ...formData,
-      venueManager: e.target.value === "venue-manager",
-    });
+    console.log(result);
   };
 
   const closeResponseModal = () => {
@@ -93,6 +75,10 @@ function EditProfileModal({ isOpen, onClose, data }) {
     setResponseModalOpen(false);
   };
 
+  //watch the url values to show as preview
+  const avatarUrl = watch("avatar");
+  const bannerUrl = watch("banner");
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -103,7 +89,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
           Update your profile information
         </p>
         <div className="flex flex-col space-x-4 mt-4">
-          <form id="edit-profile-form" onSubmit={handleUpdate}>
+          <form id="edit-profile-form" onSubmit={handleSubmit(handleUpdate)}>
             <div className="flex flex-col gap-2">
               <div className="edit-form-venueManager w-4/5 md:w-2/5">
                 <label
@@ -116,12 +102,16 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   id="venueManager"
                   name="venueManager"
                   className="text-black rounded-2xl w-full"
-                  value={formData.venueManager ? "venue-manager" : "customer"}
-                  onChange={handleSelectChange}
+                  {...register("venueManager")}
                 >
                   <option value="customer">Customer</option>
                   <option value="venue-manager">Venue Manager</option>
                 </select>
+                {errors.venueManager && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.venueManager.message}
+                  </p>
+                )}
               </div>
               <div className="edit-form-bio w-4/5">
                 <label
@@ -134,9 +124,13 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   id="bio"
                   name="bio"
                   className="text-black rounded-2xl w-full"
-                  value={formData.bio}
-                  onChange={handleChange}
+                  {...register("bio")}
                 />
+                {errors.bio && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.bio.message}
+                  </p>
+                )}
               </div>
               <div className="edit-form-avatar">
                 <label htmlFor="avatar" className="block text-sm text-white">
@@ -147,9 +141,25 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   id="avatar"
                   name="avatar"
                   className="text-black rounded-2xl w-full"
-                  value={formData.avatar}
-                  onChange={handleChange}
+                  {...register("avatar")}
                 />
+                {errors.avatar && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.avatar.message}
+                  </p>
+                )}
+                {avatarUrl && (
+                  <div className="img-preview text-white w-full my-2">
+                    <label className="w-full text-sm italic">
+                      Avatar Preview:
+                    </label>
+                    <img
+                      src={avatarUrl}
+                      alt={watch("avatarAlt")}
+                      className="mt-2 w-24 h-24 object-cover rounded"
+                    />
+                  </div>
+                )}
               </div>
               <div className="edit-form-avatarAlt">
                 <label htmlFor="avatarAlt" className="block text-sm text-white">
@@ -160,20 +170,14 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   id="avatarAlt"
                   name="avatarAlt"
                   className="text-black rounded-2xl w-full"
-                  value={formData.avatarAlt}
-                  onChange={handleChange}
+                  {...register("avatarAlt")}
                 />
+                {errors.avatarAlt && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.avatarAlt.message}
+                  </p>
+                )}
               </div>
-              {formData.avatar && (
-                <div className="img-preview text-white w-full">
-                  <label className="w-full">Avatar Preview</label>
-                  <img
-                    src={formData.avatar}
-                    alt={formData.avatarAlt}
-                    className="mt-2 w-24 h-24 object-cover rounded"
-                  />
-                </div>
-              )}
               <div className="edit-form-banner">
                 <label htmlFor="banner" className="block text-sm text-white">
                   Banner URL
@@ -183,9 +187,25 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   id="banner"
                   name="banner"
                   className="text-black rounded-2xl w-full"
-                  value={formData.banner}
-                  onChange={handleChange}
+                  {...register("banner")}
                 />
+                {errors.banner && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.banner.message}
+                  </p>
+                )}
+                {bannerUrl && (
+                  <div className="img-preview text-white w-full my-2">
+                    <label className="w-full text-sm italic">
+                      Banner Preview:
+                    </label>
+                    <img
+                      src={bannerUrl}
+                      alt={watch("bannerAlt")}
+                      className="mt-2 w-48 h-24 object-cover rounded"
+                    />
+                  </div>
+                )}
               </div>
               <div className="login-form-bannerAlt">
                 <label htmlFor="bannerAlt" className="block text-sm text-white">
@@ -196,25 +216,20 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   id="bannerAlt"
                   name="bannerAlt"
                   className="text-black rounded-2xl w-full"
-                  value={formData.bannerAlt}
-                  onChange={handleChange}
+                  {...register("bannerAlt")}
                 />
+                {errors.bannerAlt && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.bannerAlt.message}
+                  </p>
+                )}
               </div>
-              {formData.banner && (
-                <div className="img-preview text-white w-full">
-                  <label className="w-full">Banner Preview</label>
-                  <img
-                    src={formData.banner}
-                    alt={formData.bannerAlt}
-                    className="mt-2 w-48 h-24 object-cover rounded"
-                  />
-                </div>
-              )}
             </div>
             <div className="btns flex gap-10 p-5">
               <button
                 className="px-4 py-2 bg-gray-500 text-white rounded-lg w-1/3"
                 onClick={onClose}
+                type="button"
               >
                 Cancel
               </button>
@@ -234,7 +249,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
         response={response}
         onActionClick={handleActionClick}
         action="Update"
-        successMessage="You have successfully updated your profile."
+        successMessage="You have successfully updated your profile. You will be redirected to your updated profile page."
         errorMessage="An error occurred during update, try again."
       />
     </>
