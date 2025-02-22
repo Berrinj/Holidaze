@@ -75,6 +75,7 @@ function SingleVenue() {
                 <div className="hosted-by flex flex-wrap items-center gap-1 pb-4">
                   <img
                     src={venue.owner.avatar.url}
+                    alt={venue.owner.avatar.alt || "avatar"}
                     className="h-8 w-8 object-cover rounded-full"
                   />
                   <p>Hosted by</p>
