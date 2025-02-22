@@ -26,8 +26,8 @@ function SearchOne({ onSearch }) {
         <div className="w-full flex relative">
           <input
             type="search"
-            placeholder="Search by venue name or description..."
-            className="w-full bg-black text-white rounded-2xl focus:outline-none"
+            placeholder="Search venue by name or description..."
+            className="w-full bg-black text-white rounded-2xl focus:outline-none placeholder:text-xs sm:placeholder:text-sm pe-0"
             value={searchInput}
             onChange={handleSearchInput}
             autoComplete="off"
