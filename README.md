@@ -1,6 +1,5 @@
-# Holidaze, accommodation booking site, Project Exam 2
+# Holidaze - Project Exam 2
 
-![image](src/assets/holidaze-preview.png)
 ![Holidaze Preview](src/assets/holidaze-preview.png) <br>
 
 Noroff Project Exam 2, February 2025<br>
