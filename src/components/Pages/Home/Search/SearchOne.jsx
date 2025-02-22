@@ -1,6 +1,12 @@
 import { IoSearchOutline } from "react-icons/io5";
 import { useState } from "react";
 
+/**
+ * a search component that allows the user to search for venues by name or description
+ * @param {Object} onSearch - the function that handles the search
+ * @returns JSX.Element SearchOne
+ */
+
 function SearchOne({ onSearch }) {
   const [searchInput, setSearchInput] = useState("");
 
@@ -20,7 +26,7 @@ function SearchOne({ onSearch }) {
         <div className="w-full flex relative">
           <input
             type="search"
-            placeholder="Search by venue or description..."
+            placeholder="Search by venue name or description..."
             className="w-full bg-black text-white rounded-2xl focus:outline-none"
             value={searchInput}
             onChange={handleSearchInput}

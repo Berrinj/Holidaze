@@ -1,11 +1,20 @@
 import { Modal } from "components/Modals/Modal";
 import ResponseModal from "components/Modals/ResponseModal";
 import { useState, useEffect } from "react";
-// import { deleteData } from "api/data/delete";
 import { handleDelete } from "api/handlers/handleDelete.mjs";
 import { BOOKINGS_URL } from "api/constants.mjs";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * A modal that displays the delete booking confirmation
+ * @param {boolean} isOpen - Checks if the modal is open
+ * @param {function} onClose - Callback function to close the modal
+ * @param {object} booking - The booking to be deleted
+ * @param {string} booking.id - The ID of the booking
+ * @param {object} booking.venue - The venue associated with the booking
+ * @param {string} booking.venue.name - The name of the venue
+ * @returns {JSX.Element} DeleteBooking - A modal that displays the delete booking confirmation
+ */
 function DeleteBooking({ isOpen, onClose, booking }) {
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);
   const [response, setResponse] = useState(null);

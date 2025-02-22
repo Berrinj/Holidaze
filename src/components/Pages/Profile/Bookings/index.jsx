@@ -1,22 +1,20 @@
 import BookingsCard from "./BookingsCard";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-// import useFetchSingle from "hooks/useFetchSingle";
 import useFetchArray from "hooks/useFetchArray";
 import { PROFILES_URL } from "api/constants";
 import { calculateNextBooking } from "utils/calculatePastFutureBookingVenueVisit";
 import { IoIosArrowBack } from "react-icons/io";
 import { load } from "utils/localStorage.mjs";
 
+/**
+ * a component that displays the user's bookings as cards if they have any
+ * @returns JSX.Element ProfileBookings
+ */
+
 function ProfileBookings() {
-  // const params = "_bookings=true&_venues=true";
   const navigate = useNavigate();
   const bookings = "bookings";
-  // const {
-  //   data: profile,
-  //   loading,
-  //   error,
-  // } = useFetchSingle(PROFILES_URL, params);
   const params = "_customer=true&_venue=true&sort=dateFrom&sortOrder=asc";
   const {
     data: profilebookings,
@@ -114,6 +112,13 @@ function ProfileBookings() {
             All
           </p>
         </div>
+        <div className="next-booking text-center mt-2 italic">
+          {nextBooking ? (
+            <p>Next trip is {daysLeft} days away</p>
+          ) : (
+            <p>No bookings ahead</p>
+          )}
+        </div>
         <div className="profile-booking-cards flex flex-wrap justify-center gap-5 mt-5">
           {filteredBookings.length === 0 && (
             <div className="no-data text-center">
@@ -133,11 +138,6 @@ function ProfileBookings() {
             );
           })}
         </div>
-        {/* {nextBooking ? (
-          <p>Next trip is {daysLeft} days away</p>
-        ) : (
-          <p>No bookings ahead</p>
-        )} */}
       </div>
     </div>
   );

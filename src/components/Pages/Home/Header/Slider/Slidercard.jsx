@@ -1,5 +1,14 @@
 import { Link } from "react-router-dom";
 
+/**
+ * a component that displays a card with an image and a title
+ * @param {string} title - the title of the card
+ * @param {string} img - the image url of the card
+ * @param {string} alt - the alt text of the image
+ * @param {string} id - the id of the venue
+ * @returns JSX.Element SliderCard
+ */
+
 function SliderCard({ title, img, alt, id }) {
   return (
     <Link to={`/venues/${id}`} className="h-full w-full">

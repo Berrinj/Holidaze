@@ -5,6 +5,11 @@ import { useEffect, useState } from "react";
 import { VENUES_URL } from "api/constants.mjs";
 import { FetchData } from "api/data/fetch/index.mjs";
 
+/**
+ * a slider component that displays the last venues added to the API in a carousel
+ * @returns JSX.Element - an image slider
+ */
+
 function Slider() {
   const [currentCard, setCurrentCard] = useState(0);
   const [venues, setVenues] = useState([]);

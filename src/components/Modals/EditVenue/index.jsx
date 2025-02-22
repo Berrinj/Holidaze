@@ -8,6 +8,14 @@ import { handleDelete } from "api/handlers/handleDelete.mjs";
 import { VENUES_URL } from "api/constants.mjs";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * a modal that allows the user to edit their venue
+ * @param {boolean} isOpen - A boolean that determines if the modal is open or not.
+ * @param {function} onClose - A function that closes the modal.
+ * @param {object} data - The data of the venue to be edited.
+ * @returns {JSX.Element} - A modal that allows the user to edit their venue.
+ */
+
 function EditVenue({ isOpen, onClose, data }) {
   const navigate = useNavigate();
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);

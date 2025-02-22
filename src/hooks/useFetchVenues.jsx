@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import { VENUES_URL } from "api/constants";
 import { FetchData } from "api/data/fetch/index.mjs";
 
+/**
+ * a hook that fetches all the venues from the API
+ * @param {*} page - the current page
+ * @param {*} limit - the number of items to fetch per page
+ * @returns
+ */
+
 function useFetchVenues(page, limit) {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,11 +28,6 @@ function useFetchVenues(page, limit) {
   useEffect(() => {
     setLoading(true);
 
-    // const fetchUrl = searchQuery
-    //   ? `${VENUES_URL}/search?q=${searchQuery}&_sort=created&_page=${page}&_limit=${limit}`
-    //   : `${VENUES_URL}?_sort=created&_page=${page}&_limit=${limit}`;
-
-    // FetchData(fetchUrl)
     FetchData(
       VENUES_URL,
       "_owner=true",

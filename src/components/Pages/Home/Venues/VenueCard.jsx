@@ -1,6 +1,23 @@
 import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
+/**
+ * a card component that displays a venue's information as a card
+ * @param {object} venue - a venue object
+ * @param {string} venue.id - the ID of the venue
+ * @param {string} venue.name - the name of the venue
+ * @param {string} venue.rating - the rating of the venue
+ * @param {string} venue.location.city - the city of the venue
+ * @param {string} venue.location.country - the country of the venue
+ * @param {string} venue.maxGuests - the maximum number of guests the venue can accommodate
+ * @param {string} venue.price - the price of the venue
+ * @param {object} venue.meta - the meta information of the venue
+ * @param {array} venue.media - the media information of the venue
+ * @param {string} venue.media.url - the URL of the media
+ * @param {string} venue.media.alt - the alt text of the media
+ * @returns JSX.Element VenueCard
+ */
+
 function VenueCard({ venue }) {
   const defaultImage =
     "https://images.unsplash.com/photo-1634712282287-14ed57b9cc89?q=80&w=1206&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";

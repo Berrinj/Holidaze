@@ -1,6 +1,16 @@
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
 
+/**
+ * a component that displays the pagination buttons on the home page
+ * @param {number} currentPage - the current page
+ * @param {number} lastPage - the last page
+ * @param {function} onPageChange - the function that handles the page change
+ * @param {boolean} isFirstPage - a boolean that checks if the page is the first page
+ * @param {boolean} isLastPage - a boolean that checks if the page is the last page
+ * @returns JSX.Element Pagination
+ */
+
 function Pagination({
   currentPage,
   lastPage,

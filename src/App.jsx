@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import "./App.css";
 import Home from "components/Pages/Home";
 import SingleVenue from "components/Pages/Venue";

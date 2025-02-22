@@ -1,6 +1,13 @@
 import UpdateData from "api/data/update";
 import { VENUES_URL } from "api/constants.mjs";
 
+/**
+ * Handles updating a venue
+ * @param {Event} event - The event object
+ * @param {string} id - The ID of the venue to update
+ * @returns {Promise} - The result of the update
+ */
+
 const handleUpdateVenue = async (event, id) => {
   event.preventDefault();
   const formData = new FormData(event.target);

@@ -1,6 +1,12 @@
 import { VENUES_URL } from "api/constants.mjs";
 import { CreatePOST } from "api/data/create";
 
+/**
+ * a function that handles creating a venue and sending the data to the API
+ * @param {object} data - the data to create
+ * @returns the result of the create
+ */
+
 export const handleCreateVenue = async (data) => {
   const media = data.media.map((item) => ({
     url: item.url,

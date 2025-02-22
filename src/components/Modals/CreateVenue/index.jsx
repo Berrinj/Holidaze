@@ -58,6 +58,13 @@ const schema = yup.object().shape({
     .max(8, "Up to 8 images can be added to your venue"),
 });
 
+/**
+ * a modal that allows the user to create a new venue
+ * @param {boolean} isOpen checks if the modal is open
+ * @param {function} onClose callback function to close the modal
+ * @returns {JSX.Element} CreateVenueModal - a modal that allows the user to create a new venue
+ */
+
 function CreateVenueModal({ isOpen, onClose }) {
   const navigate = useNavigate();
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);

@@ -3,6 +3,11 @@ import DatePicker from "react-datepicker";
 import { useState, useRef } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 
+/**
+ * NOT IN USE because of API restrictions - a search component that allows the user to search for venues by check-in and check-out dates and number of guests
+ * @returns JSX.Element SearchTwo
+ */
+
 function SearchTwo() {
   const [checkinDate, setCheckinDate] = useState(null);
   const [checkoutDate, setCheckoutDate] = useState(null);

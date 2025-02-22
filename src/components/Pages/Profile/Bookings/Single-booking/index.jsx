@@ -7,6 +7,11 @@ import { MdDeleteForever } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 import DeleteBooking from "components/Modals/DeleteBooking";
 
+/**
+ * a component that displays a single booking in detail
+ * @returns JSX.Element SingleBooking
+ */
+
 function SingleBooking() {
   const params = "_customer=true&_venue=true";
   const navigate = useNavigate();

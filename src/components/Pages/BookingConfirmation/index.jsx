@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 /**
  * a function that fetches the booking data from the API and displays the booking confirmation based on the data just sent and received
+ * @param {object} booking - the booking data that was just sent
  * @returns jsx component
  */
 

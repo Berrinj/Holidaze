@@ -1,9 +1,6 @@
 import { Modal } from "../Modal";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-// import { handleDelete } from "api/handlers/handleDelete.mjs";
-// import { BOOKINGS_URL } from "api/constants.mjs";
-
 /**
  * A modal that displays the venue bookings
  * @param {Object} venue - The venue object
@@ -18,10 +15,6 @@ function VenueBookings({ venue, isOpen, onClose }) {
     return date.toLocaleDateString();
   };
   const [filter, setFilter] = useState("all");
-  // const handleDeleteBooking = async (bookingId) => {
-  //   const result = await handleDelete(BOOKINGS_URL, bookingId);
-  //   console.log("Result from handleDelete:", result);
-  // };
 
   const handleFilter = (filterType) => {
     setFilter(filterType);

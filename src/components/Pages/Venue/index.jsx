@@ -8,6 +8,11 @@ import { Link } from "react-router-dom";
 import { load } from "utils/localStorage.mjs";
 import EditVenue from "components/Modals/EditVenue";
 
+/**
+ * a component that displays a single venue with all its details and booking options
+ * @returns JSX.Element SingleVenue
+ */
+
 function SingleVenue() {
   const params = "_owner=true&_bookings=true";
   const { data: venue, loading, error } = useFetchSingle(VENUES_URL, params);

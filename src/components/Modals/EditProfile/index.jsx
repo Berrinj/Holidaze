@@ -34,6 +34,14 @@ const schema = yup.object().shape({
   venueManager: yup.string().oneOf(["customer", "venue-manager"]),
 });
 
+/**
+ * A modal that allows the user to edit their profile
+ * @param {boolean} isOpen checks if the modal is open
+ * @param {function} onClose closes the modal
+ * @param {object} data the data to be edited
+ * @returns JSX.Element EditProfileModal - a modal that allows the user to edit their profile
+ */
+
 function EditProfileModal({ isOpen, onClose, data }) {
   const [isResponseModalOpen, setResponseModalOpen] = useState(false);
   const [response, setResponse] = useState(null);

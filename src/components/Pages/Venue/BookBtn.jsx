@@ -3,6 +3,11 @@ import ConfirmationModal from "components/Modals/BookVenue/BookModal";
 import { useState } from "react";
 import AuthModals from "components/Modals/AuthModals";
 
+/**
+ * a component that displays a button to book a venue and opens a modal to confirm the booking
+ * @returns JSX.Element BookBtn
+ */
+
 function BookBtn({
   onClick,
   selectedDates,

@@ -3,6 +3,12 @@ import { authFetch } from "./authFetch.mjs";
 
 const method = "POST";
 
+/**
+ * a function that handles registering a user and sending the data to the API
+ * @param {*} profile - the profile to register
+ * @returns the result of the register
+ */
+
 export async function register(profile) {
   try {
     const body = JSON.stringify(profile);

@@ -1,3 +1,8 @@
+/**
+ * a component that displays the intro text on the home page, this only shows if user is not logged in
+ * @returns JSX.Element - the intro text on the home page
+ */
+
 function Intro() {
   return (
     <div className="flex flex-col justify-center text-white text-center font-extralight flex-1">

@@ -2,6 +2,11 @@ import Intro from "./Intro";
 import Slider from "./Slider";
 import { load } from "utils/localStorage.mjs";
 
+/**
+ * a component that displays the home page header with the Slider and/or Intro based on user status
+ * @returns JSX.Element HomeHeader
+ */
+
 function HomeHeader() {
   const userStatus = load("profile");
   return (

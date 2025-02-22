@@ -3,6 +3,12 @@ import { useState } from "react";
 import { parseISO, differenceInDays, isBefore, isAfter } from "date-fns";
 import VenueBookings from "components/Modals/VenueBookings";
 
+/**
+ * a component that displays a card for a venue made by a user, with buttons to view the venue and view the bookings information
+ * @param {object} venue - the venue object
+ * @returns {JSX.Element} - a card for a venue by the profile user
+ */
+
 function ProfileVenueCard({ venue }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const city = venue.location.city || "City";

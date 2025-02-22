@@ -24,15 +24,6 @@ export function calculateNextBookingAndVisit(profile) {
     daysLeft = nextBooking
       ? differenceInDays(parseISO(nextBooking.dateFrom), today)
       : null;
-
-    // const futureVisits = profile.venues
-    //   .filter((venues) => parseISO(venues.dateFrom) > today)
-    //   .sort((a, b) => parseISO(a.dateFrom) - parseISO(b.dateFrom));
-
-    // nextVisit = futureVisits.length > 0 ? futureVisits[0] : null;
-    // daysLeftVisit = nextVisit
-    //   ? differenceInDays(parseISO(nextVisit.dateFrom), today)
-    //   : null;
   }
 
   return { nextBooking, daysLeft, nextVisit, daysLeftVisit };

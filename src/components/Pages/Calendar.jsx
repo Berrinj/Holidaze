@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { StyledCalendar } from "./Calender.styles";
 
+/**
+ * a calendar component that allows users to select a date range
+ * @param {*} onDateChange - the function that handles the date change
+ * @param {*} bookedDates - the array of booked dates
+ * @returns the CalendarComponent
+ */
+
 function CalendarComponent({ onDateChange, bookedDates }) {
   const [date, setDate] = useState(null);
 

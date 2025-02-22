@@ -6,6 +6,11 @@ import Search from "../Search";
 import { FetchDataByPath } from "api/data/fetch";
 import { VENUES_URL } from "api/constants";
 
+/**
+ * a component that fetches and displays venues as cards with pagination and search
+ * @returns JSX.Element Venues
+ */
+
 function Venues() {
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState(null);

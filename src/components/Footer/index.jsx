@@ -1,6 +1,11 @@
 import hlogo from "assets/hlogo.png";
 import { LiaCopyright } from "react-icons/lia";
 
+/**
+ * a footer component that displays the footer of the website
+ * @returns JSX.Element Footer
+ */
+
 function Footer() {
   return (
     <footer className="text-white bg-black flex items-center text-sm font-light flex-col p-3 text-center border-t border-mineshaft">
