@@ -106,7 +106,7 @@ function BookingConfirmation() {
             </div>
           </div>
           <Link to={`/profiles/${booking.customer.name}/bookings`}>
-            <button className="bg-brass text-white rounded-2xl font-thin">
+            <button className="bg-brass text-black rounded-2xl">
               Go to view your bookings
             </button>
           </Link>
