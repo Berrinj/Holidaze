@@ -1,46 +1,34 @@
 import { VENUES_URL } from "api/constants.mjs";
 import { CreatePOST } from "api/data/create";
 
-export const handleCreateVenue = async (event) => {
-  event.preventDefault();
-  const formData = new FormData(event.target);
-  const media = [];
-
-  const mediaUrls = formData.getAll("media.url");
-  const mediaAlts = formData.getAll("media.alt");
-
-  mediaUrls.forEach((url, index) => {
-    if (url) {
-      media.push({
-        url: url,
-        alt: mediaAlts[index] || "",
-      });
-    }
-  });
+export const handleCreateVenue = async (data) => {
+  const media = data.media.map((item) => ({
+    url: item.url,
+    alt: item.alt || "",
+  }));
 
   const venue = {
-    name: formData.get("name"),
+    name: data.name,
     location: {
-      address: formData.get("location.address"),
-      zip: formData.get("location.zip"),
-      city: formData.get("location.city"),
-      country: formData.get("location.country"),
-      continent: formData.get("location.continent"),
-      // lat: parseFloat(formData.get("lat")),
-      // lng: parseFloat(formData.get("lng")),
+      address: data.location.address,
+      zip: data.location.zip,
+      city: data.location.city,
+      country: data.location.country,
+      continent: data.location.continent,
     },
-    description: formData.get("description"),
-    maxGuests: parseInt(formData.get("maxGuests")),
-    price: parseFloat(formData.get("price")),
-    rating: parseFloat(formData.get("rating")),
+    description: data.description,
+    maxGuests: data.maxGuests,
+    price: data.price,
+    rating: data.rating || 0,
     meta: {
-      wifi: formData.get("meta.wifi") === "on",
-      parking: formData.get("meta.parking") === "on",
-      pets: formData.get("meta.pets") === "on",
-      breakfast: formData.get("meta.breakfast") === "on",
+      wifi: data.meta.wifi || false,
+      parking: data.meta.parking || false,
+      pets: data.meta.pets || false,
+      breakfast: data.meta.breakfast || false,
     },
     media: media,
   };
+
   try {
     const response = await CreatePOST(VENUES_URL, venue);
     console.log(response);
