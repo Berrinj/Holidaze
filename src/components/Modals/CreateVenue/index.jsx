@@ -47,7 +47,12 @@ const schema = yup.object().shape({
     .of(
       yup.object().shape({
         url: yup.string().url("Invalid URL").nullable(),
-        alt: yup.string().max(120, "Alt text must be less than 120 characters"),
+        alt: yup
+          .string()
+          .max(120, "Alt text must be less than 120 characters")
+          .test("alt", "Alt text cannot be set without URL", function (value) {
+            return !value || (value && this.parent.url);
+          }),
       }),
     )
     .max(8, "Up to 8 images can be added to your venue"),
