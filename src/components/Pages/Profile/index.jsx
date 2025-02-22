@@ -202,10 +202,17 @@ function Profile() {
                 <h2 className="text-3xl">Venues</h2>
                 <p className="">({profile._count.venues})</p>
               </div>
-              <div className="venues-list flex flex-wrap justify-center gap-3 mt-3 px-2">
-                {profile.venues.map((venue) => (
-                  <VenueCard key={venue.id} venue={venue} />
-                ))}
+              <div className="venues-list gap-3 mt-3 px-2">
+                <ul className="flex flex-wrap gap-4 justify-center">
+                  {profile.venues.map((venue) => (
+                    <li
+                      key={venue.id}
+                      className="w-screen mx-4 sm:mx-0 sm:w-72"
+                    >
+                      <VenueCard key={venue.id} venue={venue} />
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           )}
