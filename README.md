@@ -51,6 +51,10 @@ git clone https://github.com/Berrinj/Holidaze.git
 3. Run npm i.
 4. Run npm run dev and follow link in the terminal
 
+### Testing
+
+Project is setup for unit testing with Vitest and end-to-end testing with Playwright, bu no tests are made.
+
 ## Design
 
 [Figma design file](https://www.figma.com/design/09Na6i0jBtRp6Rw3l86yiJ/Holidaze-EXAM-2?node-id=0-1&m=dev&t=HNRpMUoQit73HaKq-1)
