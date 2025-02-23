@@ -49,6 +49,10 @@ git clone https://github.com/Berrinj/Holidaze.git
 3. Run npm i.
 4. Run npm run dev and follow link in the terminal
 
+## Design
+
+[Figma file](https://www.figma.com/design/09Na6i0jBtRp6Rw3l86yiJ/Holidaze-EXAM-2?node-id=0-1&p=f&t=HNRpMUoQit73HaKq-0)
+
 ## Contributing
 
 Feedback is appreciated
