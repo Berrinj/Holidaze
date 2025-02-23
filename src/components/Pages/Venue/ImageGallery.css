@@ -1,8 +1,17 @@
 .image-gallery-image {
   border-radius: 1rem 1rem 0 0;
+  max-height: 600px;
+}
+.image-gallery-thumbnails-wrapper {
+  background: white;
 }
 
 .image-gallery-thumbnail-image {
   height: 50px;
   object-fit: cover;
+}
+
+.image-gallery-content .image-gallery-slide .image-gallery-image {
+  max-height: 600px;
+  object-fit: contain;
 }

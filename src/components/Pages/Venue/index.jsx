@@ -53,16 +53,16 @@ function SingleVenue() {
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {venue && (
-        <div className="single-venue--container bg-white rounded-2xl flex flex-col min-h-fit">
+        <div className="single-venue--container bg-black bg-opacity-25 sm:rounded-2xl flex flex-col min-h-fit">
           <div className="single-venue--media w-full">
             <VenueImageGallery media={venue.media} />
           </div>
-          <div className="single-venue--content px-5 py-2 flex flex-col">
+          <div className="single-venue--content bg-white rounded-b-2xl px-5 py-2 flex flex-col">
             <div className="single-venue--header mx-auto flex justify-center items-baseline gap-1 flex-wrap">
-              <h1 className="text-3xl font-semibold text-center">
+              <h1 className="text-xl md:text-3xl font-semibold text-center">
                 {venue.name},
               </h1>
-              <h2 className="text-2xl">
+              <h2 className="text-lg md:text-2xl">
                 {venue.location.city || "City"},{" "}
                 {venue.location.country || "Country"}
               </h2>

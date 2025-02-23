@@ -17,7 +17,7 @@ export const VenueImageGallery = ({ media }) => {
       <img
         src={defaultImage}
         alt="Default venue"
-        className="object-cover w-full rounded-t-2xl"
+        className="object-cover w-full rounded-t-2xl max-h-[600px]"
       />
     );
   }
@@ -27,7 +27,7 @@ export const VenueImageGallery = ({ media }) => {
     originalAlt: image.alt,
     thumbnail: image.url,
     thumbnailAlt: image.alt,
-    originalClass: "w-full rounded-t-2xl",
+    originalClass: "object-contain w-full rounded-t-2xl max-h-[600px]",
     bulletClass: "rounded-t-2xl",
   }));
 
@@ -36,7 +36,7 @@ export const VenueImageGallery = ({ media }) => {
       <img
         src={media[0].url}
         alt={media[0].alt}
-        className="object-cover w-full rounded-t-2xl"
+        className="object-contain w-full rounded-t-2xl max-h-[600px]"
         onError={(e) => {
           e.target.onerror = null;
           e.target.src = defaultImage;
