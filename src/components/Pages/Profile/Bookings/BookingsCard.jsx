@@ -43,19 +43,19 @@ function BookingsCard({ booking }) {
       />
       <div className="booking-details p-2 grow">
         {tripInProgress ? (
-          <p className="text-green-500 bg-mineshaft rounded p-1">
+          <p className="text-green-500 text-sm bg-mineshaft rounded p-1">
             Trip in progress
           </p>
         ) : daysLeft >= 0 ? (
-          <p className="text-red-700 p-1">Days left: {daysLeft} days</p>
+          <p className="text-red-700 text-sm">Days left: {daysLeft} days</p>
         ) : (
-          <p className="italic">Days since: {daysSince} days</p>
+          <p className="italic text-sm">Days since: {daysSince} days</p>
         )}
-        <p className="italic mt-3">
+        <p className="mt-1">
           {city}, {country}
         </p>
-        <h2 className="text-xl font-bold">{booking.venue.name}</h2>
-        <p>
+        <h2 className="text-lg font-bold">{booking.venue.name}</h2>
+        <p className="text-sm">
           {format(parseISO(booking.dateFrom), "dd/MM/yyyy")} -{" "}
           {format(parseISO(booking.dateTo), "dd/MM/yyyy")}
         </p>

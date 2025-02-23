@@ -59,20 +59,26 @@ function VenueCard({ venue }) {
             </span>
             <p>{venue.rating}</p>
           </div>
-          <p className="text-xs mt-1">
+          <p className="text-sm mt-1 font-normal">
             {venue.location.city || "City"},{" "}
             {venue.location.country || "Country"}
           </p>
-          <h3 className="font-semibold min-h-10 mb-1 overflow-hidden">
+          <h3 className="font-semibold text-lg min-h-10 max-h-14 mb-1 overflow-hidden truncate">
             {venue.name}
           </h3>
-          <p className="text-sm">Guests: {venue.maxGuests}</p>
-          <p className="italic text-sm">
-            {trueMetaKeys || "No additional features"}{" "}
+          <p className="text-sm">Guests: 1 - {venue.maxGuests}</p>
+          <p className="text-sm truncate">
+            Features:
+            <span className="italic">
+              {" "}
+              {trueMetaKeys || "No additional features"}{" "}
+            </span>
           </p>
-          <div className="flex justify-end pb-1 text-sm items-baseline absolute bottom-0 right-2">
-            <p className="font-semibold">Price: {venue.price} </p>
-            <p className="text-xs">/night</p>
+          <div className="pb-1 text-sm absolute bottom-0 right-2">
+            <p className="font-semibold">
+              Price: {venue.price}
+              <span className="text-xs">/night</span>{" "}
+            </p>
           </div>
         </div>
       </div>

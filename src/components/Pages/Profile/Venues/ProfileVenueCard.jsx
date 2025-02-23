@@ -33,7 +33,6 @@ function ProfileVenueCard({ venue }) {
     const dateFrom = parseISO(booking.dateFrom);
     const dateTo = parseISO(booking.dateTo);
     const daysLeft = differenceInDays(dateFrom, today);
-    // const daysSince = differenceInDays(today, dateTo);
     const tripInProgress = isBefore(today, dateTo) && isAfter(today, dateFrom);
 
     if (tripInProgress) {
@@ -59,7 +58,7 @@ function ProfileVenueCard({ venue }) {
             className="w-full h-full object-cover rounded-t-2xl"
           />
         </div>
-        <div className="venue-info px-3">
+        <div className="venue-info px-3 flex flex-col">
           <div className="venue-visit text-sm py-1">
             {closestBooking ? (
               <div>{getBookingStatus(closestBooking)}</div>
@@ -67,11 +66,11 @@ function ProfileVenueCard({ venue }) {
               <p>No booked visits</p>
             )}
           </div>
-          <div className="venue-details">
+          <div className="venue-details grow">
             <p className="italic">
               {city}, {country}
             </p>
-            <h3 className="text-lg font-bold">{venue.name}</h3>
+            <h3 className="text-lg font-bold truncate">{venue.name}</h3>
 
             <p className="text-sm text-center italic">Go to:</p>
           </div>
