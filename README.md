@@ -51,7 +51,9 @@ git clone https://github.com/Berrinj/Holidaze.git
 
 ## Design
 
-[Figma file](https://www.figma.com/design/09Na6i0jBtRp6Rw3l86yiJ/Holidaze-EXAM-2?node-id=0-1&p=f&t=HNRpMUoQit73HaKq-0)
+[Figma design file](https://www.figma.com/design/09Na6i0jBtRp6Rw3l86yiJ/Holidaze-EXAM-2?node-id=0-1&m=dev&t=HNRpMUoQit73HaKq-1)
+
+[Figma Prototype](https://www.figma.com/proto/09Na6i0jBtRp6Rw3l86yiJ/Holidaze-EXAM-2?node-id=0-1&t=HNRpMUoQit73HaKq-1)
 
 ## Contributing
 
