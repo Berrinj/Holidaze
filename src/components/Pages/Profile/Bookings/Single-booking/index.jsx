@@ -83,12 +83,12 @@ function SingleBooking() {
         </div>
         <div className="content-info relative p-5 w-full md:w-1/2 flex flex-col">
           {dateFrom > today && (
-            <p
+            <button
               onClick={handleDeleteClick}
-              className="absolute bottom-2 right-2 md:top-2 md:bottom-auto flex items-center gap-1 cursor-pointer bg-white md:bg-transparent hover:bg-red-500 hover:text-white p-2 rounded-2xl"
+              className="absolute bottom-2 right-2 md:top-2 md:bottom-auto flex items-center gap-1 cursor-pointer bg-white md:bg-transparent hover:bg-red-500 hover:text-white p-2 rounded-2xl font-normal"
             >
               <MdDeleteForever /> Cancel booking?
-            </p>
+            </button>
           )}
           <h1 className="font-bold text-3xl uppercase mt-4">
             Your Booking at:
