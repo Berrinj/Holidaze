@@ -120,7 +120,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   </p>
                 )}
               </div>
-              <div className="edit-form-bio w-4/5">
+              <div className="edit-form-bio w-full sm:w-4/5">
                 <label
                   htmlFor="bio"
                   className="block text-sm text-white w-full"
@@ -130,7 +130,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                 <textarea
                   id="bio"
                   name="bio"
-                  className="text-black rounded-2xl w-full"
+                  className="text-black rounded-2xl w-full min-h-[100px]"
                   {...register("bio")}
                 />
                 {errors.bio && (
@@ -139,7 +139,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   </p>
                 )}
               </div>
-              <div className="edit-form-avatar">
+              <div className="edit-form-avatar w-full sm:w-4/5">
                 <label htmlFor="avatar" className="block text-sm text-white">
                   Avatar URL
                 </label>
@@ -168,7 +168,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   </div>
                 )}
               </div>
-              <div className="edit-form-avatarAlt">
+              <div className="edit-form-avatarAlt w-full sm:w-4/5">
                 <label htmlFor="avatarAlt" className="block text-sm text-white">
                   Avatar Alt Text
                 </label>
@@ -185,7 +185,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   </p>
                 )}
               </div>
-              <div className="edit-form-banner">
+              <div className="edit-form-banner w-full sm:w-4/5">
                 <label htmlFor="banner" className="block text-sm text-white">
                   Banner URL
                 </label>
@@ -214,7 +214,7 @@ function EditProfileModal({ isOpen, onClose, data }) {
                   </div>
                 )}
               </div>
-              <div className="login-form-bannerAlt">
+              <div className="login-form-bannerAlt w-full sm:w-4/5">
                 <label htmlFor="bannerAlt" className="block text-sm text-white">
                   Banner Alt Text
                 </label>
