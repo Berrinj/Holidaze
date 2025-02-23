@@ -21,7 +21,7 @@ export const Modal = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-modal-img bg-cover rounded-lg shadow-lg p-6 max-w-3xl w-full h-full md:h-auto relative">
+      <div className="bg-black bg-modal-img bg-cover rounded-lg shadow-lg p-6 max-w-3xl w-full h-full md:h-auto relative">
         <img
           src={Hlogo}
           className="absolute top-2 left-2 h-8 w-8 opacity-50"
