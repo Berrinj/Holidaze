@@ -62,8 +62,6 @@ function Profile() {
     setVenueModalOpen(true);
   };
 
-  // const { nextBooking, daysLeft, nextVisit, daysLeftVisit } =
-  //   calculateNextBookingAndVisit(profile);
   const { nextBooking, daysLeft } = calculateNextBookingAndVisit(profile);
 
   return (

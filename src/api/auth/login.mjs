@@ -24,9 +24,6 @@ export async function login(credentials) {
       storage.save("token", accessToken);
       storage.save("profile", profile);
 
-      //reload the current page
-      // window.location.reload();
-
       return { status: response.status, profile };
     }
     const error = await response.json();
