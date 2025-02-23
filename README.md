@@ -17,11 +17,19 @@ There are two aspects to this brief: the customer-facing side of the website whe
 
 ## Built With
 
-- CSS
+- Tailwind
 - JavaScript
 - React
-- React Router
+  - -calendar
+  - -datepicker
+  - -dom
+  - -hook-form
+  - -icons
+  - -image-gallery
+  - -rounter-dom
 - Vite
+- Yup
+- Prettier
 - Noroff API
 
 ## Getting Started
