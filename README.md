@@ -53,7 +53,7 @@ git clone https://github.com/Berrinj/Holidaze.git
 
 ### Testing
 
-Project is setup for unit testing with Vitest and end-to-end testing with Playwright, bu no tests are made.
+Project is setup for unit testing with Vitest and end-to-end testing with Playwright, but no tests are made.
 
 ## Design
 
