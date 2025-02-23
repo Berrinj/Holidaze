@@ -117,7 +117,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
             </h2>
             <form id="signup" onSubmit={handleSubmit(handleRegister)}>
               <div className="signup-form-details flex gap-2 flex-wrap justify-center">
-                <div className="signup-form-details-name w-4/5 md:w-2/5">
+                <div className="signup-form-details-name w-11/12 sm:w-4/5 md:w-2/5">
                   <label htmlFor="name" className="block text-sm text-white">
                     Name
                   </label>
@@ -134,7 +134,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     </p>
                   )}
                 </div>
-                <div className="signup-form-details-email w-4/5 md:w-2/5">
+                <div className="signup-form-details-email w-11/12 sm:w-4/5 md:w-2/5">
                   <label htmlFor="email" className="block text-sm text-white">
                     Email
                   </label>
@@ -151,7 +151,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     </p>
                   )}
                 </div>
-                <div className="signup-form-details-password w-4/5 md:w-2/5">
+                <div className="signup-form-details-password w-11/12 sm:w-4/5 md:w-2/5">
                   <label
                     htmlFor="password"
                     className="block text-sm text-white"
@@ -171,7 +171,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     </p>
                   )}
                 </div>
-                <div className="signup-form-details-venueManager w-4/5 md:w-2/5">
+                <div className="signup-form-details-venueManager w-11/12 sm:w-4/5 md:w-2/5">
                   <label
                     htmlFor="venueManager"
                     className="block text-sm text-white"
@@ -193,7 +193,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     </p>
                   )}
                 </div>
-                <div className="signup-form-details-bio w-4/5">
+                <div className="signup-form-details-bio w-11/12 sm:w-4/5">
                   <label
                     htmlFor="bio"
                     className="block text-sm text-white w-full"
@@ -203,7 +203,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                   <textarea
                     id="bio"
                     name="bio"
-                    className="text-black rounded-2xl w-full"
+                    className="text-black rounded-2xl w-full min-h-[100px]"
                     {...register("bio")}
                   />
                   {errors.bio && (
@@ -212,7 +212,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     </p>
                   )}
                 </div>
-                <div className="signup-form-details-avatar w-4/5 md:w-2/5">
+                <div className="signup-form-details-avatar w-11/12 sm:w-4/5 md:w-2/5">
                   <label htmlFor="avatar" className="block text-sm text-white">
                     Avatar URL
                   </label>
@@ -241,7 +241,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     </div>
                   )}
                 </div>
-                <div className="signup-form-details-avatarAlt w-4/5 md:w-2/5">
+                <div className="signup-form-details-avatarAlt w-11/12 sm:w-4/5 md:w-2/5">
                   <label
                     htmlFor="avatarAlt"
                     className="block text-sm text-white"
@@ -261,7 +261,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     </p>
                   )}
                 </div>
-                <div className="signup-form-details-banner w-4/5 md:w-2/5">
+                <div className="signup-form-details-banner w-11/12 sm:w-4/5 md:w-2/5">
                   <label htmlFor="banner" className="block text-sm text-white">
                     Banner URL
                   </label>
@@ -290,7 +290,7 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
                     </div>
                   )}
                 </div>
-                <div className="signup-form-details-bannerAlt w-4/5 md:w-2/5">
+                <div className="signup-form-details-bannerAlt w-11/12 sm:w-4/5 md:w-2/5">
                   <label
                     htmlFor="bannerAlt"
                     className="block text-sm text-white"
