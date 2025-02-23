@@ -117,19 +117,10 @@ function CreateVenueModal({ isOpen, onClose }) {
 
   const handleCreateVenueSubmit = async (data) => {
     data.media = data.media.filter((item) => item.url);
-
-    console.log("Form data:", data);
     const result = await handleCreateVenue(data);
-    console.log("Response from handleCreateVenue:", result);
     setResponse(result);
     setResponseModalOpen(true);
   };
-
-  useEffect(() => {
-    if (response) {
-      console.log("Updated response state:", response);
-    }
-  }, [response]);
 
   const closeResponseModal = () => {
     setResponseModalOpen(false);
@@ -137,7 +128,6 @@ function CreateVenueModal({ isOpen, onClose }) {
   };
 
   const handleActionClick = () => {
-    console.log("Response:", response);
     if (response) {
       if (response.status === 200 || response.status === 201) {
         navigate(`/venues/${response.result.data.id}`);

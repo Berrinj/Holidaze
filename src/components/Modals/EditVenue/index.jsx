@@ -47,13 +47,7 @@ function EditVenue({ isOpen, onClose, data }) {
 
   const handleCreateVenueSubmit = async (event) => {
     event.preventDefault();
-    const dataToSend = {
-      ...formData,
-      media: media,
-    };
-    console.log("Form data:", dataToSend);
     const result = await handleUpdateVenue(event, data.id);
-    console.log("Response from handleCreateVenue:", result);
     setResponse(result);
     setAction("Update Venue");
     setSuccessMessage("Your venue is now updated! Go check it out");
@@ -61,7 +55,9 @@ function EditVenue({ isOpen, onClose, data }) {
   };
   useEffect(() => {
     if (response) {
-      console.log("Updated response state:", response);
+      if (response.status === 200) {
+        setSuccessMessage("Your venue is now updated! Go check it out");
+      }
     }
   }, [response]);
 
