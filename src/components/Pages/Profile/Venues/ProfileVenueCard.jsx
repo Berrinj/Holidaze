@@ -76,7 +76,7 @@ function ProfileVenueCard({ venue }) {
           </div>
         </div>
         <div className="venue-links flex border-t border-gray-300 font-semibold">
-          <div className="view-venue-btn bg-tan w-1/2 text-center p-2 rounded-bl-2xl flex justify-center">
+          <div className="view-venue-btn bg-tan w-1/2 text-center p-2 rounded-bl-2xl flex justify-center text-black">
             <Link
               to={`/venues/${venue.id}`}
               className="hover:italic hover:text-eerieblack self-center w-full"
@@ -85,12 +85,12 @@ function ProfileVenueCard({ venue }) {
             </Link>
           </div>
           <div className="view-bookings-btn bg-brass text-black w-1/2 text-center p-2 rounded-br-2xl border-l-2 md:border-l-4 border-white flex justify-center">
-            <p
+            <button
               onClick={handleModal}
-              className="hover:italic cursor-pointer text-center w-full"
+              className="hover:italic cursor-pointer text-center w-full bg-transparent font-semibold p-0 border-0 focus:rounded-sm"
             >
               Bookings Info
-            </p>
+            </button>
           </div>
         </div>
         <VenueBookings
