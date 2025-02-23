@@ -33,7 +33,7 @@ const ResponseModal = ({
       </p>
     ));
   if (errors) {
-    console.log(errors);
+    console.error(errors);
   }
 
   const errorMsg = (

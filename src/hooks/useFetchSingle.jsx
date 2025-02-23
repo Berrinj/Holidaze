@@ -20,7 +20,6 @@ function useFetchSingle(url, params) {
     FetchDataByPath(url, [id], params)
       .then((response) => {
         setData(response.data);
-        console.log(response.data);
         setLoading(false);
       })
       .catch((error) => {

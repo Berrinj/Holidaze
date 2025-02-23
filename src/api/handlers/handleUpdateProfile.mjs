@@ -30,7 +30,6 @@ const handleUpdateProfile = async (data, id) => {
 
   try {
     const result = await UpdateData(PROFILES_URL, id, profile);
-    console.log("Result from UpdateData:", result);
     return result;
   } catch (error) {
     console.error("Update failed:", error);

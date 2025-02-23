@@ -1,6 +1,6 @@
 import { Modal } from "components/Modals/Modal";
 import ResponseModal from "components/Modals/ResponseModal";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { handleDelete } from "api/handlers/handleDelete.mjs";
 import { BOOKINGS_URL } from "api/constants.mjs";
 import { useNavigate } from "react-router-dom";
@@ -26,12 +26,6 @@ function DeleteBooking({ isOpen, onClose, booking }) {
     setResponseModalOpen(true);
     onClose();
   };
-
-  useEffect(() => {
-    if (response) {
-      console.log("Updated response state:", response);
-    }
-  }, [response]);
 
   const closeResponseModal = () => {
     setResponseModalOpen(false);

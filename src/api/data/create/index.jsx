@@ -16,7 +16,6 @@ export async function CreatePOST(url, postData) {
       body: JSON.stringify(postData),
     });
     const result = await response.json();
-    console.log(result);
     return { status: response.status, result };
   } catch (error) {
     console.error("Ran into a problem creating data:", error);

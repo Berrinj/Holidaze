@@ -16,7 +16,6 @@ import EditVenue from "components/Modals/EditVenue";
 function SingleVenue() {
   const params = "_owner=true&_bookings=true";
   const { data: venue, loading, error } = useFetchSingle(VENUES_URL, params);
-  console.log(venue);
   const [selectedDates, setSelectedDates] = useState(null);
   const [guests, setGuests] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +31,6 @@ function SingleVenue() {
 
   const handleClick = () => {
     setIsOpen(true);
-    console.log(venue);
   };
 
   if (loading)

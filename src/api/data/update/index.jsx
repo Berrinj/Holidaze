@@ -17,13 +17,11 @@ export async function UpdateData(url, id, data) {
       },
       body: JSON.stringify(data),
     });
-    console.log(data);
     const result = await response.json();
-    console.log(result);
+
     if (!response.ok) {
       return { status: response.status, errors: result.errors };
     } else {
-      console.log("Update successful:", result);
       return { status: response.status, result };
     }
   } catch (error) {

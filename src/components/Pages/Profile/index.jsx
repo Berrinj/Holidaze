@@ -39,7 +39,7 @@ function Profile() {
       </div>
     );
   if (error) {
-    console.log("Error:", error);
+    console.error("Error:", error);
     if (error.status === 401) {
       return (
         <div className="bg-white rounded-2xl p-4 w-full text-center text-lg font-semibold">
@@ -57,14 +57,11 @@ function Profile() {
   const handleClick = () => {
     setProfileData(profile);
     setModalOpen(true);
-    console.log(profile);
   };
   const handleCreateVenueClick = () => {
     setVenueModalOpen(true);
   };
 
-  // const { nextBooking, daysLeft, nextVisit, daysLeftVisit } =
-  //   calculateNextBookingAndVisit(profile);
   const { nextBooking, daysLeft } = calculateNextBookingAndVisit(profile);
 
   return (
