@@ -5,6 +5,8 @@
 Noroff Project Exam 2, February 2025<br>
 [View the website live on Netlify](https://holidaze-berrinj.netlify.app/)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9e3eac73-7c8d-4287-9039-79c62f05c22c/deploy-status)](https://app.netlify.com/sites/holidaze-berrinj/deploys)
+
 ## Description
 
 This project uses React and Vite, and was designed based on a project brief and created to show off what I've learned the last two years at Noroff.
