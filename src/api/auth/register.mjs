@@ -3,6 +3,12 @@ import { authFetch } from "./authFetch.mjs";
 
 const method = "POST";
 
+/**
+ * a function that handles registering a user and sending the data to the API
+ * @param {*} profile - the profile to register
+ * @returns the result of the register
+ */
+
 export async function register(profile) {
   try {
     const body = JSON.stringify(profile);
@@ -12,14 +18,13 @@ export async function register(profile) {
     });
 
     const result = await response.json();
-    console.log(result);
     if (!response.ok) {
-      throw new Error("Register failed: " + result.errors[0].message);
+      return { status: response.status, errors: result.errors };
     } else {
-      console.log("Register successful");
+      return { status: response.status, result };
     }
-    return result;
   } catch (error) {
-    console.log(error);
+    console.error("Register failed:", error);
+    return { status: 500, errors: [{ message: error.message }] };
   }
 }

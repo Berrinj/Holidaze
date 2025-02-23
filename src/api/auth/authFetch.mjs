@@ -1,8 +1,27 @@
 import { headers } from "../headers.mjs";
 
+/**
+ * Fetches data from the API with authentication
+ * @param {string} url - the url to fetch data from
+ * @param {Object} options - additional options to include in the fetch
+ * @returns the response from the API
+ */
+
 export async function authFetch(url, options = {}) {
-  return fetch(url, {
+  const requestHeaders = headers(Boolean(options.body));
+
+  const response = await fetch(url, {
     ...options,
-    headers: headers(Boolean(options.body)),
+    headers: requestHeaders,
   });
+
+  if (!response.ok) {
+    const error = await response.json();
+    console.error(error);
+    const errorMessage = error.errors[0].message || "Something went wrong";
+    const errorStatus = response.status;
+    throw { message: errorMessage, status: errorStatus };
+  }
+
+  return response;
 }

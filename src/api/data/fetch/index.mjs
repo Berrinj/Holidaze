@@ -11,10 +11,10 @@ export async function FetchData(url, ...params) {
   try {
     const response = await authFetch(`${url}?${params.join("&")}`);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Ran into a problem fetching data:", error);
+    throw error;
   }
 }
 
@@ -33,9 +33,9 @@ export async function FetchDataByPath(baseURL, pathSegments = [], ...params) {
   try {
     const response = await authFetch(url);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Ran into a problem fetching data:", error);
+    throw error;
   }
 }
