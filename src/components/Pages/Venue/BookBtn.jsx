@@ -50,7 +50,6 @@ function BookBtn({
         dateTo: selectedDates[1].toISOString(),
       };
       setSendBooking(sendToAPI);
-      console.log("Booking data:", bookingData);
     } else {
       onClick();
     }

@@ -43,8 +43,6 @@ function ProfileVenues() {
     );
   }
 
-  console.log("Profile venues data:", profilevenues);
-
   return (
     <div className="profile-venues bg-white rounded-2xl min-h-fit">
       <button

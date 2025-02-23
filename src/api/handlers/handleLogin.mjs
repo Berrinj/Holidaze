@@ -9,7 +9,6 @@ import { login } from "../auth/login.mjs";
 export async function handleLogin(credentials) {
   try {
     const profile = await login(credentials);
-    console.log(profile);
     return profile;
   } catch (error) {
     console.error("Login failed:", error);

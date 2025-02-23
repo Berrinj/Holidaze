@@ -67,7 +67,6 @@ function EditProfileModal({ isOpen, onClose, data }) {
     const result = await handleUpdateProfile(formData, data.name);
     setResponse(result);
     setResponseModalOpen(true);
-    console.log(result);
   };
 
   const closeResponseModal = () => {

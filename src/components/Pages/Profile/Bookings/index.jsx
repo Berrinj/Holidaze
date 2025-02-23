@@ -57,12 +57,7 @@ function ProfileBookings() {
     );
   }
 
-  console.log("Profile bookings data:", profilebookings);
-
   const { nextBooking, daysLeft } = calculateNextBooking(profilebookings);
-
-  console.log("Next booking:", nextBooking);
-  console.log("Days left:", daysLeft);
 
   const handleFilter = (filterType) => {
     setFilter(filterType);

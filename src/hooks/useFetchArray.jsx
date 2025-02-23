@@ -21,7 +21,6 @@ function useFetchArray(url, path, params) {
     FetchDataByPath(url, [id, path], params)
       .then((response) => {
         setData(response.data);
-        console.log(response.data);
         setLoading(false);
       })
       .catch((error) => {

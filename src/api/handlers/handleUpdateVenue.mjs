@@ -33,8 +33,6 @@ const handleUpdateVenue = async (event, id) => {
       city: formData.get("location.city"),
       country: formData.get("location.country"),
       continent: formData.get("location.continent"),
-      // lat: parseFloat(formData.get("lat")),
-      // lng: parseFloat(formData.get("lng")),
     },
     description: formData.get("description"),
     maxGuests: parseInt(formData.get("maxGuests")),
@@ -51,7 +49,6 @@ const handleUpdateVenue = async (event, id) => {
 
   try {
     const result = await UpdateData(VENUES_URL, id, venue);
-    console.log("Result from UpdateData on Venue:", result);
     return result;
   } catch (error) {
     console.error("Update failed:", error);

@@ -37,7 +37,6 @@ export const handleCreateVenue = async (data) => {
 
   try {
     const response = await CreatePOST(VENUES_URL, venue);
-    console.log(response);
     return response;
   } catch (error) {
     console.error("Ran into a problem creating venue:", error);

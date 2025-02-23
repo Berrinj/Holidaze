@@ -40,10 +40,7 @@ function Venues() {
     );
 
   const handleSearch = (searchInput) => {
-    // setPage(1);
     setSearchQuery(searchInput);
-    //refresh
-    console.log("searchInput:", searchInput);
     if (!searchInput || searchInput.length < 3) {
       setSearchResults(venues);
       return;
@@ -57,7 +54,6 @@ function Venues() {
       `_limit=${totalCount}`,
       `_page=${page}`,
     )
-      // FetchData(`${VENUES_URL}/search`, `q=${searchInput}`, "_sort=created")
       .then((response) => {
         if (response && Array.isArray(response.data)) {
           setSearchResults(response.data);

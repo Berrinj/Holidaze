@@ -44,7 +44,6 @@ function LoginModal({ isOpen, onClose, onToggleSignUp }) {
 
   const handleLoginSubmit = async (data) => {
     const response = await handleLogin(data);
-    console.log(response);
     setResponse(response);
     setResponseModalOpen(true);
   };

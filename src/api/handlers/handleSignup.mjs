@@ -31,7 +31,6 @@ export async function handleSignup(data) {
 
   try {
     const result = await register(profile);
-    console.log(result);
     return result;
   } catch (error) {
     console.error("Register failed:", error);

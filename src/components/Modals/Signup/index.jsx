@@ -81,7 +81,6 @@ function SignUpModal({ isOpen, onClose, onToggleLogin }) {
     const result = await handleSignup(data);
     setResponse(result);
     setResponseModalOpen(true);
-    console.log(result);
   };
 
   const closeResponseModal = () => {
